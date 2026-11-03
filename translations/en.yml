@@ -2174,6 +2174,7 @@ translations:
   Location: Location
   Lock: Lock
   Lock Screen: Lock Screen
+  Lock after: Lock after
   Lock screen after idle timeout: Lock screen after idle timeout
   Lock the screen with your PIN: Lock the screen with your PIN
   Locked during print: Locked during print
@@ -4240,6 +4241,7 @@ translations:
   Time Format: Time Format
   Time to wait before escalating to emergency stop: Time to wait before escalating
     to emergency stop
+  Time without a touch before auto-lock, also while printing: Time without a touch before auto-lock, also while printing
   'Time: ': 'Time: '
   Timelapse: Timelapse
   Timelapse Available: Timelapse Available
@@ -4276,6 +4278,7 @@ translations:
   Toggle toolhead LED for an extruder: Toggle toolhead LED for an extruder
   'Toggle:': 'Toggle:'
   Too humid: Too humid
+  Too many attempts. Try again in {} s: Too many attempts. Try again in {} s
   Tool: Tool
   Tool Change Failed: Tool Change Failed
   Tool Changer: Tool Changer
@@ -4557,6 +4560,7 @@ translations:
   When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs.: When
     enabled, only the macro runs. When disabled, temperatures are set first, then
     the macro runs.
+  When the screen dims: When the screen dims
   Where UI sounds play: Where UI sounds play
   Whether filament is loaded: Whether filament is loaded
   Which macro switches the ACE path back on: Which macro switches the ACE path back on

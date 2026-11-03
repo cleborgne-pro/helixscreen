@@ -2272,6 +2272,7 @@ translations:
   Location: Расположение
   Lock: Блокировка
   Lock Screen: 'Блокировка экрана'
+  Lock after: ''
   Lock screen after idle timeout: Блокировать экран после простоя
   Lock the screen with your PIN: Заблокировать экран PIN-кодом
   Locked during print: Заблокировано во время печати
@@ -4380,6 +4381,7 @@ translations:
   Time Format: Формат времени
   Time to wait before escalating to emergency stop: Время ожидания перед эскалацией
     до аварийной остановки
+  Time without a touch before auto-lock, also while printing: ''
   'Time: ': 'Время: '
   Timelapse: Таймлапс
   Timelapse Available: Таймлапс доступен
@@ -4416,6 +4418,7 @@ translations:
   Toggle toolhead LED for an extruder: 'Переключить LED печатающей головки для экструдера'
   'Toggle:': 'Переключить:'
   Too humid: Слишком влажно
+  Too many attempts. Try again in {} s: ''
   Tool: Инструмент
   Tool Change Failed: 'Ошибка смены инструмента'
   Tool Changer: Сменщик инструментов
@@ -4692,6 +4695,7 @@ translations:
   When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs.: Когда
     включено, запускается только макрос. Когда выключено, сначала задаются температуры,
     затем запускается макрос.
+  When the screen dims: ''
   Where UI sounds play: Где воспроизводятся звуки интерфейса
   Whether filament is loaded: Загружен ли филамент
   Which macro switches the ACE path back on: 'Какой макрос снова включает тракт ACE'

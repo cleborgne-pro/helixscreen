@@ -2030,6 +2030,7 @@
   <translation tag="Location" zh="位置"/>
   <translation tag="Lock" zh="锁定"/>
   <translation tag="Lock Screen" zh="屏幕锁定"/>
+  <translation tag="Lock after"/>
   <translation tag="Lock screen after idle timeout" zh="空闲超时后锁定屏幕"/>
   <translation tag="Lock the screen with your PIN" zh="用 PIN 码锁定屏幕"/>
   <translation tag="Locked during print" zh="打印期间锁定"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" zh="时间"/>
   <translation tag="Time Format" zh="时间格式"/>
   <translation tag="Time to wait before escalating to emergency stop" zh="升级为紧急停止前的等待时间"/>
+  <translation tag="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " zh="时间: "/>
   <translation tag="Timelapse" zh="延时摄影"/>
   <translation tag="Timelapse Available" zh="延时摄影可用"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" zh="切换某个挤出机的工具头 LED"/>
   <translation tag="Toggle:" zh="切换:"/>
   <translation tag="Too humid" zh="湿度过高"/>
+  <translation tag="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" zh="工具"/>
   <translation tag="Tool Change Failed" zh="工具切换失败"/>
   <translation tag="Tool Changer" zh="换刀器"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" zh="打印结束时的操作"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." zh="当切片软件上传并启动的文件超出此打印机的行程、加热超过其上限或使用不存在的工具时，保留文件但不开始打印。"/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." zh="启用时仅运行宏。禁用时先设置温度，然后运行宏。"/>
+  <translation tag="When the screen dims"/>
   <translation tag="Where UI sounds play" zh="界面声音的播放位置"/>
   <translation tag="Whether filament is loaded" zh="耗材是否已装载"/>
   <translation tag="Which belt is each path?" zh="每条路径是哪条皮带?"/>

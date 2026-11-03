@@ -2240,6 +2240,7 @@ translations:
   Location: Standort
   Lock: Sperren
   Lock Screen: 'Bildschirmsperre'
+  Lock after: ''
   Lock screen after idle timeout: Bildschirm nach Inaktivität sperren
   Lock the screen with your PIN: Bildschirm mit PIN sperren
   Locked during print: Während des Drucks gesperrt
@@ -4346,6 +4347,7 @@ translations:
   Time: Zeit
   Time Format: Zeitformat
   Time to wait before escalating to emergency stop: Wartezeit vor Eskalation zum Not-Stopp
+  Time without a touch before auto-lock, also while printing: ''
   'Time: ': 'Zeit: '
   Timelapse: Zeitraffer
   Timelapse Available: Zeitraffer verfügbar
@@ -4382,6 +4384,7 @@ translations:
   Toggle toolhead LED for an extruder: 'Werkzeugkopf-LED für einen Extruder umschalten'
   'Toggle:': 'Umschalten:'
   Too humid: Zu feucht
+  Too many attempts. Try again in {} s: ''
   Tool: Werkzeug
   Tool Change Failed: 'Werkzeugwechsel fehlgeschlagen'
   Tool Changer: Werkzeugwechsler
@@ -4662,6 +4665,7 @@ translations:
   When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs.: Wenn
     aktiviert, wird nur das Makro ausgeführt. Wenn deaktiviert, werden zuerst die
     Temperaturen gesetzt, dann das Makro.
+  When the screen dims: ''
   Where UI sounds play: Wo UI-Töne abgespielt werden
   Whether filament is loaded: Ob Filament geladen ist
   Which macro switches the ACE path back on: 'Welches Makro den ACE-Pfad wieder einschaltet'

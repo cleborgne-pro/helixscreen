@@ -2030,6 +2030,7 @@
   <translation tag="Location" fr="Emplacement"/>
   <translation tag="Lock" fr="Verrouiller"/>
   <translation tag="Lock Screen" fr="Verrouillage de l&apos;écran"/>
+  <translation tag="Lock after" fr="Verrouiller après"/>
   <translation tag="Lock screen after idle timeout" fr="Verrouiller l&apos;écran après inactivité"/>
   <translation tag="Lock the screen with your PIN" fr="Verrouiller l&apos;écran avec votre PIN"/>
   <translation tag="Locked during print" fr="Verrouillé pendant l&apos;impression"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" fr="Temps"/>
   <translation tag="Time Format" fr="Format de l&apos;heure"/>
   <translation tag="Time to wait before escalating to emergency stop" fr="Temps d&apos;attente avant d&apos;escalader vers l&apos;arrêt d&apos;urgence"/>
+  <translation tag="Time without a touch before auto-lock, also while printing" fr="Délai sans toucher l&apos;écran avant le verrouillage auto, même pendant une impression"/>
   <translation tag="Time: " fr="Heure : "/>
   <translation tag="Timelapse" fr="Timelapse"/>
   <translation tag="Timelapse Available" fr="Timelapse disponible"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" fr="Basculer la LED de la tête d&apos;outil pour un extrudeur"/>
   <translation tag="Toggle:" fr="Basculer :"/>
   <translation tag="Too humid" fr="Trop humide"/>
+  <translation tag="Too many attempts. Try again in {} s" fr="Trop d&apos;essais. Réessayez dans {} s"/>
   <translation tag="Tool" fr="Outil"/>
   <translation tag="Tool Change Failed" fr="Échec du changement d&apos;outil"/>
   <translation tag="Tool Changer" fr="Changeur d&apos;outils"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" fr="Ce qui se passe à la fin d&apos;une impression"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." fr="Quand un trancheur envoie et lance un fichier qui dépasse la course de cette imprimante, chauffe au-delà de ses limites ou utilise un outil absent, garder le fichier sans le lancer."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." fr="Quand activé, seule la macro s&apos;exécute. Quand désactivé, les températures sont définies d&apos;abord, puis la macro s&apos;exécute."/>
+  <translation tag="When the screen dims" fr="À l&apos;atténuation de l&apos;écran"/>
   <translation tag="Where UI sounds play" fr="Où les sons de l&apos;interface sont diffusés"/>
   <translation tag="Whether filament is loaded" fr="Si du filament est chargé"/>
   <translation tag="Which belt is each path?" fr="Quelle courroie correspond à chaque chemin ?"/>

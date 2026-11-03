@@ -2030,6 +2030,7 @@
   <translation tag="Location" pt="Localização"/>
   <translation tag="Lock" pt="Bloquear"/>
   <translation tag="Lock Screen" pt="Bloqueio de tela"/>
+  <translation tag="Lock after"/>
   <translation tag="Lock screen after idle timeout" pt="Bloquear tela após tempo ocioso"/>
   <translation tag="Lock the screen with your PIN" pt="Bloquear a tela com seu PIN"/>
   <translation tag="Locked during print" pt="Bloqueado durante impressão"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" pt="Tempo"/>
   <translation tag="Time Format" pt="Formato de Hora"/>
   <translation tag="Time to wait before escalating to emergency stop" pt="Tempo de espera antes de escalar para parada de emergência"/>
+  <translation tag="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " pt="Hora: "/>
   <translation tag="Timelapse" pt="Timelapse"/>
   <translation tag="Timelapse Available" pt="Timelapse Disponível"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" pt="Alternar o LED do cabeçote para um extrusor"/>
   <translation tag="Toggle:" pt="Alternar:"/>
   <translation tag="Too humid" pt="Muito úmido"/>
+  <translation tag="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" pt="Ferramenta"/>
   <translation tag="Tool Change Failed" pt="Falha ao trocar de ferramenta"/>
   <translation tag="Tool Changer" pt="Trocador de Ferramentas"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" pt="O que acontece ao terminar uma impressão"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." pt="Quando um fatiador envia e inicia um arquivo que vai além do curso desta impressora, aquece acima dos limites ou usa uma ferramenta que não existe, manter o arquivo mas não iniciá-lo."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." pt="Quando habilitado, apenas a macro é executada. Quando desabilitado, as temperaturas são definidas primeiro, depois a macro é executada."/>
+  <translation tag="When the screen dims"/>
   <translation tag="Where UI sounds play" pt="Onde os sons da interface são reproduzidos"/>
   <translation tag="Whether filament is loaded" pt="Se há filamento carregado"/>
   <translation tag="Which belt is each path?" pt="Qual correia é cada caminho?"/>

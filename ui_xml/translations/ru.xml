@@ -2075,6 +2075,7 @@
   <translation tag="Location" ru="Расположение"/>
   <translation tag="Lock" ru="Блокировка"/>
   <translation tag="Lock Screen" ru="Блокировка экрана"/>
+  <translation tag="Lock after"/>
   <translation tag="Lock screen after idle timeout" ru="Блокировать экран после простоя"/>
   <translation tag="Lock the screen with your PIN" ru="Заблокировать экран PIN-кодом"/>
   <translation tag="Locked during print" ru="Заблокировано во время печати"/>
@@ -3983,6 +3984,7 @@
   <translation tag="Time" ru="Время"/>
   <translation tag="Time Format" ru="Формат времени"/>
   <translation tag="Time to wait before escalating to emergency stop" ru="Время ожидания перед эскалацией до аварийной остановки"/>
+  <translation tag="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " ru="Время: "/>
   <translation tag="Timelapse" ru="Таймлапс"/>
   <translation tag="Timelapse Available" ru="Таймлапс доступен"/>
@@ -4017,6 +4019,7 @@
   <translation tag="Toggle toolhead LED for an extruder" ru="Переключить LED печатающей головки для экструдера"/>
   <translation tag="Toggle:" ru="Переключить:"/>
   <translation tag="Too humid" ru="Слишком влажно"/>
+  <translation tag="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" ru="Инструмент"/>
   <translation tag="Tool Change Failed" ru="Ошибка смены инструмента"/>
   <translation tag="Tool Changer" ru="Сменщик инструментов"/>
@@ -4286,6 +4289,7 @@
   <translation tag="What happens when a print ends" ru="Что происходит по окончании печати"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." ru="Если слайсер загружает и запускает файл, который выходит за ход этого принтера, нагревает выше его пределов или использует отсутствующий инструмент, сохранить файл, но не запускать печать."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." ru="Когда включено, запускается только макрос. Когда выключено, сначала задаются температуры, затем запускается макрос."/>
+  <translation tag="When the screen dims"/>
   <translation tag="Where UI sounds play" ru="Где воспроизводятся звуки интерфейса"/>
   <translation tag="Whether filament is loaded" ru="Загружен ли филамент"/>
   <translation tag="Which belt is each path?" ru="Какой ремень у каждого пути?"/>

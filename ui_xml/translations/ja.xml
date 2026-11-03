@@ -2030,6 +2030,7 @@
   <translation tag="Location" ja="場所"/>
   <translation tag="Lock" ja="ロック"/>
   <translation tag="Lock Screen" ja="画面ロック"/>
+  <translation tag="Lock after"/>
   <translation tag="Lock screen after idle timeout" ja="アイドルタイムアウト後に画面をロック"/>
   <translation tag="Lock the screen with your PIN" ja="PIN で画面をロック"/>
   <translation tag="Locked during print" ja="印刷中はロックされています"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" ja="時間"/>
   <translation tag="Time Format" ja="時間形式"/>
   <translation tag="Time to wait before escalating to emergency stop" ja="緊急停止にエスカレートするまでの待機時間"/>
+  <translation tag="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " ja="時刻: "/>
   <translation tag="Timelapse" ja="タイムラプス"/>
   <translation tag="Timelapse Available" ja="タイムラプス利用可能"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" ja="エクストルーダーのツールヘッドLEDを切り替え"/>
   <translation tag="Toggle:" ja="切り替え:"/>
   <translation tag="Too humid" ja="湿度が高すぎます"/>
+  <translation tag="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" ja="ツール"/>
   <translation tag="Tool Change Failed" ja="ツール変更に失敗しました"/>
   <translation tag="Tool Changer" ja="ツールチェンジャー"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" ja="印刷終了時の動作"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." ja="スライサーがこのプリンターの移動範囲を超える、加熱上限を超える、または存在しないツールを使うファイルをアップロードして開始したとき、ファイルは残して印刷は開始しません。"/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." ja="有効時はマクロのみ実行されます。無効時は先に温度を設定してからマクロが実行されます。"/>
+  <translation tag="When the screen dims"/>
   <translation tag="Where UI sounds play" ja="UIサウンドの再生先"/>
   <translation tag="Whether filament is loaded" ja="フィラメントの装填状態"/>
   <translation tag="Which belt is each path?" ja="各パスはどのベルト?"/>

@@ -2030,6 +2030,7 @@
   <translation tag="Location" it="Posizione"/>
   <translation tag="Lock" it="Blocca"/>
   <translation tag="Lock Screen" it="Blocco schermo"/>
+  <translation tag="Lock after"/>
   <translation tag="Lock screen after idle timeout" it="Blocca schermo dopo inattività"/>
   <translation tag="Lock the screen with your PIN" it="Blocca lo schermo con il PIN"/>
   <translation tag="Locked during print" it="Bloccato durante la stampa"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" it="Tempo"/>
   <translation tag="Time Format" it="Formato ora"/>
   <translation tag="Time to wait before escalating to emergency stop" it="Tempo di attesa prima di escalation ad arresto di emergenza"/>
+  <translation tag="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " it="Ora: "/>
   <translation tag="Timelapse" it="Timelapse"/>
   <translation tag="Timelapse Available" it="Timelapse disponibile"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" it="Alterna il LED della testina per un estrusore"/>
   <translation tag="Toggle:" it="Commuta:"/>
   <translation tag="Too humid" it="Troppo umido"/>
+  <translation tag="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" it="Strumento"/>
   <translation tag="Tool Change Failed" it="Cambio utensile non riuscito"/>
   <translation tag="Tool Changer" it="Cambia utensile"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" it="Cosa succede al termine di una stampa"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." it="Quando uno slicer carica e avvia un file che va oltre la corsa di questa stampante, scalda oltre i suoi limiti o usa uno strumento mancante, mantieni il file ma non avviarlo."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." it="Se abilitato, viene eseguita solo la macro. Se disabilitato, le temperature vengono impostate prima, poi la macro viene eseguita."/>
+  <translation tag="When the screen dims"/>
   <translation tag="Where UI sounds play" it="Dove vengono riprodotti i suoni dell&apos;interfaccia"/>
   <translation tag="Whether filament is loaded" it="Se il filamento è caricato"/>
   <translation tag="Which belt is each path?" it="Quale cinghia corrisponde a ogni percorso?"/>

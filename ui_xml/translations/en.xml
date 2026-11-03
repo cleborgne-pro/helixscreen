@@ -2030,6 +2030,7 @@
   <translation tag="Location" en="Location"/>
   <translation tag="Lock" en="Lock"/>
   <translation tag="Lock Screen" en="Lock Screen"/>
+  <translation tag="Lock after" en="Lock after"/>
   <translation tag="Lock screen after idle timeout" en="Lock screen after idle timeout"/>
   <translation tag="Lock the screen with your PIN" en="Lock the screen with your PIN"/>
   <translation tag="Locked during print" en="Locked during print"/>
@@ -3923,6 +3924,7 @@
   <translation tag="Time" en="Time"/>
   <translation tag="Time Format" en="Time Format"/>
   <translation tag="Time to wait before escalating to emergency stop" en="Time to wait before escalating to emergency stop"/>
+  <translation tag="Time without a touch before auto-lock, also while printing" en="Time without a touch before auto-lock, also while printing"/>
   <translation tag="Time: " en="Time: "/>
   <translation tag="Timelapse" en="Timelapse"/>
   <translation tag="Timelapse Available" en="Timelapse Available"/>
@@ -3957,6 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" en="Toggle toolhead LED for an extruder"/>
   <translation tag="Toggle:" en="Toggle:"/>
   <translation tag="Too humid" en="Too humid"/>
+  <translation tag="Too many attempts. Try again in {} s" en="Too many attempts. Try again in {} s"/>
   <translation tag="Tool" en="Tool"/>
   <translation tag="Tool Change Failed" en="Tool Change Failed"/>
   <translation tag="Tool Changer" en="Tool Changer"/>
@@ -4226,6 +4229,7 @@
   <translation tag="What happens when a print ends" en="What happens when a print ends"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." en="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." en="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs."/>
+  <translation tag="When the screen dims" en="When the screen dims"/>
   <translation tag="Where UI sounds play" en="Where UI sounds play"/>
   <translation tag="Whether filament is loaded" en="Whether filament is loaded"/>
   <translation tag="Which belt is each path?" en="Which belt is each path?"/>
