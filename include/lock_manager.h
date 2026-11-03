@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
 
+#include <chrono>
+#include <functional>
 #include <string>
 
 // Forward declaration for test access (defined in tests/unit/test_lock_manager.cpp)
@@ -21,6 +23,8 @@ namespace helix {
  */
 class LockManager {
   public:
+    using Clock = std::chrono::steady_clock;
+
     static LockManager& instance();
 
     /** Returns true if a PIN hash is stored. */
@@ -49,9 +53,17 @@ class LockManager {
 
     /**
      * @brief Attempt to unlock with a PIN.
+     *
+     * From the kFreeAttempts-th wrong PIN in a row, every wrong PIN starts a
+     * wait that doubles each time; attempts during the wait are refused without
+     * checking the PIN. The count survives a restart.
+     *
      * @return true and clears locked state on success, false otherwise.
      */
     bool try_unlock(const std::string& pin);
+
+    /** Seconds left before try_unlock() accepts another attempt (0 = now). */
+    int unlock_wait_seconds() const;
 
     bool auto_lock_enabled() const;
     void set_auto_lock(bool enabled);
@@ -66,6 +78,7 @@ class LockManager {
     friend class ::LockManagerTestAccess;
 
     std::string hash_pin(const std::string& pin) const;
+    void start_wait_for_failures();
     void load_from_config();
     void save_to_config();
 
@@ -73,9 +86,15 @@ class LockManager {
     bool locked_ = false;
     bool auto_lock_ = false;
     bool subjects_initialized_ = false;
+    int failed_attempts_ = 0;
+    Clock::time_point retry_at_{};
+    std::function<Clock::time_point()> now_ = [] { return Clock::now(); };
 
     static constexpr int kMinPinLength = 4;
     static constexpr int kMaxPinLength = 6;
+    static constexpr int kFreeAttempts = 3;
+    static constexpr int kFirstWaitSec = 30;
+    static constexpr int kMaxWaitSec = 15 * 60;
 };
 
 } // namespace helix

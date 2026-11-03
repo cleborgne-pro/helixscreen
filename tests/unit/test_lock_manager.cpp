@@ -4,6 +4,8 @@
 
 #include "../catch_amalgamated.hpp"
 
+#include <memory>
+
 // [L065] Use friend class pattern instead of public test-only methods
 class LockManagerTestAccess {
   public:
@@ -11,7 +13,15 @@ class LockManagerTestAccess {
         mgr.pin_hash_.clear();
         mgr.locked_ = false;
         mgr.auto_lock_ = false;
+        mgr.failed_attempts_ = 0;
+        mgr.retry_at_ = {};
+        mgr.now_ = [] { return helix::LockManager::Clock::now(); };
         mgr.save_to_config();
+    }
+    // Freezes the manager's clock at `now`, which the test then moves by hand.
+    static void use_clock(helix::LockManager& mgr,
+                          std::shared_ptr<helix::LockManager::Clock::time_point> now) {
+        mgr.now_ = [now] { return *now; };
     }
     // What a restart sees: state rebuilt from the saved config.
     static void reload(helix::LockManager& mgr) {
@@ -189,4 +199,105 @@ TEST_CASE("LockManager: without a PIN a restart never locks", "[lock]") {
 
     LockManagerTestAccess::reload(mgr);
     CHECK_FALSE(mgr.is_locked());
+}
+
+namespace {
+
+using LockClock = helix::LockManager::Clock;
+
+std::shared_ptr<LockClock::time_point> frozen_clock(helix::LockManager& mgr) {
+    auto now = std::make_shared<LockClock::time_point>(LockClock::now());
+    LockManagerTestAccess::use_clock(mgr, now);
+    return now;
+}
+
+void fail_times(helix::LockManager& mgr, int n) {
+    for (int i = 0; i < n; ++i)
+        REQUIRE_FALSE(mgr.try_unlock("0000"));
+}
+
+} // namespace
+
+TEST_CASE("LockManager: the third wrong PIN in a row starts a 30 s wait", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    auto now = frozen_clock(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    fail_times(mgr, 2);
+    CHECK(mgr.unlock_wait_seconds() == 0);
+
+    fail_times(mgr, 1);
+    CHECK(mgr.unlock_wait_seconds() == 30);
+
+    // The right PIN is refused too while the wait runs.
+    CHECK_FALSE(mgr.try_unlock("1234"));
+    CHECK(mgr.is_locked());
+
+    *now += std::chrono::seconds(30);
+    CHECK(mgr.unlock_wait_seconds() == 0);
+    CHECK(mgr.try_unlock("1234"));
+    CHECK_FALSE(mgr.is_locked());
+}
+
+TEST_CASE("LockManager: a refused attempt during the wait is not counted", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    auto now = frozen_clock(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    fail_times(mgr, 3);
+    *now += std::chrono::seconds(10);
+    CHECK_FALSE(mgr.try_unlock("0000"));
+    CHECK(mgr.unlock_wait_seconds() == 20);
+}
+
+TEST_CASE("LockManager: each further wrong PIN doubles the wait, up to 15 minutes", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    auto now = frozen_clock(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    fail_times(mgr, 3);
+    int expected = 30;
+    for (int round = 0; round < 8; ++round) {
+        CHECK(mgr.unlock_wait_seconds() == expected);
+        *now += std::chrono::seconds(mgr.unlock_wait_seconds());
+        fail_times(mgr, 1);
+        expected = std::min(expected * 2, 15 * 60);
+    }
+    CHECK(mgr.unlock_wait_seconds() == 15 * 60);
+}
+
+TEST_CASE("LockManager: the right PIN clears the wrong-PIN count", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    frozen_clock(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    fail_times(mgr, 2);
+    REQUIRE(mgr.try_unlock("1234"));
+    mgr.lock();
+    fail_times(mgr, 2);
+    CHECK(mgr.unlock_wait_seconds() == 0);
+}
+
+TEST_CASE("LockManager: a restart restarts the wait in full", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    auto now = frozen_clock(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    fail_times(mgr, 3);
+    *now += std::chrono::seconds(25);
+    REQUIRE(mgr.unlock_wait_seconds() == 5);
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK(mgr.is_locked());
+    CHECK(mgr.unlock_wait_seconds() == 30);
 }

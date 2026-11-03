@@ -53,6 +53,8 @@ bool LockManager::set_pin(const std::string& pin) {
 void LockManager::remove_pin() {
     pin_hash_.clear();
     locked_ = false;
+    failed_attempts_ = 0;
+    retry_at_ = {};
     save_to_config();
     spdlog::info("[LockManager] PIN removed, lock disabled");
     if (s_subjects_initialized) {
@@ -81,14 +83,45 @@ void LockManager::lock() {
 }
 
 bool LockManager::try_unlock(const std::string& pin) {
+    if (unlock_wait_seconds() > 0) {
+        spdlog::debug("[LockManager] Unlock refused — waiting after repeated wrong PINs");
+        return false;
+    }
     if (verify_pin(pin)) {
         locked_ = false;
+        failed_attempts_ = 0;
         save_to_config();
         spdlog::info("[LockManager] Screen unlocked");
         return true;
     }
-    spdlog::debug("[LockManager] Unlock failed — wrong PIN");
+    ++failed_attempts_;
+    start_wait_for_failures();
+    save_to_config();
+    spdlog::info("[LockManager] Unlock failed — wrong PIN ({} in a row)", failed_attempts_);
     return false;
+}
+
+int LockManager::unlock_wait_seconds() const {
+    const auto left = retry_at_ - now_();
+    if (left <= Clock::duration::zero())
+        return 0;
+    // Round up so the countdown never shows 0 while attempts are still refused.
+    return static_cast<int>(
+        std::chrono::ceil<std::chrono::seconds>(left).count());
+}
+
+void LockManager::start_wait_for_failures() {
+    const int over = failed_attempts_ - kFreeAttempts;
+    if (over < 0) {
+        retry_at_ = {};
+        return;
+    }
+    // 30 s, 60 s, 120 s ... capped: a 4-digit PIN cannot be walked by hand.
+    int wait_sec = kFirstWaitSec;
+    for (int i = 0; i < over && wait_sec < kMaxWaitSec; ++i)
+        wait_sec *= 2;
+    wait_sec = std::min(wait_sec, kMaxWaitSec);
+    retry_at_ = now_() + std::chrono::seconds(wait_sec);
 }
 
 bool LockManager::auto_lock_enabled() const {
@@ -111,6 +144,9 @@ void LockManager::load_from_config() {
     // A restart must not hand over an unlocked screen: power-cycling the printer
     // would otherwise be the way past the PIN. Auto-lock treats the restart as idle time.
     locked_ = has_pin() && (config->get<bool>("/security/locked", false) || auto_lock_);
+    // The wait restarts in full: rebooting must not be a shortcut past it.
+    failed_attempts_ = std::max(0, config->get<int>("/security/failed_attempts", 0));
+    start_wait_for_failures();
 }
 
 void LockManager::save_to_config() {
@@ -118,6 +154,7 @@ void LockManager::save_to_config() {
     config->set<std::string>("/security/pin_hash", pin_hash_);
     config->set<bool>("/security/auto_lock", auto_lock_);
     config->set<bool>("/security/locked", locked_);
+    config->set<int>("/security/failed_attempts", failed_attempts_);
     config->save();
 }
 

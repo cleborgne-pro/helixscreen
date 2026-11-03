@@ -11,6 +11,7 @@
 #include "lock_manager.h"
 #include "ui/ui_widget_helpers.h"
 
+#include <spdlog/fmt/fmt.h>
 #include <spdlog/spdlog.h>
 
 #include <lvgl.h>
@@ -159,16 +160,29 @@ void LockScreenOverlay::on_confirm() {
 
     spdlog::debug("[LockScreen] Attempting unlock with {} digit PIN", digit_buffer_.size());
 
-    if (helix::LockManager::instance().try_unlock(digit_buffer_)) {
+    auto& lock = helix::LockManager::instance();
+    if (lock.try_unlock(digit_buffer_)) {
         spdlog::info("[LockScreen] Unlock successful");
         // Defer hide() to avoid deleting objects in input event handler
         helix::ui::run_next_tick([]() { LockScreenOverlay::instance().hide(); });
-    } else {
-        spdlog::info("[LockScreen] Wrong PIN entered");
-        show_error("Wrong PIN");
-        shake_dots();
-        // clear_digits() is called from shake_dots() completed callback
+        return;
     }
+
+    const int wait_sec = lock.unlock_wait_seconds();
+    if (wait_sec > 0) {
+        // No shake: its completion clears the error line, and this message has to
+        // stay up long enough to read. The next digit hides it.
+        spdlog::info("[LockScreen] Unlock refused, {} s left before the next attempt", wait_sec);
+        clear_digits();
+        const std::string text =
+            fmt::format(fmt::runtime(lv_tr("Too many attempts. Try again in {} s")), wait_sec);
+        show_error(text.c_str());
+        return;
+    }
+    spdlog::info("[LockScreen] Wrong PIN entered");
+    show_error(lv_tr("Wrong PIN"));
+    shake_dots();
+    // clear_digits() is called from shake_dots() completed callback
 }
 
 // ============================================================================
