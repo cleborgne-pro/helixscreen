@@ -2030,7 +2030,7 @@
   <translation tag="Location" es="Ubicación"/>
   <translation tag="Lock" es="Bloquear"/>
   <translation tag="Lock Screen" es="Bloqueo de pantalla"/>
-  <translation tag="Lock after"/>
+  <translation tag="Lock after" es="Bloquear tras"/>
   <translation tag="Lock screen after idle timeout" es="Bloquear pantalla tras inactividad"/>
   <translation tag="Lock the screen with your PIN" es="Bloquear la pantalla con tu PIN"/>
   <translation tag="Locked during print" es="Bloqueado durante impresión"/>
@@ -3924,7 +3924,7 @@
   <translation tag="Time" es="Hora"/>
   <translation tag="Time Format" es="Formato de Hora"/>
   <translation tag="Time to wait before escalating to emergency stop" es="Tiempo de espera antes de escalar a parada de emergencia"/>
-  <translation tag="Time without a touch before auto-lock, also while printing"/>
+  <translation tag="Time without a touch before auto-lock, also while printing" es="Tiempo sin tocar antes del bloqueo automático, también durante la impresión"/>
   <translation tag="Time: " es="Hora: "/>
   <translation tag="Timelapse" es="Timelapse"/>
   <translation tag="Timelapse Available" es="Timelapse Disponible"/>
@@ -3959,7 +3959,7 @@
   <translation tag="Toggle toolhead LED for an extruder" es="Alternar el LED del cabezal para un extrusor"/>
   <translation tag="Toggle:" es="Conmutar:"/>
   <translation tag="Too humid" es="Demasiado húmedo"/>
-  <translation tag="Too many attempts. Try again in {} s"/>
+  <translation tag="Too many attempts. Try again in {} s" es="Demasiados intentos. Inténtalo de nuevo en {} s"/>
   <translation tag="Tool" es="Herramienta"/>
   <translation tag="Tool Change Failed" es="Fallo al cambiar de herramienta"/>
   <translation tag="Tool Changer" es="Cambiador de Herramientas"/>
@@ -4229,7 +4229,7 @@
   <translation tag="What happens when a print ends" es="Qué ocurre al terminar una impresión"/>
   <translation tag="When a slicer uploads and starts a file that moves past this printer&apos;s travel, heats past its limits or uses a missing tool, keep the file but do not start it." es="Cuando un laminador sube e inicia un archivo que se mueve más allá del recorrido de esta impresora, calienta por encima de sus límites o usa una herramienta que no existe, conservar el archivo pero no iniciarlo."/>
   <translation tag="When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs." es="Cuando está activado, solo se ejecuta el macro. Cuando está desactivado, primero se establecen las temperaturas y luego se ejecuta el macro."/>
-  <translation tag="When the screen dims"/>
+  <translation tag="When the screen dims" es="Al atenuarse la pantalla"/>
   <translation tag="Where UI sounds play" es="Dónde se reproducen los sonidos de la interfaz"/>
   <translation tag="Whether filament is loaded" es="Si hay filamento cargado"/>
   <translation tag="Which belt is each path?" es="¿Qué correa es cada ruta?"/>

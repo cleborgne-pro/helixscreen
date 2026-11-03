@@ -2112,7 +2112,7 @@ translations:
   Location: 場所
   Lock: ロック
   Lock Screen: '画面ロック'
-  Lock after: ''
+  Lock after: ロックまでの時間
   Lock screen after idle timeout: アイドルタイムアウト後に画面をロック
   Lock the screen with your PIN: PIN で画面をロック
   Locked during print: 印刷中はロックされています
@@ -4103,7 +4103,7 @@ translations:
   Time: 時間
   Time Format: 時間形式
   Time to wait before escalating to emergency stop: 緊急停止にエスカレートするまでの待機時間
-  Time without a touch before auto-lock, also while printing: ''
+  Time without a touch before auto-lock, also while printing: 自動ロックまでの無操作時間（印刷中も有効）
   'Time: ': '時刻: '
   Timelapse: タイムラプス
   Timelapse Available: タイムラプス利用可能
@@ -4140,7 +4140,7 @@ translations:
   Toggle toolhead LED for an extruder: 'エクストルーダーのツールヘッドLEDを切り替え'
   'Toggle:': '切り替え:'
   Too humid: 湿度が高すぎます
-  Too many attempts. Try again in {} s: ''
+  Too many attempts. Try again in {} s: 試行回数が多すぎます。{} 秒後に再試行してください
   Tool: ツール
   Tool Change Failed: 'ツール変更に失敗しました'
   Tool Changer: ツールチェンジャー
@@ -4408,7 +4408,7 @@ translations:
   ? When a slicer uploads and starts a file that moves past this printer's travel, heats past its limits or uses a missing tool, keep the file but do not start it.
   : 'スライサーがこのプリンターの移動範囲を超える、加熱上限を超える、または存在しないツールを使うファイルをアップロードして開始したとき、ファイルは残して印刷は開始しません。'
   When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs.: 有効時はマクロのみ実行されます。無効時は先に温度を設定してからマクロが実行されます。
-  When the screen dims: ''
+  When the screen dims: 画面減光時
   Where UI sounds play: UIサウンドの再生先
   Whether filament is loaded: フィラメントの装填状態
   Which macro switches the ACE path back on: 'ACE経路を再びオンにするマクロ'

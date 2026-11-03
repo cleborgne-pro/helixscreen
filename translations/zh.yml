@@ -2106,7 +2106,7 @@ translations:
   Location: 位置
   Lock: 锁定
   Lock Screen: '屏幕锁定'
-  Lock after: ''
+  Lock after: 锁定时间
   Lock screen after idle timeout: 空闲超时后锁定屏幕
   Lock the screen with your PIN: 用 PIN 码锁定屏幕
   Locked during print: 打印期间锁定
@@ -4094,7 +4094,7 @@ translations:
   Time: 时间
   Time Format: 时间格式
   Time to wait before escalating to emergency stop: 升级为紧急停止前的等待时间
-  Time without a touch before auto-lock, also while printing: ''
+  Time without a touch before auto-lock, also while printing: 无触摸多久后自动锁定（打印时也生效）
   'Time: ': '时间: '
   Timelapse: 延时摄影
   Timelapse Available: 延时摄影可用
@@ -4131,7 +4131,7 @@ translations:
   Toggle toolhead LED for an extruder: '切换某个挤出机的工具头 LED'
   'Toggle:': '切换:'
   Too humid: 湿度过高
-  Too many attempts. Try again in {} s: ''
+  Too many attempts. Try again in {} s: 尝试次数过多。请在 {} 秒后重试
   Tool: 工具
   Tool Change Failed: '工具切换失败'
   Tool Changer: 换刀器
@@ -4399,7 +4399,7 @@ translations:
   ? When a slicer uploads and starts a file that moves past this printer's travel, heats past its limits or uses a missing tool, keep the file but do not start it.
   : '当切片软件上传并启动的文件超出此打印机的行程、加热超过其上限或使用不存在的工具时，保留文件但不开始打印。'
   When enabled, only the macro runs. When disabled, temperatures are set first, then the macro runs.: 启用时仅运行宏。禁用时先设置温度，然后运行宏。
-  When the screen dims: ''
+  When the screen dims: 屏幕变暗时
   Where UI sounds play: 界面声音的播放位置
   Whether filament is loaded: 耗材是否已装载
   Which macro switches the ACE path back on: '重新开启ACE通路的宏'
