@@ -46,6 +46,7 @@
 #include "led/led_auto_state.h"
 #include "led/led_controller.h"
 #include "light_button_config.h"
+#include "lock_manager.h"
 #include "moonraker_manager.h"
 #include "page_scroll_auto_inject.h"
 #include "panel_factory.h"
@@ -902,6 +903,10 @@ int Application::run(int argc, char** argv) {
             // No wizard will run — finalize the home panel immediately so its
             // default layout reflects currently-connected hardware.
             get_global_home_panel().finalize_setup();
+            // A screen that was locked, or auto-locks, comes back up behind the PIN pad.
+            if (helix::LockManager::instance().is_locked()) {
+                helix::ui::LockScreenOverlay::instance().show();
+            }
         }
 
         // Phase 14: Load plugins (HELIX_PLUGIN_DIR for authors, otherwise the

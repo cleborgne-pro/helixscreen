@@ -73,13 +73,17 @@ bool LockManager::is_locked() const {
 void LockManager::lock() {
     if (!has_pin())
         return;
-    locked_ = true;
+    if (!locked_) {
+        locked_ = true;
+        save_to_config();
+    }
     spdlog::info("[LockManager] Screen locked");
 }
 
 bool LockManager::try_unlock(const std::string& pin) {
     if (verify_pin(pin)) {
         locked_ = false;
+        save_to_config();
         spdlog::info("[LockManager] Screen unlocked");
         return true;
     }
@@ -104,12 +108,16 @@ void LockManager::load_from_config() {
     auto* config = Config::get_instance();
     pin_hash_ = config->get<std::string>("/security/pin_hash", "");
     auto_lock_ = config->get<bool>("/security/auto_lock", false);
+    // A restart must not hand over an unlocked screen: power-cycling the printer
+    // would otherwise be the way past the PIN. Auto-lock treats the restart as idle time.
+    locked_ = has_pin() && (config->get<bool>("/security/locked", false) || auto_lock_);
 }
 
 void LockManager::save_to_config() {
     auto* config = Config::get_instance();
     config->set<std::string>("/security/pin_hash", pin_hash_);
     config->set<bool>("/security/auto_lock", auto_lock_);
+    config->set<bool>("/security/locked", locked_);
     config->save();
 }
 

@@ -11,6 +11,11 @@ class LockManagerTestAccess {
         mgr.pin_hash_.clear();
         mgr.locked_ = false;
         mgr.auto_lock_ = false;
+        mgr.save_to_config();
+    }
+    // What a restart sees: state rebuilt from the saved config.
+    static void reload(helix::LockManager& mgr) {
+        mgr.load_from_config();
     }
     static const std::string& pin_hash(const helix::LockManager& mgr) {
         return mgr.pin_hash_;
@@ -140,4 +145,48 @@ TEST_CASE("LockManager: set_pin while locked updates PIN", "[lock]") {
     CHECK_FALSE(mgr.verify_pin("1234"));
     CHECK(mgr.verify_pin("5678"));
     CHECK(mgr.try_unlock("5678"));
+}
+
+TEST_CASE("LockManager: a locked screen stays locked across a restart", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK(mgr.is_locked());
+}
+
+TEST_CASE("LockManager: an unlocked screen restarts unlocked when auto-lock is off", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    mgr.set_pin("1234");
+    mgr.lock();
+    REQUIRE(mgr.try_unlock("1234"));
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK_FALSE(mgr.is_locked());
+}
+
+TEST_CASE("LockManager: auto-lock locks the screen at startup", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    mgr.set_pin("1234");
+    mgr.set_auto_lock(true);
+    REQUIRE_FALSE(mgr.is_locked());
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK(mgr.is_locked());
+}
+
+TEST_CASE("LockManager: without a PIN a restart never locks", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    mgr.set_pin("1234");
+    mgr.set_auto_lock(true);
+    mgr.lock();
+    mgr.remove_pin();
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK_FALSE(mgr.is_locked());
 }

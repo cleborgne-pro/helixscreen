@@ -11,7 +11,8 @@ namespace helix {
 /**
  * @brief Screen lock manager — PIN storage, lock state, auto-lock flag.
  *
- * PINs are stored as SHA-256 hashes via PicoSHA2 and persisted to Config.
+ * PINs are stored as SHA-256 hashes via PicoSHA2 and persisted to Config,
+ * together with the locked state so a restart comes back locked.
  * LVGL subjects (for UI binding) are initialised lazily in init_subjects()
  * and are NOT declared in this header so that the class compiles cleanly
  * in test contexts where LVGL is not fully available.
