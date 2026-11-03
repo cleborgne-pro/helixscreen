@@ -157,36 +157,47 @@ void PrintControlButtons::handle_primary_button() {
         spdlog::warn("[PrintControl] No API - cannot dispatch primary action");
         return;
     }
-    // RAW_PRINT_STATE_OK: picks which macro to send; see below.
-    auto state = get_printer_state().print_state().get_print_job_state();
-    auto& macros = StandardMacros::instance();
-
     // RAW_PRINT_STATE_OK: chooses WHICH macro to send. Pause is meaningless
     // before the printer holds the job, and print_control_view already refuses
-    // the button during Preparing.
+    // the button during Preparing. Resume is only meaningful once the PRINTER
+    // says it is paused.
+    auto state = get_printer_state().print_state().get_print_job_state();
     if (state == helix::PrintJobState::PRINTING) {
-        if (macros.get(StandardMacroSlot::Pause).is_empty()) {
-            NOTIFY_WARNING(lv_tr("Pause macro not configured"));
-            return;
-        }
-        spdlog::info("[PrintControl] Pausing print");
-        start_pending_action(PendingAction::Pausing);
-        // suppress_auto_toast=true: the on_error below surfaces a contextual
-        // toast; the generic RPC_ERROR auto-toast + Klipper's `!!` broadcast
-        // for the same root cause would be redundant noise.
-        macros.execute(
-            StandardMacroSlot::Pause, api_, []() { spdlog::info("[PrintControl] Pause sent"); },
-            [](const MoonrakerError& err) {
-                spdlog::error("[PrintControl] Pause failed: {}", err.message);
-                helix::ui::notify_error_tr(TR_NOOP("Failed to pause print: {}"), err);
-                PrintControlButtons::instance().clear_pending_action();
-            },
-            /*timeout_ms=*/0, /*suppress_auto_toast=*/true);
-        // RAW_PRINT_STATE_OK: Resume is only meaningful once the PRINTER says
-        // it is paused.
+        request_pause();
     } else if (state == helix::PrintJobState::PAUSED) {
         request_resume();
     }
+}
+
+void PrintControlButtons::request_pause() {
+    if (!api_) {
+        spdlog::warn("[PrintControl] No API - cannot pause");
+        return;
+    }
+    // RAW_PRINT_STATE_OK: only a print the printer is running can pause; in
+    // any other state this is a no-op, never a resume.
+    if (get_printer_state().print_state().get_print_job_state() != helix::PrintJobState::PRINTING) {
+        spdlog::debug("[PrintControl] Pause ignored - printer is not printing");
+        return;
+    }
+    auto& macros = StandardMacros::instance();
+    if (macros.get(StandardMacroSlot::Pause).is_empty()) {
+        NOTIFY_WARNING(lv_tr("Pause macro not configured"));
+        return;
+    }
+    spdlog::info("[PrintControl] Pausing print");
+    start_pending_action(PendingAction::Pausing);
+    // suppress_auto_toast=true: the on_error below surfaces a contextual
+    // toast; the generic RPC_ERROR auto-toast + Klipper's `!!` broadcast
+    // for the same root cause would be redundant noise.
+    macros.execute(
+        StandardMacroSlot::Pause, api_, []() { spdlog::info("[PrintControl] Pause sent"); },
+        [](const MoonrakerError& err) {
+            spdlog::error("[PrintControl] Pause failed: {}", err.message);
+            helix::ui::notify_error_tr(TR_NOOP("Failed to pause print: {}"), err);
+            PrintControlButtons::instance().clear_pending_action();
+        },
+        /*timeout_ms=*/0, /*suppress_auto_toast=*/true);
 }
 
 void PrintControlButtons::request_resume() {

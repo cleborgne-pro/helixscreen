@@ -69,6 +69,11 @@ class PrintControlButtons {
     void handle_primary_button();
     void handle_stop_button();
 
+    /// Pause the running print, and nothing else: in any state other than
+    /// Printing it does nothing, so it can sit behind the lock screen without
+    /// ever resuming a print someone paused on purpose. Main thread only.
+    void request_pause();
+
     /// Resume the paused print: validates the Resume macro is configured, marks
     /// a Resuming pending action (optimistic spinner), and runs the shared
     /// prepare_for_resume → Resume dispatch with a clear-on-failure callback.
