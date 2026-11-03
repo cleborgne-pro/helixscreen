@@ -188,6 +188,8 @@ class PrintControlButtons {
     lv_subject_t primary_label_subject_{};
     lv_subject_t primary_enabled_subject_{};
     lv_subject_t stop_enabled_subject_{};
+    /// 1 while the primary button would pause (print_control_pause_available).
+    lv_subject_t pause_available_subject_{};
     lv_subject_t pending_action_subject_{};
     char primary_icon_buf_[32] = "\xF3\xB0\x8F\xA4";
     char primary_label_buf_[16] = "Pause";

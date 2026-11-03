@@ -24,6 +24,7 @@
 
 #include <atomic>
 #include <cstdio>
+#include <cstring>
 #include <memory>
 
 namespace helix::ui {
@@ -43,11 +44,14 @@ void PrintControlButtons::init_subjects() {
                               "print_control_primary_label", subjects_);
     UI_MANAGED_SUBJECT_INT(primary_enabled_subject_, 0, "print_control_primary_enabled", subjects_);
     UI_MANAGED_SUBJECT_INT(stop_enabled_subject_, 0, "print_control_stop_enabled", subjects_);
+    UI_MANAGED_SUBJECT_INT(pause_available_subject_, 0, "print_control_pause_available",
+                           subjects_);
     UI_MANAGED_SUBJECT_INT(pending_action_subject_, 0, "print_pending_action", subjects_);
 
     register_xml_callbacks({
         {"on_print_control_primary", [](lv_event_t*) { instance().handle_primary_button(); }},
         {"on_print_control_stop", [](lv_event_t*) { instance().handle_stop_button(); }},
+        {"on_print_control_pause", [](lv_event_t*) { instance().request_pause(); }},
     });
 
     // print_state_enum is a static global subject — no SubjectLifetime needed.
@@ -145,6 +149,10 @@ void PrintControlButtons::recompute() {
     lv_subject_copy_string(&primary_label_subject_, primary_label_buf_);
     lv_subject_set_int(&primary_enabled_subject_, v.primary_enabled ? 1 : 0);
     lv_subject_set_int(&stop_enabled_subject_, v.stop_enabled ? 1 : 0);
+    lv_subject_set_int(&pause_available_subject_,
+                       v.primary_enabled && std::strcmp(v.primary_label, kControlLabelPause) == 0
+                           ? 1
+                           : 0);
     lv_subject_set_int(&pending_action_subject_, static_cast<int>(pending_action_));
 }
 

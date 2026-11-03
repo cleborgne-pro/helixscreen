@@ -45,14 +45,29 @@
         width="100%" height="100%" style_bg_color="#screen_bg" style_bg_opa="230" style_border_width="0"
         style_pad_all="0" style_radius="0" scrollable="false" clickable="true">
 
-    <!-- E-Stop FAB — top-right, only visible while printing -->
-    <lv_button name="estop_fab"
-               width="56" height="56" style_radius="99" style_bg_color="#danger" style_pad_all="0" align="top_right"
-               x="-16" y="16">
-      <bind_flag_if_eq subject="estop_visible" flag="hidden" ref_value="0"/>
-      <icon src="power" size="md" variant="primary" align="center"/>
-      <event_cb trigger="clicked" callback="lock_screen_estop_clicked"/>
-    </lv_button>
+    <!-- Safety actions in the top-right corner, where the card leaves them clear
+         (SMALL and up). MICRO/TINY carry them inside the card instead: the
+         compact card spans nearly the full width and would cover this corner.
+         Pause only pauses: resuming a print stays behind the PIN. -->
+    <lv_obj name="lock_actions_corner"
+            width="content" height="content" align="top_right" x="-16" y="16" flex_flow="row"
+            style_pad_all="0" style_pad_gap="#space_lg" style_bg_opa="0" style_border_width="0"
+            scrollable="false">
+      <bind_flag_if cond="ui_breakpoint le 1" flag="hidden"/>
+      <lv_button name="pause_fab"
+                 width="56" height="56" style_radius="99" style_bg_color="#warning" style_pad_all="0">
+        <bind_flag_if_eq subject="print_control_pause_available" flag="hidden" ref_value="0"/>
+        <icon src="pause" size="md" variant="primary" align="center"/>
+        <event_cb trigger="clicked" callback="on_print_control_pause"/>
+      </lv_button>
+      <!-- E-Stop: only visible while a job holds the machine -->
+      <lv_button name="estop_fab"
+                 width="56" height="56" style_radius="99" style_bg_color="#danger" style_pad_all="0">
+        <bind_flag_if_eq subject="estop_visible" flag="hidden" ref_value="0"/>
+        <icon src="power" size="md" variant="primary" align="center"/>
+        <event_cb trigger="clicked" callback="lock_screen_estop_clicked"/>
+      </lv_button>
+    </lv_obj>
 
     <!-- Centered card containing PIN entry UI.
          width + flex_flow come from card_compact / card_stacked. -->
@@ -108,6 +123,25 @@
         <!-- Error label — invisible by default, space reserved -->
         <text_small name="lock_error_label"
                     width="100%" text=" " style_text_color="#warning" style_text_align="center" style_opa="0"/>
+
+        <!-- Safety actions on MICRO/TINY, where the corner is under the card. -->
+        <lv_obj name="lock_actions_inline"
+                width="content" height="content" flex_flow="row" style_pad_all="0" style_pad_gap="#space_lg"
+                style_bg_opa="0" style_border_width="0" scrollable="false">
+          <bind_flag_if cond="ui_breakpoint ge 2" flag="hidden"/>
+          <lv_button name="pause_inline"
+                     width="48" height="48" style_radius="99" style_bg_color="#warning" style_pad_all="0">
+            <bind_flag_if_eq subject="print_control_pause_available" flag="hidden" ref_value="0"/>
+            <icon src="pause" size="md" variant="primary" align="center"/>
+            <event_cb trigger="clicked" callback="on_print_control_pause"/>
+          </lv_button>
+          <lv_button name="estop_inline"
+                     width="48" height="48" style_radius="99" style_bg_color="#danger" style_pad_all="0">
+            <bind_flag_if_eq subject="estop_visible" flag="hidden" ref_value="0"/>
+            <icon src="power" size="md" variant="primary" align="center"/>
+            <event_cb trigger="clicked" callback="lock_screen_estop_clicked"/>
+          </lv_button>
+        </lv_obj>
       </lv_obj>
 
       <!-- Keypad: 4x3 grid using row_wrap -->
