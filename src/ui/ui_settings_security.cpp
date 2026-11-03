@@ -50,8 +50,9 @@ void SecuritySettingsOverlay::on_activate() {
 void SecuritySettingsOverlay::init_auto_lock_after_dropdown() {
     lv_obj_t* row = helix::ui::find_required(overlay_root_, "row_auto_lock_after", get_name());
     if (lv_obj_t* dropdown = helix::ui::find_required(row, "dropdown", get_name())) {
-        lv_dropdown_set_selected(dropdown, helix::LockManager::auto_lock_after_index(
-                                               helix::LockManager::instance().auto_lock_after_sec()));
+        lv_dropdown_set_selected(dropdown,
+                                 helix::LockManager::auto_lock_after_index(
+                                     helix::LockManager::instance().auto_lock_after_sec()));
     }
 }
 

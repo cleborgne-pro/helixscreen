@@ -50,19 +50,16 @@
          compact card spans nearly the full width and would cover this corner.
          Pause only pauses: resuming a print stays behind the PIN. -->
     <lv_obj name="lock_actions_corner"
-            width="content" height="content" align="top_right" x="-16" y="16" flex_flow="row"
-            style_pad_all="0" style_pad_gap="#space_lg" style_bg_opa="0" style_border_width="0"
-            scrollable="false">
+            width="content" height="content" align="top_right" x="-16" y="16" flex_flow="row" style_pad_all="0"
+            style_pad_gap="#space_lg" style_bg_opa="0" style_border_width="0" scrollable="false">
       <bind_flag_if cond="ui_breakpoint le 1" flag="hidden"/>
-      <lv_button name="pause_fab"
-                 width="56" height="56" style_radius="99" style_bg_color="#warning" style_pad_all="0">
+      <lv_button name="pause_fab" width="56" height="56" style_radius="99" style_bg_color="#warning" style_pad_all="0">
         <bind_flag_if_eq subject="print_control_pause_available" flag="hidden" ref_value="0"/>
         <icon src="pause" size="md" variant="primary" align="center"/>
         <event_cb trigger="clicked" callback="on_print_control_pause"/>
       </lv_button>
       <!-- E-Stop: only visible while a job holds the machine -->
-      <lv_button name="estop_fab"
-                 width="56" height="56" style_radius="99" style_bg_color="#danger" style_pad_all="0">
+      <lv_button name="estop_fab" width="56" height="56" style_radius="99" style_bg_color="#danger" style_pad_all="0">
         <bind_flag_if_eq subject="estop_visible" flag="hidden" ref_value="0"/>
         <icon src="power" size="md" variant="primary" align="center"/>
         <event_cb trigger="clicked" callback="lock_screen_estop_clicked"/>

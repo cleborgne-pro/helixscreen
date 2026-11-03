@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "lock_manager.h"
 
-#include "../catch_amalgamated.hpp"
-
 #include <memory>
+
+#include "../catch_amalgamated.hpp"
 
 // [L065] Use friend class pattern instead of public test-only methods
 class LockManagerTestAccess {

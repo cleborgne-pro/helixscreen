@@ -141,8 +141,8 @@ class UserActivityClock {
 
 /// Whether the idle lock fires now. lock_after_sec 0 leaves locking to the wake from
 /// dim or sleep (wake_should_auto_lock), so a print holding the screen awake never locks.
-inline bool idle_should_auto_lock(uint32_t user_idle_ms, int lock_after_sec,
-                                  bool auto_lock_enabled, bool has_pin, bool locked) {
+inline bool idle_should_auto_lock(uint32_t user_idle_ms, int lock_after_sec, bool auto_lock_enabled,
+                                  bool has_pin, bool locked) {
     return auto_lock_enabled && has_pin && !locked && lock_after_sec > 0 &&
            user_idle_ms >= static_cast<uint32_t>(lock_after_sec) * 1000U;
 }

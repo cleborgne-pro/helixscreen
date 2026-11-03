@@ -109,8 +109,7 @@ int LockManager::unlock_wait_seconds() const {
     if (left <= Clock::duration::zero())
         return 0;
     // Round up so the countdown never shows 0 while attempts are still refused.
-    return static_cast<int>(
-        std::chrono::ceil<std::chrono::seconds>(left).count());
+    return static_cast<int>(std::chrono::ceil<std::chrono::seconds>(left).count());
 }
 
 void LockManager::start_wait_for_failures() {
@@ -152,9 +151,8 @@ void LockManager::set_auto_lock_after_sec(int seconds) {
 
 int LockManager::auto_lock_after_index(int seconds) {
     const auto it = std::find(kAutoLockAfterOptions.begin(), kAutoLockAfterOptions.end(), seconds);
-    return it == kAutoLockAfterOptions.end()
-               ? 0
-               : static_cast<int>(it - kAutoLockAfterOptions.begin());
+    return it == kAutoLockAfterOptions.end() ? 0
+                                             : static_cast<int>(it - kAutoLockAfterOptions.begin());
 }
 
 int LockManager::auto_lock_after_sec_at(int index) {
@@ -171,8 +169,8 @@ void LockManager::load_from_config() {
     auto* config = Config::get_instance();
     pin_hash_ = config->get<std::string>("/security/pin_hash", "");
     auto_lock_ = config->get<bool>("/security/auto_lock", false);
-    auto_lock_after_sec_ =
-        auto_lock_after_sec_at(auto_lock_after_index(config->get<int>("/security/auto_lock_after_sec", 0)));
+    auto_lock_after_sec_ = auto_lock_after_sec_at(
+        auto_lock_after_index(config->get<int>("/security/auto_lock_after_sec", 0)));
     // A restart must not hand over an unlocked screen: power-cycling the printer
     // would otherwise be the way past the PIN. Auto-lock treats the restart as idle time.
     locked_ = has_pin() && (config->get<bool>("/security/locked", false) || auto_lock_);
