@@ -33,12 +33,26 @@ void SecuritySettingsOverlay::register_callbacks() {
          [](lv_event_t* e) {
              helix::LockManager::instance().set_auto_lock(helix::ui::event_checked(e));
          }},
+        {"on_auto_lock_after_changed",
+         [](lv_event_t* e) {
+             helix::LockManager::instance().set_auto_lock_after_sec(
+                 helix::LockManager::auto_lock_after_sec_at(helix::ui::event_selected(e)));
+         }},
     });
 }
 
 void SecuritySettingsOverlay::on_activate() {
     OverlayBase::on_activate();
     init_auto_lock_toggle();
+    init_auto_lock_after_dropdown();
+}
+
+void SecuritySettingsOverlay::init_auto_lock_after_dropdown() {
+    lv_obj_t* row = helix::ui::find_required(overlay_root_, "row_auto_lock_after", get_name());
+    if (lv_obj_t* dropdown = helix::ui::find_required(row, "dropdown", get_name())) {
+        lv_dropdown_set_selected(dropdown, helix::LockManager::auto_lock_after_index(
+                                               helix::LockManager::instance().auto_lock_after_sec()));
+    }
 }
 
 // The LockManager flag has no subject, so the toggle is re-synced on each open.

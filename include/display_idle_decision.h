@@ -107,6 +107,47 @@ inline bool wake_should_auto_lock(bool was_sleeping, bool was_dimmed, bool was_p
 }
 
 /**
+ * @brief Time since the user last touched the screen, as opposed to LVGL's activity clock.
+ *
+ * Holding the screen awake (a print with sleep-while-printing off, an awake hold) works by
+ * re-triggering LVGL's activity clock every tick, which keeps its idle time near zero. An
+ * idle lock timed off that clock would never fire during a print, so this tracker drops
+ * the activity stamps the controller wrote itself and keeps the last one anybody else did.
+ *
+ * Ticks are LVGL ticks (lv_tick_get()); unsigned subtraction keeps wrap-around correct.
+ */
+class UserActivityClock {
+  public:
+    /// Called each tick with LVGL's current last-activity stamp.
+    void observe(uint32_t activity_tick) {
+        if (!m_hold_tick_valid || activity_tick != m_hold_tick) {
+            m_user_tick = activity_tick;
+        }
+    }
+    /// Called right after the controller itself re-triggers activity, with the new stamp.
+    void note_hold_trigger(uint32_t activity_tick) {
+        m_hold_tick = activity_tick;
+        m_hold_tick_valid = true;
+    }
+    uint32_t user_idle_ms(uint32_t now_tick) const {
+        return now_tick - m_user_tick;
+    }
+
+  private:
+    uint32_t m_user_tick = 0;
+    uint32_t m_hold_tick = 0;
+    bool m_hold_tick_valid = false;
+};
+
+/// Whether the idle lock fires now. lock_after_sec 0 leaves locking to the wake from
+/// dim or sleep (wake_should_auto_lock), so a print holding the screen awake never locks.
+inline bool idle_should_auto_lock(uint32_t user_idle_ms, int lock_after_sec,
+                                  bool auto_lock_enabled, bool has_pin, bool locked) {
+    return auto_lock_enabled && has_pin && !locked && lock_after_sec > 0 &&
+           user_idle_ms >= static_cast<uint32_t>(lock_after_sec) * 1000U;
+}
+
+/**
  * @brief Decide whether real panel power-off (FB_BLANK_POWERDOWN / DRM DPMS)
  *        is the sleep mechanism (#1049). Pure, no side effects.
  *

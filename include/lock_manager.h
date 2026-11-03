@@ -68,6 +68,17 @@ class LockManager {
     bool auto_lock_enabled() const;
     void set_auto_lock(bool enabled);
 
+    /**
+     * @brief Seconds without a touch before auto-lock engages, even while a print
+     *        holds the screen awake. 0 = lock only when waking from dim or sleep.
+     */
+    int auto_lock_after_sec() const;
+    /** Accepts only the values the Security dropdown offers; others are ignored. */
+    void set_auto_lock_after_sec(int seconds);
+    /** Dropdown index for a delay (0 for an unknown value) and its inverse. */
+    static int auto_lock_after_index(int seconds);
+    static int auto_lock_after_sec_at(int index);
+
     /** Initialise LVGL subjects for UI binding (call after lv_init()). */
     void init_subjects();
 
@@ -85,6 +96,7 @@ class LockManager {
     std::string pin_hash_;
     bool locked_ = false;
     bool auto_lock_ = false;
+    int auto_lock_after_sec_ = 0;
     bool subjects_initialized_ = false;
     int failed_attempts_ = 0;
     Clock::time_point retry_at_{};

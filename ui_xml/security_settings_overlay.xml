@@ -48,6 +48,19 @@
                               label="Auto-lock" icon="clock" description="Lock screen after idle timeout"
                               callback="on_auto_lock_changed"/>
         </lv_obj>
+        <!-- ================================================================== -->
+        <!-- LOCK AFTER — visible only when PIN IS configured. Values come from
+             LockManager::auto_lock_after_sec_at(), in this order. -->
+        <!-- ================================================================== -->
+        <lv_obj name="container_auto_lock_after" width="100%" style_pad_all="0" scrollable="false">
+          <bind_flag_if_eq subject="lock_pin_set" flag="hidden" ref_value="0"/>
+          <setting_dropdown_row name="row_auto_lock_after"
+                                label="Lock after" icon="lock"
+                                description="Time without a touch before auto-lock, also while printing"
+                                options="When the screen dims&#10;30 seconds&#10;1 minute&#10;2 minutes&#10;5 minutes"
+                                options_tag="When the screen dims&#10;30 seconds&#10;1 minute&#10;2 minutes&#10;5 minutes"
+                                callback="on_auto_lock_after_changed"/>
+        </lv_obj>
       </setting_group>
     </lv_obj>
   </view>

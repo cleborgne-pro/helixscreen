@@ -123,6 +123,11 @@ class DisplaySleepController {
     /// Undoes suppress_flush_for_sleep(). Safe to call when nothing was suppressed.
     void restore_flush_after_sleep();
 
+    /// Re-stamps LVGL's activity clock to hold the screen up, without it reading as a touch.
+    void trigger_hold_activity();
+    /// Locks the screen once the user has not touched it for the configured delay.
+    void check_idle_lock();
+
     void create_sleep_overlay();
     void destroy_sleep_overlay();
 
@@ -138,6 +143,7 @@ class DisplaySleepController {
     bool m_remote_sleep_held = false;  // a remote viewer is keeping an overdue sleep at dim
     bool m_remote_viewer_seen = false; // the previous tick saw a remote viewer
     bool m_wake_from_input = false;    // wake() is running for the user's touch or activity
+    helix::UserActivityClock m_user_activity;
     int m_dim_timeout_sec = 600;
     int m_dim_brightness_percent = 30;
 

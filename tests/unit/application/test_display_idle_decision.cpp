@@ -351,3 +351,47 @@ TEST_CASE("wake_should_auto_lock truth table", "[display][idle_decision]") {
               r.want);
     }
 }
+
+// ============================================================================
+// Idle lock: the user's own idle time, not the activity clock a print holds up
+// ============================================================================
+
+TEST_CASE("UserActivityClock ignores the controller's own hold triggers", "[display][lock]") {
+    helix::UserActivityClock clock;
+    clock.observe(1000); // the user touched at t=1000
+
+    // A print holds the screen up: every tick re-stamps LVGL's activity clock.
+    for (uint32_t t = 1100; t <= 40000; t += 100) {
+        clock.observe(t - 100); // the stamp the previous tick wrote
+        clock.note_hold_trigger(t);
+    }
+    CHECK(clock.user_idle_ms(40000) == 39000);
+}
+
+TEST_CASE("UserActivityClock follows a touch that lands during a hold", "[display][lock]") {
+    helix::UserActivityClock clock;
+    clock.observe(0);
+    clock.note_hold_trigger(5000);
+
+    clock.observe(5300); // a real press after the hold trigger
+    CHECK(clock.user_idle_ms(6000) == 700);
+}
+
+TEST_CASE("UserActivityClock survives the tick counter wrapping", "[display][lock]") {
+    helix::UserActivityClock clock;
+    clock.observe(UINT32_MAX - 499);
+    CHECK(clock.user_idle_ms(500) == 1000);
+}
+
+TEST_CASE("idle_should_auto_lock fires once the user idle time reaches the delay",
+          "[display][lock]") {
+    using helix::idle_should_auto_lock;
+    CHECK_FALSE(idle_should_auto_lock(29999, 30, true, true, false));
+    CHECK(idle_should_auto_lock(30000, 30, true, true, false));
+
+    // Delay 0 = lock on wake only; then auto-lock off, no PIN, already locked.
+    CHECK_FALSE(idle_should_auto_lock(60000, 0, true, true, false));
+    CHECK_FALSE(idle_should_auto_lock(60000, 30, false, true, false));
+    CHECK_FALSE(idle_should_auto_lock(60000, 30, true, false, false));
+    CHECK_FALSE(idle_should_auto_lock(60000, 30, true, true, true));
+}

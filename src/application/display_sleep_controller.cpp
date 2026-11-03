@@ -305,6 +305,24 @@ void DisplaySleepController::restore_flush_after_sleep() {
 // Idle tick
 // ============================================================================
 
+void DisplaySleepController::trigger_hold_activity() {
+    lv_display_trigger_activity(nullptr);
+    m_user_activity.note_hold_trigger(lv_tick_get() - lv_display_get_inactive_time(nullptr));
+}
+
+void DisplaySleepController::check_idle_lock() {
+    auto& lock = helix::LockManager::instance();
+    if (!helix::idle_should_auto_lock(m_user_activity.user_idle_ms(lv_tick_get()),
+                                      lock.auto_lock_after_sec(), lock.auto_lock_enabled(),
+                                      lock.has_pin(), lock.is_locked())) {
+        return;
+    }
+    spdlog::info("[DisplaySleep] Auto-lock engaged after {}s without a touch",
+                 lock.auto_lock_after_sec());
+    lock.lock();
+    helix::ui::LockScreenOverlay::instance().show();
+}
+
 void DisplaySleepController::tick() {
     BacklightBackend* backlight = m_host.backlight.get();
 #if HELIX_ENABLE_SCREENSAVER
@@ -328,6 +346,10 @@ void DisplaySleepController::tick() {
     }
 #endif
 
+    // Read before this tick's hold triggers below re-stamp LVGL's activity clock.
+    m_user_activity.observe(lv_tick_get() - lv_display_get_inactive_time(nullptr));
+    check_idle_lock();
+
     // If sleep-while-printing is disabled, inhibit *entering* sleep/dim during
     // active prints. We still need to honor wake-from-sleep touches: the
     // display may have entered sleep BEFORE the print started, and bailing out
@@ -341,13 +363,13 @@ void DisplaySleepController::tick() {
         const auto lifecycle = get_printer_state().print_state().get_print_lifecycle();
         if (job_holds_machine(lifecycle)) {
             // Reset LVGL activity timer so we don't immediately sleep when print ends
-            lv_display_trigger_activity(nullptr);
+            trigger_hold_activity();
             inhibit_sleep_entry = true;
         }
     }
     // A view waiting on the user mid-operation holds the screen up regardless.
     if (helix::display_awake_hold().is_held()) {
-        lv_display_trigger_activity(nullptr);
+        trigger_hold_activity();
         inhibit_sleep_entry = true;
     }
 

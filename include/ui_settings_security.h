@@ -52,6 +52,7 @@ class SecuritySettingsOverlay : public OverlayBase {
 
   private:
     void init_auto_lock_toggle();
+    void init_auto_lock_after_dropdown();
 };
 
 inline SecuritySettingsOverlay& get_security_settings_overlay() {

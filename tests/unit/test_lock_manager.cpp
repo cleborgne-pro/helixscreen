@@ -13,6 +13,7 @@ class LockManagerTestAccess {
         mgr.pin_hash_.clear();
         mgr.locked_ = false;
         mgr.auto_lock_ = false;
+        mgr.auto_lock_after_sec_ = 0;
         mgr.failed_attempts_ = 0;
         mgr.retry_at_ = {};
         mgr.now_ = [] { return helix::LockManager::Clock::now(); };
@@ -300,4 +301,27 @@ TEST_CASE("LockManager: a restart restarts the wait in full", "[lock]") {
     LockManagerTestAccess::reload(mgr);
     CHECK(mgr.is_locked());
     CHECK(mgr.unlock_wait_seconds() == 30);
+}
+
+TEST_CASE("LockManager: the auto-lock delay takes only the offered values", "[lock]") {
+    auto& mgr = helix::LockManager::instance();
+    LockManagerTestAccess::reset(mgr);
+    CHECK(mgr.auto_lock_after_sec() == 0);
+
+    mgr.set_auto_lock_after_sec(30);
+    CHECK(mgr.auto_lock_after_sec() == 30);
+
+    mgr.set_auto_lock_after_sec(45);
+    CHECK(mgr.auto_lock_after_sec() == 30);
+
+    LockManagerTestAccess::reload(mgr);
+    CHECK(mgr.auto_lock_after_sec() == 30);
+}
+
+TEST_CASE("LockManager: auto-lock delay dropdown index round-trips", "[lock]") {
+    using helix::LockManager;
+    for (int i = 0; i < 5; ++i)
+        CHECK(LockManager::auto_lock_after_index(LockManager::auto_lock_after_sec_at(i)) == i);
+    CHECK(LockManager::auto_lock_after_index(45) == 0);
+    CHECK(LockManager::auto_lock_after_sec_at(99) == 0);
 }
