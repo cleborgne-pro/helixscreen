@@ -35,9 +35,20 @@ Both actions require the current PIN, so someone who doesn't know it can't chang
 
 The **Auto-lock** toggle (shown only when a PIN is set) ties the screen lock to the display sleep timeout. When auto-lock is on, the screen locks automatically as the display wakes from sleep or screensaver/dim — so the printer is protected whenever it's been idle. You'll need to enter your PIN to use the screen again.
 
-> The display sleep timeout itself is configured under display settings. Auto-lock simply hooks into that same idle behavior rather than having its own separate timer — there's no separate "lock after X minutes" setting to configure.
-
 Auto-lock only engages after the display has actually gone idle (dimmed or slept on its own). Previewing a screensaver from settings does **not** lock the screen, since you're clearly right there using it.
+
+### Lock after a delay
+
+**Lock after** (shown once a PIN is set) chooses when auto-lock engages:
+
+- **When the screen dims** — the behavior above: the lock follows the display dim and sleep timeouts.
+- **30 seconds, 1 minute, 2 minutes or 5 minutes** — the screen locks once nobody has touched it for that long, whatever the display does. This also works while printing, when the display normally stays awake and would never dim.
+
+Auto-lock must be on for either choice to take effect.
+
+### After a restart
+
+A screen that was locked stays locked when HelixScreen or the printer restarts. With auto-lock on, the screen also comes back locked after any restart, so switching the printer off and on is not a way past the PIN.
 
 ### Locking manually
 
@@ -60,7 +71,15 @@ When locked, a full-screen overlay covers the UI with a numeric keypad:
 
 Entering fewer than 4 digits and tapping the checkmark shows a "PIN must be at least 4 digits" reminder rather than counting it as a wrong attempt.
 
-**Emergency Stop stays available.** Whenever a print is running or paused, a red Emergency Stop button appears in the top-right corner of the lock screen, so you can always halt the printer in an emergency without unlocking it first. When the printer is idle there's nothing to stop, so the button isn't shown.
+**Wrong PINs make you wait.** After three wrong PINs in a row the keypad refuses any PIN for 30 seconds, and each further wrong PIN doubles the wait, up to 15 minutes. The message under the dots says how long is left. The count survives a restart, and the right PIN resets it.
+
+**Emergency Stop stays available.** Whenever a print is running or paused, a red Emergency Stop button appears on the lock screen (in the top-right corner, or under the PIN dots on small screens), so you can always halt the printer in an emergency without unlocking it first. When the printer is idle there's nothing to stop, so the button isn't shown.
+
+**Pause stays available too.** While a print is running, a Pause button sits next to the Emergency Stop. It only pauses: resuming the print, like every other control, needs the PIN, so nobody can restart a print you paused on purpose.
+
+### Unlocking from your phone
+
+Open the printer's screen in your phone's browser and type the PIN on the keypad there. The same wait after wrong PINs applies. See [Screen Sharing](screen-sharing.md); on a Snapmaker U1 with Extended Firmware, use its own remote screen page instead.
 
 ---
 
@@ -84,7 +103,7 @@ A **Factory Reset** (**Settings > System > Factory Reset**) clears all HelixScre
 
 The screen lock is a convenience feature that keeps someone from tapping through your printer controls at the machine — handy in a shared shop, classroom, or makerspace. It is **not** full device security.
 
-While the screen is locked, the printer keeps doing whatever it was already doing. The lock only covers the touchscreen: it does not affect Moonraker, the web interface, SSH, or anything else reaching the printer over the network. Anyone with network or physical access to the underlying hardware can still get in. Treat it as a "keep hands off the screen" lock, not a way to secure the machine itself.
+While the screen is locked, the printer keeps doing whatever it was already doing. The lock only covers the touchscreen: it does not affect Moonraker, the web interface, SSH, or anything else reaching the printer over the network. To keep prints from being started or cancelled from a browser or slicer as well, turn on your printer's own login for Mainsail, Fluidd and Moonraker. Anyone with network or physical access to the underlying hardware can still get in. Treat it as a "keep hands off the screen" lock, not a way to secure the machine itself.
 
 ---
 
