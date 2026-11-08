@@ -182,6 +182,8 @@ translations:
   A print is running. Apply the result after it ends.: Há uma impressão em andamento. Aplique o resultado quando ela terminar.
   A print started: 'Uma impressão foi iniciada'
   A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.: "Uma impressão começou com carretéis marcados como na mesa. Se ainda estiverem lá, pare a impressora agora com a Parada de Emergência."
+  A print still running pauses at its next layer change: 'Uma impressão ainda em andamento pausa na próxima troca de camada'
+  A print the pause stopped resumes on its own: 'Uma impressão pausada assim é retomada sozinha'
   A restart is already in progress: Já há uma reinicialização em andamento
   A right, B left: "A direita, B esquerda"
   ? A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen.
@@ -995,6 +997,8 @@ translations:
   Load stopped: Carregamento interrompido
   'Moonraker answered at {}.': "O Moonraker respondeu em {}."
   No filament was inserted in time: 'Nenhum filamento foi inserido a tempo'
+  Print hours: 'Horário de impressão'
+  'Print hours are over, but the print stays paused: {}': 'O horário de impressão voltou, mas a impressão continua pausada: {}'
   Print hours between filter changes. Off hides this meter.: 'Horas de impressão entre trocas de filtro. Desligado oculta este contador.'
   Print hours between nozzle changes. Off hides this meter.: 'Horas de impressão entre trocas de bico. Desligado oculta este contador.'
   Print hours between rail cleaning and lubrication. Off hides this meter.: 'Horas de impressão entre limpeza e lubrificação dos trilhos. Desligado oculta este contador.'
@@ -2851,6 +2855,7 @@ translations:
   PLA: PLA
   PLA - Black: PLA - Preto
   POWER: ENERGIA
+  PRINT HOURS: 'HORÁRIO DE IMPRESSÃO'
   PRINT OPTIONS: OPÇÕES DE IMPRESSÃO
   PRINTER: IMPRESSORA
   PRINTER VISUALS: VISUAIS DA IMPRESSORA
@@ -2893,8 +2898,10 @@ translations:
   Pause: Pausar
   Pause Layer: 'Camada da pausa'
   Pause at Layer: 'Pausar na camada'
+  Pause from: 'Pausa a partir de'
   Pause macro not configured: Macro de pausa não configurado
   Pause on Detection: Pausar ao detectar
+  Pause prints at a layer change outside these hours, bed kept hot, then resume: 'Pausa numa troca de camada fora deste horário, com a mesa quente, e depois retoma'
   Pause the print first, then load, unload, or change filament: Pause a impressão primeiro, depois carregue, descarregue ou troque o filamento
   Pause the print when a failure is seen (off = warn only): Pausa a impressão quando uma falha é vista (desligado = apenas avisar)
   Pause, resume, or stop the print: Pausar, retomar ou parar a impressão
@@ -3065,6 +3072,8 @@ translations:
   Print error: Erro de impressão
   Print failed: Impressão falhou
   Print history will show the rewritten name: O histórico de impressões mostrará o nome reescrito
+  'Print hours: resuming the print': 'Horário de impressão: retomando a impressão'
+  'Print hours: the print pauses at the next layer change and resumes at {}': 'Horário de impressão: a impressão pausa na próxima troca de camada e retoma às {}'
   Print issue detected: Problema de impressão detectado
   Print jobs waiting to run: Trabalhos aguardando impressão
   Print paused: Impressão pausada
@@ -3433,6 +3442,7 @@ translations:
   Resume: Retomar
   Resume Print: Retomar Impressão
   Resume Requires Restart: 'Retomar exige reiniciar'
+  Resume at: 'Retomar às'
   Resume canceled: Retomada cancelada
   Resume even though the bed cooled down: Retomar mesmo com a mesa resfriada
   Resume failed: Falha ao retomar
@@ -4225,6 +4235,7 @@ translations:
   The print is still stuck to the bed: A impressão continua presa à mesa
   The print is waiting for the chamber to reach {}°C, but the heater is not heating.: 'A impressão aguarda a câmara atingir {}°C, mas o aquecedor não está aquecendo.'
   The print is waiting for the chamber, but the heater is not heating.: 'A impressão aguarda a câmara, mas o aquecedor não está aquecendo.'
+  'The print paused for another reason: print hours will not resume it': 'A impressão pausou por outro motivo: o horário não vai retomá-la'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: 'O tamanho imprimível em milímetros (X × Y × Z), a partir dos limites dos eixos na configuração Klipper da impressora.'
   The printer applied this value and keeps it for this tool.: 'A impressora aplicou este valor e o mantém para esta ferramenta.'
   The printer asks for a service after 25100 changes on one head: 'A impressora pede manutenção após 25100 trocas em um cabeçote'
@@ -4911,6 +4922,7 @@ translations:
   'Z: 0.000': 'Z: 0.000'
   Zone {:.0f}-{:.0f} Hz: "Zona {:.0f}-{:.0f} Hz"
   '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.': '[resonance_tester] não tem probe_points, então o cabeçote não tem uma altura segura para as voltas de assentamento.'
+  a filament sensor reports no filament: 'um sensor de filamento não detecta filamento'
   already loaded: 'já carregado'
   attempt {}: 'tentativa {}'
   auto: auto
@@ -5006,6 +5018,7 @@ translations:
   tall: de altura
   target {}%: 'alvo {}%'
   target {}°: 'alvo {}°'
+  the bed was turned off, so the print may have come loose: 'a mesa foi desligada e a peça pode ter se soltado'
   the extruder: o extrusor
   the left belt: "correia esquerda"
   the lower belt: "correia inferior"

@@ -210,6 +210,8 @@
   <translation tag="A print is running. Apply the result after it ends." ru="Идёт печать. Примените результат после её завершения."/>
   <translation tag="A print started" ru="Началась печать"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." ru="Печать началась, когда катушки отмечены как лежащие на столе. Если они всё ещё там, немедленно остановите принтер аварийной остановкой."/>
+  <translation tag="A print still running pauses at its next layer change" ru="Идущая печать встаёт на паузу при следующей смене слоя"/>
+  <translation tag="A print the pause stopped resumes on its own" ru="Печать, поставленная на такую паузу, продолжится сама"/>
   <translation tag="A restart is already in progress" ru="Перезапуск уже выполняется"/>
   <translation tag="A right, B left" ru="A справа, B слева"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." ru="Датчик, измеряющий расстояние до стола. HelixScreen использует его для калибровки Z Offset и тестов зонда на экране «Зонд»."/>
@@ -2659,6 +2661,7 @@
   <translation tag="PLA" ru="PLA"/>
   <translation tag="PLA - Black" ru="PLA - Чёрный"/>
   <translation tag="POWER" ru="ПИТАНИЕ"/>
+  <translation tag="PRINT HOURS" ru="ЧАСЫ ПЕЧАТИ"/>
   <translation tag="PRINT OPTIONS" ru="ПАРАМЕТРЫ ПЕЧАТИ"/>
   <translation tag="PRINTER" ru="ПРИНТЕР"/>
   <translation tag="PRINTER VISUALS" ru="ВНЕШНИЙ ВИД ПРИНТЕРА"/>
@@ -2699,8 +2702,10 @@
   <translation tag="Pause" ru="Пауза"/>
   <translation tag="Pause Layer" ru="Слой паузы"/>
   <translation tag="Pause at Layer" ru="Пауза на слое"/>
+  <translation tag="Pause from" ru="Пауза с"/>
   <translation tag="Pause macro not configured" ru="Макрос паузы не настроен"/>
   <translation tag="Pause on Detection" ru="Пауза при обнаружении"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" ru="Ставит печать на паузу при смене слоя вне этих часов, стол остаётся горячим, затем продолжает"/>
   <translation tag="Pause the print first, then load, unload, or change filament" ru="Сначала приостановите печать, затем загружайте, выгружайте или меняйте филамент"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" ru="Приостанавливает печать при обнаружении сбоя (выкл. = только предупреждать)"/>
   <translation tag="Pause, resume, or stop the print" ru="Пауза, продолжение или остановка"/>
@@ -2862,10 +2867,14 @@
   <translation tag="Print error" ru="Ошибка печати"/>
   <translation tag="Print failed" ru="Печать не удалась"/>
   <translation tag="Print history will show the rewritten name" ru="История печати покажет изменённое имя"/>
+  <translation tag="Print hours" ru="Часы печати"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" ru="Время печати наступило, но печать остаётся на паузе: {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." ru="Часы печати между заменами фильтра. «Выкл» скрывает этот счётчик."/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." ru="Часы печати между заменами сопла. «Выкл» скрывает этот счётчик."/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." ru="Часы печати между чисткой и смазкой направляющих. «Выкл» скрывает этот счётчик."/>
   <translation tag="Print hours this week and lifetime totals" ru="Часы печати за неделю и общие итоги"/>
+  <translation tag="Print hours: resuming the print" ru="Часы печати: печать продолжается"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" ru="Часы печати: печать встанет на паузу при следующей смене слоя и продолжится в {}"/>
   <translation tag="Print issue detected" ru="Обнаружена проблема печати"/>
   <translation tag="Print jobs waiting to run" ru="Задания печати в очереди"/>
   <translation tag="Print paused" ru="Печать приостановлена"/>
@@ -3216,6 +3225,7 @@
   <translation tag="Resume" ru="Продолжить"/>
   <translation tag="Resume Print" ru="Продолжить печать"/>
   <translation tag="Resume Requires Restart" ru="Для возобновления нужен перезапуск"/>
+  <translation tag="Resume at" ru="Продолжить в"/>
   <translation tag="Resume canceled" ru="Продолжение отменено"/>
   <translation tag="Resume even though the bed cooled down" ru="Продолжить, хотя стол остыл"/>
   <translation tag="Resume failed" ru="Не удалось продолжить"/>
@@ -3920,6 +3930,7 @@
   <translation tag="The print is still stuck to the bed" ru="Модель всё ещё держится на столе"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." ru="Печать ждёт, пока камера нагреется до {}°C, но нагреватель не греет."/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." ru="Печать ждёт камеру, но нагреватель не греет."/>
+  <translation tag="The print paused for another reason: print hours will not resume it" ru="Печать встала на паузу по другой причине: часы печати её не продолжат"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." ru="Размер области печати в миллиметрах (X × Y × Z) по пределам осей в конфигурации Klipper принтера."/>
   <translation tag="The printer applied this value and keeps it for this tool." ru="Принтер применил это значение и сохранил его для этого инструмента."/>
   <translation tag="The printer asks for a service after 25100 changes on one head" ru="Принтер запрашивает обслуживание после 25100 смен одной головки"/>
@@ -4533,6 +4544,7 @@
   <translation tag="Z: 0.000" ru="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" ru="Зона {:.0f}-{:.0f} Гц"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." ru="В [resonance_tester] нет probe_points, поэтому у головы нет безопасной высоты для кругов приработки."/>
+  <translation tag="a filament sensor reports no filament" ru="датчик филамента не видит филамент"/>
   <translation tag="already loaded" ru="уже загружен"/>
   <translation tag="attempt {}" ru="попытка {}"/>
   <translation tag="auto" ru="авто"/>
@@ -4625,6 +4637,7 @@
   <translation tag="tall" ru="высотой"/>
   <translation tag="target {}%" ru="цель {}%"/>
   <translation tag="target {}°" ru="цель {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" ru="стол был выключен, деталь могла отклеиться"/>
   <translation tag="the extruder" ru="экструдер"/>
   <translation tag="the left belt" ru="левый ремень"/>
   <translation tag="the lower belt" ru="нижний ремень"/>

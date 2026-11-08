@@ -229,6 +229,8 @@ translations:
   A print is running. Apply the result after it ends.: Идёт печать. Примените результат после её завершения.
   A print started: 'Началась печать'
   A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.: "Печать началась, когда катушки отмечены как лежащие на столе. Если они всё ещё там, немедленно остановите принтер аварийной остановкой."
+  A print still running pauses at its next layer change: 'Идущая печать встаёт на паузу при следующей смене слоя'
+  A print the pause stopped resumes on its own: 'Печать, поставленная на такую паузу, продолжится сама'
   A restart is already in progress: Перезапуск уже выполняется
   A right, B left: "A справа, B слева"
   ? A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen.
@@ -1043,6 +1045,8 @@ translations:
   Load stopped: 'Загрузка остановлена'
   'Moonraker answered at {}.': "Moonraker ответил по адресу {}."
   No filament was inserted in time: 'Филамент не был вставлен вовремя'
+  Print hours: 'Часы печати'
+  'Print hours are over, but the print stays paused: {}': 'Время печати наступило, но печать остаётся на паузе: {}'
   Print hours between filter changes. Off hides this meter.: 'Часы печати между заменами фильтра. «Выкл» скрывает этот счётчик.'
   Print hours between nozzle changes. Off hides this meter.: 'Часы печати между заменами сопла. «Выкл» скрывает этот счётчик.'
   Print hours between rail cleaning and lubrication. Off hides this meter.: 'Часы печати между чисткой и смазкой направляющих. «Выкл» скрывает этот счётчик.'
@@ -2891,6 +2895,7 @@ translations:
   PLA: PLA
   PLA - Black: PLA - Чёрный
   POWER: ПИТАНИЕ
+  PRINT HOURS: 'ЧАСЫ ПЕЧАТИ'
   PRINT OPTIONS: ПАРАМЕТРЫ ПЕЧАТИ
   PRINTER: ПРИНТЕР
   PRINTER VISUALS: ВНЕШНИЙ ВИД ПРИНТЕРА
@@ -2933,8 +2938,10 @@ translations:
   Pause: Пауза
   Pause Layer: 'Слой паузы'
   Pause at Layer: 'Пауза на слое'
+  Pause from: 'Пауза с'
   Pause macro not configured: Макрос паузы не настроен
   Pause on Detection: Пауза при обнаружении
+  Pause prints at a layer change outside these hours, bed kept hot, then resume: 'Ставит печать на паузу при смене слоя вне этих часов, стол остаётся горячим, затем продолжает'
   Pause the print first, then load, unload, or change filament: Сначала приостановите печать, затем загружайте, выгружайте или меняйте филамент
   Pause the print when a failure is seen (off = warn only): Приостанавливает печать при обнаружении сбоя (выкл. = только предупреждать)
   Pause, resume, or stop the print: Пауза, продолжение или остановка
@@ -3108,6 +3115,8 @@ translations:
   Print error: Ошибка печати
   Print failed: Печать не удалась
   Print history will show the rewritten name: История печати покажет изменённое имя
+  'Print hours: resuming the print': 'Часы печати: печать продолжается'
+  'Print hours: the print pauses at the next layer change and resumes at {}': 'Часы печати: печать встанет на паузу при следующей смене слоя и продолжится в {}'
   Print issue detected: Обнаружена проблема печати
   Print jobs waiting to run: Задания печати в очереди
   Print paused: Печать приостановлена
@@ -3481,6 +3490,7 @@ translations:
   Resume: Продолжить
   Resume Print: Продолжить печать
   Resume Requires Restart: 'Для возобновления нужен перезапуск'
+  Resume at: 'Продолжить в'
   Resume canceled: Продолжение отменено
   Resume even though the bed cooled down: Продолжить, хотя стол остыл
   Resume failed: Не удалось продолжить
@@ -4272,6 +4282,7 @@ translations:
   The print is still stuck to the bed: Модель всё ещё держится на столе
   The print is waiting for the chamber to reach {}°C, but the heater is not heating.: 'Печать ждёт, пока камера нагреется до {}°C, но нагреватель не греет.'
   The print is waiting for the chamber, but the heater is not heating.: 'Печать ждёт камеру, но нагреватель не греет.'
+  'The print paused for another reason: print hours will not resume it': 'Печать встала на паузу по другой причине: часы печати её не продолжат'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: 'Размер области печати в миллиметрах (X × Y × Z) по пределам осей в конфигурации Klipper принтера.'
   The printer applied this value and keeps it for this tool.: 'Принтер применил это значение и сохранил его для этого инструмента.'
   The printer asks for a service after 25100 changes on one head: 'Принтер запрашивает обслуживание после 25100 смен одной головки'
@@ -4949,6 +4960,7 @@ translations:
   'Z: 0.000': 'Z: 0.000'
   Zone {:.0f}-{:.0f} Hz: "Зона {:.0f}-{:.0f} Гц"
   '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.': 'В [resonance_tester] нет probe_points, поэтому у головы нет безопасной высоты для кругов приработки.'
+  a filament sensor reports no filament: 'датчик филамента не видит филамент'
   already loaded: 'уже загружен'
   attempt {}: 'попытка {}'
   auto: авто
@@ -5047,6 +5059,7 @@ translations:
   tall: высотой
   target {}%: 'цель {}%'
   target {}°: 'цель {}°'
+  the bed was turned off, so the print may have come loose: 'стол был выключен, деталь могла отклеиться'
   the extruder: экструдер
   the left belt: "левый ремень"
   the lower belt: "нижний ремень"

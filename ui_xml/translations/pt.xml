@@ -174,6 +174,8 @@
   <translation tag="A print is running. Apply the result after it ends." pt="Há uma impressão em andamento. Aplique o resultado quando ela terminar."/>
   <translation tag="A print started" pt="Uma impressão foi iniciada"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." pt="Uma impressão começou com carretéis marcados como na mesa. Se ainda estiverem lá, pare a impressora agora com a Parada de Emergência."/>
+  <translation tag="A print still running pauses at its next layer change" pt="Uma impressão ainda em andamento pausa na próxima troca de camada"/>
+  <translation tag="A print the pause stopped resumes on its own" pt="Uma impressão pausada assim é retomada sozinha"/>
   <translation tag="A restart is already in progress" pt="Já há uma reinicialização em andamento"/>
   <translation tag="A right, B left" pt="A direita, B esquerda"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." pt="Um sensor que mede a distância até a mesa. O HelixScreen o usa para calibrar o Z Offset e para testes de sonda na tela Sonda."/>
@@ -2611,6 +2613,7 @@
   <translation tag="PLA" pt="PLA"/>
   <translation tag="PLA - Black" pt="PLA - Preto"/>
   <translation tag="POWER" pt="ENERGIA"/>
+  <translation tag="PRINT HOURS" pt="HORÁRIO DE IMPRESSÃO"/>
   <translation tag="PRINT OPTIONS" pt="OPÇÕES DE IMPRESSÃO"/>
   <translation tag="PRINTER" pt="IMPRESSORA"/>
   <translation tag="PRINTER VISUALS" pt="VISUAIS DA IMPRESSORA"/>
@@ -2651,8 +2654,10 @@
   <translation tag="Pause" pt="Pausar"/>
   <translation tag="Pause Layer" pt="Camada da pausa"/>
   <translation tag="Pause at Layer" pt="Pausar na camada"/>
+  <translation tag="Pause from" pt="Pausa a partir de"/>
   <translation tag="Pause macro not configured" pt="Macro de pausa não configurado"/>
   <translation tag="Pause on Detection" pt="Pausar ao detectar"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" pt="Pausa numa troca de camada fora deste horário, com a mesa quente, e depois retoma"/>
   <translation tag="Pause the print first, then load, unload, or change filament" pt="Pause a impressão primeiro, depois carregue, descarregue ou troque o filamento"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" pt="Pausa a impressão quando uma falha é vista (desligado = apenas avisar)"/>
   <translation tag="Pause, resume, or stop the print" pt="Pausar, retomar ou parar a impressão"/>
@@ -2811,10 +2816,14 @@
   <translation tag="Print error" pt="Erro de impressão"/>
   <translation tag="Print failed" pt="Impressão falhou"/>
   <translation tag="Print history will show the rewritten name" pt="O histórico de impressões mostrará o nome reescrito"/>
+  <translation tag="Print hours" pt="Horário de impressão"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" pt="O horário de impressão voltou, mas a impressão continua pausada: {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." pt="Horas de impressão entre trocas de filtro. Desligado oculta este contador."/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." pt="Horas de impressão entre trocas de bico. Desligado oculta este contador."/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." pt="Horas de impressão entre limpeza e lubrificação dos trilhos. Desligado oculta este contador."/>
   <translation tag="Print hours this week and lifetime totals" pt="Horas de impressão desta semana e totais acumulados"/>
+  <translation tag="Print hours: resuming the print" pt="Horário de impressão: retomando a impressão"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" pt="Horário de impressão: a impressão pausa na próxima troca de camada e retoma às {}"/>
   <translation tag="Print issue detected" pt="Problema de impressão detectado"/>
   <translation tag="Print jobs waiting to run" pt="Trabalhos aguardando impressão"/>
   <translation tag="Print paused" pt="Impressão pausada"/>
@@ -3159,6 +3168,7 @@
   <translation tag="Resume" pt="Retomar"/>
   <translation tag="Resume Print" pt="Retomar Impressão"/>
   <translation tag="Resume Requires Restart" pt="Retomar exige reiniciar"/>
+  <translation tag="Resume at" pt="Retomar às"/>
   <translation tag="Resume canceled" pt="Retomada cancelada"/>
   <translation tag="Resume even though the bed cooled down" pt="Retomar mesmo com a mesa resfriada"/>
   <translation tag="Resume failed" pt="Falha ao retomar"/>
@@ -3857,6 +3867,7 @@
   <translation tag="The print is still stuck to the bed" pt="A impressão continua presa à mesa"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." pt="A impressão aguarda a câmara atingir {}°C, mas o aquecedor não está aquecendo."/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." pt="A impressão aguarda a câmara, mas o aquecedor não está aquecendo."/>
+  <translation tag="The print paused for another reason: print hours will not resume it" pt="A impressão pausou por outro motivo: o horário não vai retomá-la"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." pt="O tamanho imprimível em milímetros (X × Y × Z), a partir dos limites dos eixos na configuração Klipper da impressora."/>
   <translation tag="The printer applied this value and keeps it for this tool." pt="A impressora aplicou este valor e o mantém para esta ferramenta."/>
   <translation tag="The printer asks for a service after 25100 changes on one head" pt="A impressora pede manutenção após 25100 trocas em um cabeçote"/>
@@ -4470,6 +4481,7 @@
   <translation tag="Z: 0.000" pt="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" pt="Zona {:.0f}-{:.0f} Hz"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." pt="[resonance_tester] não tem probe_points, então o cabeçote não tem uma altura segura para as voltas de assentamento."/>
+  <translation tag="a filament sensor reports no filament" pt="um sensor de filamento não detecta filamento"/>
   <translation tag="already loaded" pt="já carregado"/>
   <translation tag="attempt {}" pt="tentativa {}"/>
   <translation tag="auto" pt="auto"/>
@@ -4559,6 +4571,7 @@
   <translation tag="tall" pt="de altura"/>
   <translation tag="target {}%" pt="alvo {}%"/>
   <translation tag="target {}°" pt="alvo {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" pt="a mesa foi desligada e a peça pode ter se soltado"/>
   <translation tag="the extruder" pt="o extrusor"/>
   <translation tag="the left belt" pt="correia esquerda"/>
   <translation tag="the lower belt" pt="correia inferior"/>

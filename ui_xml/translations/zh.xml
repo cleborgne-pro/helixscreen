@@ -174,6 +174,8 @@
   <translation tag="A print is running. Apply the result after it ends." zh="正在打印。请在打印结束后应用结果。"/>
   <translation tag="A print started" zh="打印已开始"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." zh="在料盘仍标记为放在热床上时开始了打印。如果料盘还在，请立即用紧急停止停下打印机。"/>
+  <translation tag="A print still running pauses at its next layer change" zh="仍在进行的打印会在下一次换层时暂停"/>
+  <translation tag="A print the pause stopped resumes on its own" zh="因此暂停的打印会自动继续"/>
   <translation tag="A restart is already in progress" zh="重启正在进行中"/>
   <translation tag="A right, B left" zh="A 右,B 左"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." zh="测量到热床距离的传感器。HelixScreen 用它进行 Z 偏移校准,并在探针界面进行探针测试。"/>
@@ -2611,6 +2613,7 @@
   <translation tag="PLA" zh="PLA"/>
   <translation tag="PLA - Black" zh="PLA - 黑色"/>
   <translation tag="POWER" zh="电源"/>
+  <translation tag="PRINT HOURS" zh="打印时段"/>
   <translation tag="PRINT OPTIONS" zh="打印选项"/>
   <translation tag="PRINTER" zh="打印机"/>
   <translation tag="PRINTER VISUALS" zh="打印机外观"/>
@@ -2651,8 +2654,10 @@
   <translation tag="Pause" zh="暂停"/>
   <translation tag="Pause Layer" zh="暂停层"/>
   <translation tag="Pause at Layer" zh="在指定层暂停"/>
+  <translation tag="Pause from" zh="暂停开始于"/>
   <translation tag="Pause macro not configured" zh="暂停宏未配置"/>
   <translation tag="Pause on Detection" zh="检测到故障时暂停"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" zh="在时段之外于换层时暂停，热床保持加热，然后继续"/>
   <translation tag="Pause the print first, then load, unload, or change filament" zh="请先暂停打印，然后再加载、卸载或更换耗材"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" zh="发现故障时暂停打印（关闭 = 仅提醒）"/>
   <translation tag="Pause, resume, or stop the print" zh="暂停、恢复或停止打印"/>
@@ -2811,10 +2816,14 @@
   <translation tag="Print error" zh="打印错误"/>
   <translation tag="Print failed" zh="打印失败"/>
   <translation tag="Print history will show the rewritten name" zh="打印历史将显示改写后的名称"/>
+  <translation tag="Print hours" zh="打印时段"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" zh="打印时段已到，但打印仍保持暂停: {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." zh="两次更换过滤器之间的打印小时数。关闭则隐藏此计数器。"/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." zh="两次更换喷嘴之间的打印小时数。关闭则隐藏此计数器。"/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." zh="两次清洁和润滑导轨之间的打印小时数。关闭则隐藏此计数器。"/>
   <translation tag="Print hours this week and lifetime totals" zh="本周打印时长和累计总数"/>
+  <translation tag="Print hours: resuming the print" zh="打印时段: 继续打印"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" zh="打印时段: 打印将在下一次换层时暂停，并于{}继续"/>
   <translation tag="Print issue detected" zh="检测到打印问题"/>
   <translation tag="Print jobs waiting to run" zh="等待执行的打印任务"/>
   <translation tag="Print paused" zh="打印已暂停"/>
@@ -3159,6 +3168,7 @@
   <translation tag="Resume" zh="恢复"/>
   <translation tag="Resume Print" zh="恢复打印"/>
   <translation tag="Resume Requires Restart" zh="恢复打印需要重新开始"/>
+  <translation tag="Resume at" zh="继续时间"/>
   <translation tag="Resume canceled" zh="恢复已取消"/>
   <translation tag="Resume even though the bed cooled down" zh="即使热床已冷却也恢复"/>
   <translation tag="Resume failed" zh="恢复失败"/>
@@ -3857,6 +3867,7 @@
   <translation tag="The print is still stuck to the bed" zh="打印件仍附着在热床上"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." zh="打印正在等待腔体达到 {}°C，但加热器没有加热。"/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." zh="打印正在等待腔体，但加热器没有加热。"/>
+  <translation tag="The print paused for another reason: print hours will not resume it" zh="打印因其他原因暂停：打印时段不会自动继续"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." zh="可打印尺寸（毫米，X × Y × Z），取自打印机 Klipper 配置中的轴限位。"/>
   <translation tag="The printer applied this value and keeps it for this tool." zh="打印机已应用此值，并为该工具保存。"/>
   <translation tag="The printer asks for a service after 25100 changes on one head" zh="单个工具头切换25100次后打印机会提示维护"/>
@@ -4470,6 +4481,7 @@
   <translation tag="Z: 0.000" zh="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" zh="区间 {:.0f}-{:.0f} Hz"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." zh="[resonance_tester] 没有 probe_points，因此打印头没有进行稳定绕圈的安全高度。"/>
+  <translation tag="a filament sensor reports no filament" zh="耗材传感器检测不到耗材"/>
   <translation tag="already loaded" zh="已加载"/>
   <translation tag="attempt {}" zh="第 {} 次尝试"/>
   <translation tag="auto" zh="自动"/>
@@ -4559,6 +4571,7 @@
   <translation tag="tall" zh="高"/>
   <translation tag="target {}%" zh="目标 {}%"/>
   <translation tag="target {}°" zh="目标 {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" zh="热床已关闭，打印件可能已松动"/>
   <translation tag="the extruder" zh="挤出机"/>
   <translation tag="the left belt" zh="左皮带"/>
   <translation tag="the lower belt" zh="下皮带"/>

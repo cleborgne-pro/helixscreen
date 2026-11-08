@@ -50,6 +50,8 @@
 #include "print_start_collector.h"
 #include "print_start_profile.h"
 #include "print_stop_reason.h"
+#include "print_window_controller.h"
+#include "print_window_settings_manager.h"
 #include "printer_detector.h"
 #include "printer_state.h"
 #include "runtime_config.h"
@@ -166,6 +168,7 @@ void MoonrakerManager::shutdown() {
     // Stop print start collector first (before client is destroyed)
     release_print_start_collector();
     m_print_stop_reason.reset();
+    m_print_window.reset();
 
     // Release observer guards without calling lv_observer_remove().
     // During shutdown, subjects may already be deinitialized (which frees observers).
@@ -715,6 +718,14 @@ void MoonrakerManager::init_print_stop_reason() {
         m_print_stop_reason =
             std::make_unique<helix::PrintStopReasonTracker>(*m_client, get_printer_state());
     }
+}
+
+void MoonrakerManager::init_print_window() {
+    m_print_window.reset();
+    m_print_window = std::make_unique<helix::PrintWindowController>(
+        m_api.get(), get_printer_state(),
+        [] { return helix::PrintWindowSettingsManager::instance().window(); },
+        &helix::PrintWindowController::local_minute_of_day);
 }
 
 void MoonrakerManager::init_print_start_collector() {

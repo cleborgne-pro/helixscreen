@@ -89,6 +89,7 @@ src/application/gcode_error_text.cpp
 src/application/hardware_fingerprint.cpp
 src/application/moonraker_event_routing.cpp
 src/application/panel_factory.cpp
+src/application/print_window_controller.cpp
 src/application/printer_cache_registry.cpp
 src/application/printer_retarget.cpp
 src/application/printer_switch_flow.cpp
@@ -123,6 +124,7 @@ src/ui/print/print_status_tile_layout.cpp
 src/ui/print/ui_print_status_more_menu.cpp
 src/ui/print/ui_print_status_tiles.cpp
 src/print/print_eta_estimator.cpp
+src/print/print_window.cpp
 src/print/thumbnail_write_journal.cpp
 src/print/print_completion.cpp
 src/print/print_completion_alert.cpp
@@ -365,6 +367,7 @@ src/core/log_redact.cpp
 src/system/preset_materials.cpp
 src/system/prerender_size_class.cpp
 src/system/prerendered_images.cpp
+src/system/print_window_settings_manager.cpp
 src/system/printer_image_manager.cpp
 src/system/printer_image_regions.cpp
 src/system/printer_name_sync.cpp

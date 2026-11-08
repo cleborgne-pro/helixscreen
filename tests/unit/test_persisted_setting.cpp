@@ -19,6 +19,7 @@
 #include "display_settings_manager.h"
 #include "input_settings_manager.h"
 #include "persisted_setting.h"
+#include "print_window_settings_manager.h"
 #include "remote_screen_settings_manager.h"
 #include "safety_settings_manager.h"
 #include "system/telemetry_manager.h"
@@ -37,7 +38,7 @@ using namespace helix;
 
 namespace {
 
-enum class Mgr { Settings, Display, System, Input, Audio, Safety, RemoteScreen };
+enum class Mgr { Settings, Display, System, Input, Audio, Safety, RemoteScreen, PrintWindow };
 
 struct Row {
     const char* xml;
@@ -73,6 +74,9 @@ SafetySettingsManager& safety() {
 }
 RemoteScreenSettingsManager& rs() {
     return RemoteScreenSettingsManager::instance();
+}
+PrintWindowSettingsManager& pwm() {
+    return PrintWindowSettingsManager::instance();
 }
 
 #define SETB(expr) [](int v) { expr(v != 0); }
@@ -122,6 +126,17 @@ const std::vector<Row>& rows() {
         {"settings_remote_screen_webcam", Mgr::RemoteScreen, true, "remote_screen/webcam", true, 1,
          0, 1, "remote_screen_webcam", true, SETB(rs().set_webcam), GET(rs().get_webcam),
          SUBJ(rs().subject_webcam)},
+
+        // PrintWindowSettingsManager
+        {"settings_print_window_enabled", Mgr::PrintWindow, true, "print_window/enabled", true, 0,
+         0, 1, "print_window_enabled", true, SETB(pwm().set_enabled), GET(pwm().get_enabled),
+         SUBJ(pwm().subject_enabled)},
+        {"settings_print_window_stop", Mgr::PrintWindow, true, "print_window/stop_slot", false, 40,
+         0, 47, "print_window_stop_slot", true, SETI(pwm().set_stop_slot), GET(pwm().get_stop_slot),
+         SUBJ(pwm().subject_stop_slot)},
+        {"settings_print_window_resume", Mgr::PrintWindow, true, "print_window/resume_slot", false,
+         18, 0, 47, "print_window_resume_slot", true, SETI(pwm().set_resume_slot),
+         GET(pwm().get_resume_slot), SUBJ(pwm().subject_resume_slot)},
 
         // InputSettingsManager
         {"settings_scroll_throw", Mgr::Input, false, "/input/scroll_throw", false, 25, 5, 50,
@@ -354,6 +369,10 @@ void reinit(Mgr m) {
         rs().deinit_subjects();
         rs().init_subjects();
         break;
+    case Mgr::PrintWindow:
+        pwm().deinit_subjects();
+        pwm().init_subjects();
+        break;
     }
 }
 
@@ -523,7 +542,8 @@ std::vector<settings::TableView> real_tables() {
             InputSettingsManager::persisted_table(),
             AudioSettingsManager::persisted_table(),
             SafetySettingsManager::persisted_table(),
-            RemoteScreenSettingsManager::persisted_table()};
+            RemoteScreenSettingsManager::persisted_table(),
+            PrintWindowSettingsManager::persisted_table()};
 }
 } // namespace
 

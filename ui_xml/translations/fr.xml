@@ -174,6 +174,8 @@
   <translation tag="A print is running. Apply the result after it ends." fr="Une impression est en cours. Appliquez le résultat quand elle sera terminée."/>
   <translation tag="A print started" fr="Une impression a démarré"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." fr="Une impression a démarré alors que des bobines sont signalées sur le plateau. Si elles y sont encore, arrêtez l&apos;imprimante maintenant avec l&apos;arrêt d&apos;urgence."/>
+  <translation tag="A print still running pauses at its next layer change" fr="Une impression encore en cours se met en pause au changement de couche suivant"/>
+  <translation tag="A print the pause stopped resumes on its own" fr="Une impression mise en pause par la plage horaire reprend d&apos;elle-même"/>
   <translation tag="A restart is already in progress" fr="Un redémarrage est déjà en cours"/>
   <translation tag="A right, B left" fr="A droite, B gauche"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." fr="Un capteur qui mesure la distance au plateau. HelixScreen l&apos;utilise pour la calibration du Z Offset et les tests de sonde sur l&apos;écran Sonde."/>
@@ -2611,6 +2613,7 @@
   <translation tag="PLA" fr="PLA"/>
   <translation tag="PLA - Black" fr="PLA - Noir"/>
   <translation tag="POWER" fr="ALIMENTATION"/>
+  <translation tag="PRINT HOURS" fr="PLAGE HORAIRE"/>
   <translation tag="PRINT OPTIONS" fr="OPTIONS D&apos;IMPRESSION"/>
   <translation tag="PRINTER" fr="IMPRIMANTE"/>
   <translation tag="PRINTER VISUALS" fr="VISUELS DE L&apos;IMPRIMANTE"/>
@@ -2651,8 +2654,10 @@
   <translation tag="Pause" fr="Pause"/>
   <translation tag="Pause Layer" fr="Couche de pause"/>
   <translation tag="Pause at Layer" fr="Pause à la couche"/>
+  <translation tag="Pause from" fr="Pause à partir de"/>
   <translation tag="Pause macro not configured" fr="Macro de pause non configurée"/>
   <translation tag="Pause on Detection" fr="Pause à la détection"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" fr="Met en pause au changement de couche hors de ces heures, plateau maintenu chaud, puis reprend"/>
   <translation tag="Pause the print first, then load, unload, or change filament" fr="Mettez d&apos;abord l&apos;impression en pause, puis chargez, déchargez ou changez le filament"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" fr="Met l&apos;impression en pause quand un défaut est vu (désactivé = avertir seulement)"/>
   <translation tag="Pause, resume, or stop the print" fr="Mettre en pause, reprendre ou arrêter"/>
@@ -2811,10 +2816,14 @@
   <translation tag="Print error" fr="Erreur d&apos;impression"/>
   <translation tag="Print failed" fr="Impression échouée"/>
   <translation tag="Print history will show the rewritten name" fr="L&apos;historique d&apos;impression affichera le nom réécrit"/>
+  <translation tag="Print hours" fr="Plage horaire d&apos;impression"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" fr="La plage horaire reprend, mais l&apos;impression reste en pause : {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." fr="Heures d’impression entre deux changements de filtre. Désactivé masque ce compteur."/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." fr="Heures d’impression entre deux changements de buse. Désactivé masque ce compteur."/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." fr="Heures d’impression entre deux nettoyages et graissages des rails. Désactivé masque ce compteur."/>
   <translation tag="Print hours this week and lifetime totals" fr="Heures d&apos;impression cette semaine et totaux cumulés"/>
+  <translation tag="Print hours: resuming the print" fr="Plage horaire : reprise de l&apos;impression"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" fr="Plage horaire : l&apos;impression se met en pause au prochain changement de couche et reprend à {}"/>
   <translation tag="Print issue detected" fr="Problème d&apos;impression détecté"/>
   <translation tag="Print jobs waiting to run" fr="Impressions en attente"/>
   <translation tag="Print paused" fr="Impression en pause"/>
@@ -3159,6 +3168,7 @@
   <translation tag="Resume" fr="Reprendre"/>
   <translation tag="Resume Print" fr="Reprendre l&apos;impression"/>
   <translation tag="Resume Requires Restart" fr="La reprise nécessite un redémarrage"/>
+  <translation tag="Resume at" fr="Reprise à"/>
   <translation tag="Resume canceled" fr="Reprise annulée"/>
   <translation tag="Resume even though the bed cooled down" fr="Reprendre même si le plateau a refroidi"/>
   <translation tag="Resume failed" fr="Échec de la reprise"/>
@@ -3857,6 +3867,7 @@
   <translation tag="The print is still stuck to the bed" fr="L&apos;impression est toujours collée au plateau"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." fr="L&apos;impression attend que la chambre atteigne {}°C, mais le chauffage ne chauffe pas."/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." fr="L&apos;impression attend la chambre, mais le chauffage ne chauffe pas."/>
+  <translation tag="The print paused for another reason: print hours will not resume it" fr="L&apos;impression s&apos;est mise en pause pour une autre raison : la plage horaire ne la reprendra pas"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." fr="La taille imprimable en millimètres (X × Y × Z), d&apos;après les limites des axes dans la configuration Klipper de l&apos;imprimante."/>
   <translation tag="The printer applied this value and keeps it for this tool." fr="L&apos;imprimante a appliqué cette valeur et la conserve pour cet outil."/>
   <translation tag="The printer asks for a service after 25100 changes on one head" fr="L&apos;imprimante demande un entretien après 25100 changements sur une tête"/>
@@ -4470,6 +4481,7 @@
   <translation tag="Z: 0.000" fr="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" fr="Zone {:.0f}-{:.0f} Hz"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." fr="[resonance_tester] n&apos;a pas de probe_points, la tête n&apos;a donc pas de hauteur sûre pour les tours de mise en place."/>
+  <translation tag="a filament sensor reports no filament" fr="un capteur ne détecte plus de filament"/>
   <translation tag="already loaded" fr="déjà chargé"/>
   <translation tag="attempt {}" fr="essai {}"/>
   <translation tag="auto" fr="auto"/>
@@ -4559,6 +4571,7 @@
   <translation tag="tall" fr="de haut"/>
   <translation tag="target {}%" fr="cible {}%"/>
   <translation tag="target {}°" fr="cible {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" fr="le plateau a été coupé, la pièce a pu se décoller"/>
   <translation tag="the extruder" fr="l&apos;extrudeur"/>
   <translation tag="the left belt" fr="la courroie gauche"/>
   <translation tag="the lower belt" fr="la courroie du bas"/>

@@ -174,6 +174,8 @@
   <translation tag="A print is running. Apply the result after it ends." ja="印刷中です。終了後に結果を適用してください。"/>
   <translation tag="A print started" ja="印刷が開始されました"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." ja="スプールがベッド上にあるとされている状態で印刷が開始されました。まだ置かれている場合は、今すぐ緊急停止でプリンターを止めてください。"/>
+  <translation tag="A print still running pauses at its next layer change" ja="実行中の印刷は次のレイヤー切り替えで一時停止します"/>
+  <translation tag="A print the pause stopped resumes on its own" ja="この一時停止で止まった印刷は自動で再開します"/>
   <translation tag="A restart is already in progress" ja="再起動はすでに進行中です"/>
   <translation tag="A right, B left" ja="A右・B左"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." ja="ベッドまでの距離を測るセンサー。HelixScreenはZオフセットのキャリブレーションと、プローブ画面でのプローブテストに使います。"/>
@@ -2611,6 +2613,7 @@
   <translation tag="PLA" ja="PLA"/>
   <translation tag="PLA - Black" ja="PLA - ブラック"/>
   <translation tag="POWER" ja="電源"/>
+  <translation tag="PRINT HOURS" ja="印刷スケジュール"/>
   <translation tag="PRINT OPTIONS" ja="印刷オプション"/>
   <translation tag="PRINTER" ja="プリンター"/>
   <translation tag="PRINTER VISUALS" ja="プリンター表示"/>
@@ -2651,8 +2654,10 @@
   <translation tag="Pause" ja="一時停止"/>
   <translation tag="Pause Layer" ja="一時停止レイヤー"/>
   <translation tag="Pause at Layer" ja="レイヤーで一時停止"/>
+  <translation tag="Pause from" ja="一時停止の開始"/>
   <translation tag="Pause macro not configured" ja="一時停止マクロが未設定です"/>
   <translation tag="Pause on Detection" ja="検出時に一時停止"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" ja="設定した時間外はレイヤー切り替えで一時停止し、ベッドを保温して再開します"/>
   <translation tag="Pause the print first, then load, unload, or change filament" ja="先に印刷を一時停止してから、装填・排出・フィラメント交換を行ってください"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" ja="失敗を検出したら印刷を一時停止します（オフ = 警告のみ）"/>
   <translation tag="Pause, resume, or stop the print" ja="印刷の一時停止、再開、停止"/>
@@ -2811,10 +2816,14 @@
   <translation tag="Print error" ja="印刷エラー"/>
   <translation tag="Print failed" ja="印刷失敗"/>
   <translation tag="Print history will show the rewritten name" ja="印刷履歴には書き換え後の名前が表示されます"/>
+  <translation tag="Print hours" ja="印刷スケジュール"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" ja="印刷スケジュールになりましたが、印刷は一時停止のままです: {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." ja="フィルター交換までの印刷時間。オフにするとこのメーターを非表示にします。"/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." ja="ノズル交換までの印刷時間。オフにするとこのメーターを非表示にします。"/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." ja="レールの清掃と給油までの印刷時間。オフにするとこのメーターを非表示にします。"/>
   <translation tag="Print hours this week and lifetime totals" ja="今週の印刷時間と累計"/>
+  <translation tag="Print hours: resuming the print" ja="印刷スケジュール: 印刷を再開します"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" ja="印刷スケジュール: 次のレイヤー切り替えで一時停止し、{}に再開します"/>
   <translation tag="Print issue detected" ja="印刷の問題を検出しました"/>
   <translation tag="Print jobs waiting to run" ja="実行待ちの印刷ジョブ"/>
   <translation tag="Print paused" ja="印刷一時停止"/>
@@ -3159,6 +3168,7 @@
   <translation tag="Resume" ja="再開"/>
   <translation tag="Resume Print" ja="印刷を再開"/>
   <translation tag="Resume Requires Restart" ja="再開には再起動が必要です"/>
+  <translation tag="Resume at" ja="再開時刻"/>
   <translation tag="Resume canceled" ja="再開をキャンセルしました"/>
   <translation tag="Resume even though the bed cooled down" ja="ベッドが冷えていても再開する"/>
   <translation tag="Resume failed" ja="再開に失敗しました"/>
@@ -3857,6 +3867,7 @@
   <translation tag="The print is still stuck to the bed" ja="印刷物はまだベッドに付いている"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." ja="印刷はチャンバーが{}°Cに達するのを待っていますが、ヒーターが加熱していません。"/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." ja="印刷はチャンバーを待っていますが、ヒーターが加熱していません。"/>
+  <translation tag="The print paused for another reason: print hours will not resume it" ja="別の理由で一時停止しました。印刷スケジュールでは再開しません"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." ja="印刷可能なサイズ（mm、X × Y × Z）。プリンターのKlipper設定の軸リミットから取得します。"/>
   <translation tag="The printer applied this value and keeps it for this tool." ja="プリンターはこの値を適用し、このツールに保存しました。"/>
   <translation tag="The printer asks for a service after 25100 changes on one head" ja="1つのヘッドで25100回変更するとプリンターがメンテナンスを求めます"/>
@@ -4470,6 +4481,7 @@
   <translation tag="Z: 0.000" ja="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" ja="ゾーン {:.0f}-{:.0f} Hz"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." ja="[resonance_tester] に probe_points がないため、なじませ周回を行う安全な高さがありません。"/>
+  <translation tag="a filament sensor reports no filament" ja="フィラメントセンサーがフィラメントなしを検出しています"/>
   <translation tag="already loaded" ja="装填済み"/>
   <translation tag="attempt {}" ja="試行 {}"/>
   <translation tag="auto" ja="自動"/>
@@ -4559,6 +4571,7 @@
   <translation tag="tall" ja="高さ"/>
   <translation tag="target {}%" ja="目標 {}%"/>
   <translation tag="target {}°" ja="目標 {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" ja="ベッドがオフになったため、印刷物が外れている可能性があります"/>
   <translation tag="the extruder" ja="エクストルーダー"/>
   <translation tag="the left belt" ja="左ベルト"/>
   <translation tag="the lower belt" ja="下ベルト"/>

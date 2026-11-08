@@ -178,6 +178,8 @@ translations:
   A print is running. Apply the result after it ends.: 印刷中です。終了後に結果を適用してください。
   A print started: '印刷が開始されました'
   A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.: "スプールがベッド上にあるとされている状態で印刷が開始されました。まだ置かれている場合は、今すぐ緊急停止でプリンターを止めてください。"
+  A print still running pauses at its next layer change: '実行中の印刷は次のレイヤー切り替えで一時停止します'
+  A print the pause stopped resumes on its own: 'この一時停止で止まった印刷は自動で再開します'
   A restart is already in progress: 再起動はすでに進行中です
   A right, B left: "A右・B左"
   ? A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen.
@@ -928,6 +930,8 @@ translations:
   Load stopped: 'ロードを停止しました'
   'Moonraker answered at {}.': "{} でMoonrakerが応答しました。"
   No filament was inserted in time: '時間内にフィラメントが挿入されませんでした'
+  Print hours: '印刷スケジュール'
+  'Print hours are over, but the print stays paused: {}': '印刷スケジュールになりましたが、印刷は一時停止のままです: {}'
   Print hours between filter changes. Off hides this meter.: 'フィルター交換までの印刷時間。オフにするとこのメーターを非表示にします。'
   Print hours between nozzle changes. Off hides this meter.: 'ノズル交換までの印刷時間。オフにするとこのメーターを非表示にします。'
   Print hours between rail cleaning and lubrication. Off hides this meter.: 'レールの清掃と給油までの印刷時間。オフにするとこのメーターを非表示にします。'
@@ -2713,6 +2717,7 @@ translations:
   PLA: PLA
   PLA - Black: PLA - ブラック
   POWER: 電源
+  PRINT HOURS: '印刷スケジュール'
   PRINT OPTIONS: 印刷オプション
   PRINTER: プリンター
   PRINTER VISUALS: プリンター表示
@@ -2754,8 +2759,10 @@ translations:
   Pause: 一時停止
   Pause Layer: '一時停止レイヤー'
   Pause at Layer: 'レイヤーで一時停止'
+  Pause from: '一時停止の開始'
   Pause macro not configured: 一時停止マクロが未設定です
   Pause on Detection: 検出時に一時停止
+  Pause prints at a layer change outside these hours, bed kept hot, then resume: '設定した時間外はレイヤー切り替えで一時停止し、ベッドを保温して再開します'
   Pause the print first, then load, unload, or change filament: 先に印刷を一時停止してから、装填・排出・フィラメント交換を行ってください
   Pause the print when a failure is seen (off = warn only): 失敗を検出したら印刷を一時停止します（オフ = 警告のみ）
   Pause, resume, or stop the print: 印刷の一時停止、再開、停止
@@ -2921,6 +2928,8 @@ translations:
   Print error: 印刷エラー
   Print failed: 印刷失敗
   Print history will show the rewritten name: 印刷履歴には書き換え後の名前が表示されます
+  'Print hours: resuming the print': '印刷スケジュール: 印刷を再開します'
+  'Print hours: the print pauses at the next layer change and resumes at {}': '印刷スケジュール: 次のレイヤー切り替えで一時停止し、{}に再開します'
   Print issue detected: 印刷の問題を検出しました
   Print jobs waiting to run: 実行待ちの印刷ジョブ
   Print paused: 印刷一時停止
@@ -3271,6 +3280,7 @@ translations:
   Resume: 再開
   Resume Print: 印刷を再開
   Resume Requires Restart: '再開には再起動が必要です'
+  Resume at: '再開時刻'
   Resume canceled: 再開をキャンセルしました
   Resume even though the bed cooled down: ベッドが冷えていても再開する
   Resume failed: 再開に失敗しました
@@ -4010,6 +4020,7 @@ translations:
   The print is still stuck to the bed: 印刷物はまだベッドに付いている
   The print is waiting for the chamber to reach {}°C, but the heater is not heating.: '印刷はチャンバーが{}°Cに達するのを待っていますが、ヒーターが加熱していません。'
   The print is waiting for the chamber, but the heater is not heating.: '印刷はチャンバーを待っていますが、ヒーターが加熱していません。'
+  'The print paused for another reason: print hours will not resume it': '別の理由で一時停止しました。印刷スケジュールでは再開しません'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: '印刷可能なサイズ（mm、X × Y × Z）。プリンターのKlipper設定の軸リミットから取得します。'
   The printer applied this value and keeps it for this tool.: 'プリンターはこの値を適用し、このツールに保存しました。'
   The printer asks for a service after 25100 changes on one head: '1つのヘッドで25100回変更するとプリンターがメンテナンスを求めます'
@@ -4653,6 +4664,7 @@ translations:
   'Z: 0.000': 'Z: 0.000'
   Zone {:.0f}-{:.0f} Hz: "ゾーン {:.0f}-{:.0f} Hz"
   '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.': '[resonance_tester] に probe_points がないため、なじませ周回を行う安全な高さがありません。'
+  a filament sensor reports no filament: 'フィラメントセンサーがフィラメントなしを検出しています'
   already loaded: '装填済み'
   attempt {}: '試行 {}'
   auto: 自動
@@ -4747,6 +4759,7 @@ translations:
   tall: 高さ
   target {}%: '目標 {}%'
   target {}°: '目標 {}°'
+  the bed was turned off, so the print may have come loose: 'ベッドがオフになったため、印刷物が外れている可能性があります'
   the extruder: エクストルーダー
   the left belt: "左ベルト"
   the lower belt: "下ベルト"

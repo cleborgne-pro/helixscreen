@@ -174,6 +174,8 @@
   <translation tag="A print is running. Apply the result after it ends." en="A print is running. Apply the result after it ends."/>
   <translation tag="A print started" en="A print started"/>
   <translation tag="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop." en="A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop."/>
+  <translation tag="A print still running pauses at its next layer change" en="A print still running pauses at its next layer change"/>
+  <translation tag="A print the pause stopped resumes on its own" en="A print the pause stopped resumes on its own"/>
   <translation tag="A restart is already in progress" en="A restart is already in progress"/>
   <translation tag="A right, B left" en="A right, B left"/>
   <translation tag="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen." en="A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen."/>
@@ -2611,6 +2613,7 @@
   <translation tag="PLA" en="PLA"/>
   <translation tag="PLA - Black" en="PLA - Black"/>
   <translation tag="POWER" en="POWER"/>
+  <translation tag="PRINT HOURS" en="PRINT HOURS"/>
   <translation tag="PRINT OPTIONS" en="PRINT OPTIONS"/>
   <translation tag="PRINTER" en="PRINTER"/>
   <translation tag="PRINTER VISUALS" en="PRINTER VISUALS"/>
@@ -2651,8 +2654,10 @@
   <translation tag="Pause" en="Pause"/>
   <translation tag="Pause Layer" en="Pause Layer"/>
   <translation tag="Pause at Layer" en="Pause at Layer"/>
+  <translation tag="Pause from" en="Pause from"/>
   <translation tag="Pause macro not configured" en="Pause macro not configured"/>
   <translation tag="Pause on Detection" en="Pause on Detection"/>
+  <translation tag="Pause prints at a layer change outside these hours, bed kept hot, then resume" en="Pause prints at a layer change outside these hours, bed kept hot, then resume"/>
   <translation tag="Pause the print first, then load, unload, or change filament" en="Pause the print first, then load, unload, or change filament"/>
   <translation tag="Pause the print when a failure is seen (off = warn only)" en="Pause the print when a failure is seen (off = warn only)"/>
   <translation tag="Pause, resume, or stop the print" en="Pause, resume, or stop the print"/>
@@ -2811,10 +2816,14 @@
   <translation tag="Print error" en="Print error"/>
   <translation tag="Print failed" en="Print failed"/>
   <translation tag="Print history will show the rewritten name" en="Print history will show the rewritten name"/>
+  <translation tag="Print hours" en="Print hours"/>
+  <translation tag="Print hours are over, but the print stays paused: {}" en="Print hours are over, but the print stays paused: {}"/>
   <translation tag="Print hours between filter changes. Off hides this meter." en="Print hours between filter changes. Off hides this meter."/>
   <translation tag="Print hours between nozzle changes. Off hides this meter." en="Print hours between nozzle changes. Off hides this meter."/>
   <translation tag="Print hours between rail cleaning and lubrication. Off hides this meter." en="Print hours between rail cleaning and lubrication. Off hides this meter."/>
   <translation tag="Print hours this week and lifetime totals" en="Print hours this week and lifetime totals"/>
+  <translation tag="Print hours: resuming the print" en="Print hours: resuming the print"/>
+  <translation tag="Print hours: the print pauses at the next layer change and resumes at {}" en="Print hours: the print pauses at the next layer change and resumes at {}"/>
   <translation tag="Print issue detected" en="Print issue detected"/>
   <translation tag="Print jobs waiting to run" en="Print jobs waiting to run"/>
   <translation tag="Print paused" en="Print paused"/>
@@ -3159,6 +3168,7 @@
   <translation tag="Resume" en="Resume"/>
   <translation tag="Resume Print" en="Resume Print"/>
   <translation tag="Resume Requires Restart" en="Resume Requires Restart"/>
+  <translation tag="Resume at" en="Resume at"/>
   <translation tag="Resume canceled" en="Resume canceled"/>
   <translation tag="Resume even though the bed cooled down" en="Resume even though the bed cooled down"/>
   <translation tag="Resume failed" en="Resume failed"/>
@@ -3857,6 +3867,7 @@
   <translation tag="The print is still stuck to the bed" en="The print is still stuck to the bed"/>
   <translation tag="The print is waiting for the chamber to reach {}°C, but the heater is not heating." en="The print is waiting for the chamber to reach {}°C, but the heater is not heating."/>
   <translation tag="The print is waiting for the chamber, but the heater is not heating." en="The print is waiting for the chamber, but the heater is not heating."/>
+  <translation tag="The print paused for another reason: print hours will not resume it" en="The print paused for another reason: print hours will not resume it"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." en="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config."/>
   <translation tag="The printer applied this value and keeps it for this tool." en="The printer applied this value and keeps it for this tool."/>
   <translation tag="The printer asks for a service after 25100 changes on one head" en="The printer asks for a service after 25100 changes on one head"/>
@@ -4470,6 +4481,7 @@
   <translation tag="Z: 0.000" en="Z: 0.000"/>
   <translation tag="Zone {:.0f}-{:.0f} Hz" en="Zone {:.0f}-{:.0f} Hz"/>
   <translation tag="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps." en="[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps."/>
+  <translation tag="a filament sensor reports no filament" en="a filament sensor reports no filament"/>
   <translation tag="already loaded" en="already loaded"/>
   <translation tag="attempt {}" en="attempt {}"/>
   <translation tag="auto" en="auto"/>
@@ -4559,6 +4571,7 @@
   <translation tag="tall" en="tall"/>
   <translation tag="target {}%" en="target {}%"/>
   <translation tag="target {}°" en="target {}°"/>
+  <translation tag="the bed was turned off, so the print may have come loose" en="the bed was turned off, so the print may have come loose"/>
   <translation tag="the extruder" en="the extruder"/>
   <translation tag="the left belt" en="the left belt"/>
   <translation tag="the lower belt" en="the lower belt"/>

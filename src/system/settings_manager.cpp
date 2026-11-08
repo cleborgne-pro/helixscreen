@@ -20,6 +20,7 @@
 #include "lvgl.h"
 #include "material_settings_manager.h"
 #include "mount_feed_sequence.h"
+#include "print_window_settings_manager.h"
 #include "printer_detector.h"
 #include "printer_state.h"
 #include "remote_screen_settings_manager.h"
@@ -233,6 +234,7 @@ void SettingsManager::init_subjects() {
     AudioSettingsManager::instance().init_subjects();
     SafetySettingsManager::instance().init_subjects();
     RemoteScreenSettingsManager::instance().init_subjects();
+    PrintWindowSettingsManager::instance().init_subjects();
     MaterialSettingsManager::instance().init();
 
     settings_.init(subjects_);

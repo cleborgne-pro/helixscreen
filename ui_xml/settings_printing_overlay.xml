@@ -70,6 +70,29 @@
         </setting_toggle_row>
       </setting_group>
       <!-- ================================================================== -->
+      <!-- PRINT HOURS (print_window.h): a print running at the stop time pauses at
+           its next layer change, the bed kept hot, and resumes at the resume time.
+           The dropdowns' options are the day's half hours, set by
+           PrintingSettingsOverlay::on_activate(). -->
+      <!-- ================================================================== -->
+      <setting_group name="group_print_window">
+        <setting_group_header title="PRINT HOURS"/>
+        <setting_toggle_row name="row_print_window"
+                            label="Print hours" icon="clock"
+                            description="Pause prints at a layer change outside these hours, bed kept hot, then resume"
+                            subject="settings_print_window_enabled" callback="on_print_window_changed"/>
+        <lv_obj name="container_print_window_times" width="100%" style_pad_all="0" scrollable="false" flex_flow="column">
+          <bind_flag_if_eq subject="settings_print_window_enabled" flag="hidden" ref_value="0"/>
+          <setting_dropdown_row name="row_print_window_stop"
+                                label="Pause from" icon="sleep"
+                                description="A print still running pauses at its next layer change"
+                                bind_selected="settings_print_window_stop" callback="on_print_window_stop_changed"/>
+          <setting_dropdown_row name="row_print_window_resume"
+                                label="Resume at" icon="clock" description="A print the pause stopped resumes on its own"
+                                bind_selected="settings_print_window_resume" callback="on_print_window_resume_changed"/>
+        </lv_obj>
+      </setting_group>
+      <!-- ================================================================== -->
       <!-- EXTRAS -->
       <!-- ================================================================== -->
       <setting_group name="group_extras">

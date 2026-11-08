@@ -266,6 +266,16 @@ When the print reaches that layer, it pauses the way your **Pause** button does 
 
 > **Note:** A pause scheduled from Mainsail or Fluidd shows here too, since they use the same macros.
 
+### Print Hours
+
+Print hours keep a print from running through the night (or any other part of the day) without spoiling it. Turn them on in **Settings → Printing → Print hours**, then pick **Pause from** and **Resume at** (half-hour steps; 20:00 to 09:00 by default, and a window that ends the next morning is fine).
+
+- **At the pause time**, a running print is not stopped where it is: HelixScreen schedules a pause at the **next layer change**, the place where a stop leaves the least visible mark. It needs the same macros and layer info as [Pausing at a Layer](#pausing-at-a-layer). A print whose file reports no layers pauses at once instead; a layer that has still not ended after 45 minutes does too; a print on its last layer is left to finish.
+- **During the pause**, the printer does what its **Pause** does: on the Snapmaker U1 the nozzles cool to 40 °C, the head parks, and **the bed stays at its temperature** so the part stays stuck down. HelixScreen also holds Klipper's idle timeout off until an hour past the resume time, so a printer whose timeout runs while paused does not turn the bed and the motors off overnight.
+- **At the resume time**, the print resumes on its own - but only a pause print hours took. It stays paused, with a message saying why, when a filament sensor reports no filament or the bed was turned off during the night.
+- **You stay in charge.** Resuming the print by hand, or canceling the scheduled pause from the layer count, keeps it running until the pause hours end; they apply again the next day. A pause with another cause (a runout, a detected failure, a printer fault) is never resumed by print hours.
+- Keep the screen powered: the clock is HelixScreen's, so a printer switched off at the wall does not resume.
+
 ### View Toggle (Progress / Complete)
 
 When the G-code viewer is active during a print, a small floating button appears in the top-left corner. Tap it to switch between:

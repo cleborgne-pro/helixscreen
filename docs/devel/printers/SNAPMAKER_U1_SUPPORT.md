@@ -568,6 +568,10 @@ Per-head tangle detection (`filament_entangle_detect e<N>_filament`). During a p
 
 The switch and the sensitivity (`print_task_config.filament_entangle_detect` / `filament_entangle_sen`) are the Print Behavior device actions. A tangle's coded fault reads "A filament is tangled or caught before its toolhead…" through `snapmaker::exception_message()`, whose row matches the code whatever the head.
 
+### Print hours on the U1
+
+`PrintWindowController` (`src/application/print_window_controller.cpp`) arms the stock `SET_PAUSE_NEXT_LAYER` at the stop time, so the pause lands on a layer change through the U1's own `INNER_PAUSE`: nozzles to its `pause_temp` (40 °C), head parked, bed target untouched. The U1 sets `[idle_timeout] timeout_on_pause` to effectively forever, so its paused state never times out; the controller's `SET_IDLE_TIMEOUT` hold matters on printers without that. The decision itself is `print_window::decide()` (`include/print_window.h`).
+
 ### Tool-change counters (`extruder*`)
 
 The firmware's extruder switch recorder counts every pick of a head and keeps the count reached at the last service: `switch_count` and `last_maintenance_count` on each `extruder*` object. Past `individual_maintenance_threshold` (25100 by default, not in any status object) changes on one head it raises 0001-0523-0000-0037 "Maintenance recommended for extruders"; `RESET_EXTRUDER_MAINTENANCE_COUNT` takes the current counts as the new baseline for every head. `helix::toolchange_wear` subscribes the two fields on the heads discovery found and `ToolchangeWearState` publishes, per head, the share of the interval used; the Maintenance overlay shows them under **Tool changes since service** with one Reset that sends the command.

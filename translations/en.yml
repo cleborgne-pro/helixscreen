@@ -176,6 +176,8 @@ translations:
   A print is running. Apply the result after it ends.: A print is running. Apply the result after it ends.
   A print started: A print started
   A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.: A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.
+  A print still running pauses at its next layer change: A print still running pauses at its next layer change
+  A print the pause stopped resumes on its own: A print the pause stopped resumes on its own
   A restart is already in progress: A restart is already in progress
   A right, B left: A right, B left
   ? A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen.
@@ -968,6 +970,8 @@ translations:
   Load stopped: Load stopped
   'Moonraker answered at {}.': 'Moonraker answered at {}.'
   No filament was inserted in time: No filament was inserted in time
+  Print hours: Print hours
+  'Print hours are over, but the print stays paused: {}': 'Print hours are over, but the print stays paused: {}'
   Print hours between filter changes. Off hides this meter.: Print hours between filter changes. Off hides this meter.
   Print hours between nozzle changes. Off hides this meter.: Print hours between nozzle changes. Off hides this meter.
   Print hours between rail cleaning and lubrication. Off hides this meter.: Print hours between rail cleaning and lubrication. Off hides this meter.
@@ -2785,6 +2789,7 @@ translations:
   PLA: PLA
   PLA - Black: PLA - Black
   POWER: POWER
+  PRINT HOURS: PRINT HOURS
   PRINT OPTIONS: PRINT OPTIONS
   PRINTER: PRINTER
   PRINTER VISUALS: PRINTER VISUALS
@@ -2827,8 +2832,10 @@ translations:
   Pause: Pause
   Pause Layer: Pause Layer
   Pause at Layer: Pause at Layer
+  Pause from: Pause from
   Pause macro not configured: Pause macro not configured
   Pause on Detection: Pause on Detection
+  Pause prints at a layer change outside these hours, bed kept hot, then resume: Pause prints at a layer change outside these hours, bed kept hot, then resume
   Pause the print first, then load, unload, or change filament: Pause the print first,
     then load, unload, or change filament
   Pause the print when a failure is seen (off = warn only): Pause the print when a failure is seen (off = warn only)
@@ -2998,6 +3005,8 @@ translations:
   Print error: Print error
   Print failed: Print failed
   Print history will show the rewritten name: Print history will show the rewritten name
+  'Print hours: resuming the print': 'Print hours: resuming the print'
+  'Print hours: the print pauses at the next layer change and resumes at {}': 'Print hours: the print pauses at the next layer change and resumes at {}'
   Print issue detected: Print issue detected
   Print jobs waiting to run: Print jobs waiting to run
   Print paused: Print paused
@@ -3359,6 +3368,7 @@ translations:
   Resume: Resume
   Resume Print: Resume Print
   Resume Requires Restart: Resume Requires Restart
+  Resume at: Resume at
   Resume canceled: Resume canceled
   Resume even though the bed cooled down: Resume even though the bed cooled down
   Resume failed: Resume failed
@@ -4129,6 +4139,7 @@ translations:
   The print is still stuck to the bed: The print is still stuck to the bed
   The print is waiting for the chamber to reach {}°C, but the heater is not heating.: The print is waiting for the chamber to reach {}°C, but the heater is not heating.
   The print is waiting for the chamber, but the heater is not heating.: The print is waiting for the chamber, but the heater is not heating.
+  'The print paused for another reason: print hours will not resume it': 'The print paused for another reason: print hours will not resume it'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.
   The printer applied this value and keeps it for this tool.: 'The printer applied this value and keeps it for this tool.'
   The printer asks for a service after 25100 changes on one head: The printer asks for a service after 25100 changes on one head
@@ -4809,6 +4820,7 @@ translations:
   'Z: 0.000': 'Z: 0.000'
   Zone {:.0f}-{:.0f} Hz: Zone {:.0f}-{:.0f} Hz
   '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.': '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.'
+  a filament sensor reports no filament: a filament sensor reports no filament
   already loaded: already loaded
   attempt {}: attempt {}
   auto: auto
@@ -4898,6 +4910,7 @@ translations:
   tall: tall
   target {}%: target {}%
   target {}°: target {}°
+  the bed was turned off, so the print may have come loose: the bed was turned off, so the print may have come loose
   the extruder: the extruder
   the left belt: the left belt
   the lower belt: the lower belt

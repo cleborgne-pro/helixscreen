@@ -177,6 +177,8 @@ translations:
   A print is running. Apply the result after it ends.: 正在打印。请在打印结束后应用结果。
   A print started: '打印已开始'
   A print started while spools are marked as on the bed. If they are still there, stop the printer now with the E-stop.: "在料盘仍标记为放在热床上时开始了打印。如果料盘还在，请立即用紧急停止停下打印机。"
+  A print still running pauses at its next layer change: '仍在进行的打印会在下一次换层时暂停'
+  A print the pause stopped resumes on its own: '因此暂停的打印会自动继续'
   A restart is already in progress: 重启正在进行中
   A right, B left: "A 右,B 左"
   ? A sensor that measures the distance to the bed. HelixScreen uses it for Z offset calibration and probe tests on the Probe screen.
@@ -926,6 +928,8 @@ translations:
   Load stopped: '装载已停止'
   'Moonraker answered at {}.': "Moonraker 在 {} 响应。"
   No filament was inserted in time: '未及时插入耗材'
+  Print hours: '打印时段'
+  'Print hours are over, but the print stays paused: {}': '打印时段已到，但打印仍保持暂停: {}'
   Print hours between filter changes. Off hides this meter.: '两次更换过滤器之间的打印小时数。关闭则隐藏此计数器。'
   Print hours between nozzle changes. Off hides this meter.: '两次更换喷嘴之间的打印小时数。关闭则隐藏此计数器。'
   Print hours between rail cleaning and lubrication. Off hides this meter.: '两次清洁和润滑导轨之间的打印小时数。关闭则隐藏此计数器。'
@@ -2706,6 +2710,7 @@ translations:
   PLA: PLA
   PLA - Black: PLA - 黑色
   POWER: 电源
+  PRINT HOURS: '打印时段'
   PRINT OPTIONS: 打印选项
   PRINTER: 打印机
   PRINTER VISUALS: 打印机外观
@@ -2747,8 +2752,10 @@ translations:
   Pause: 暂停
   Pause Layer: '暂停层'
   Pause at Layer: '在指定层暂停'
+  Pause from: '暂停开始于'
   Pause macro not configured: 暂停宏未配置
   Pause on Detection: 检测到故障时暂停
+  Pause prints at a layer change outside these hours, bed kept hot, then resume: '在时段之外于换层时暂停，热床保持加热，然后继续'
   Pause the print first, then load, unload, or change filament: 请先暂停打印，然后再加载、卸载或更换耗材
   Pause the print when a failure is seen (off = warn only): 发现故障时暂停打印（关闭 = 仅提醒）
   Pause, resume, or stop the print: 暂停、恢复或停止打印
@@ -2913,6 +2920,8 @@ translations:
   Print error: 打印错误
   Print failed: 打印失败
   Print history will show the rewritten name: 打印历史将显示改写后的名称
+  'Print hours: resuming the print': '打印时段: 继续打印'
+  'Print hours: the print pauses at the next layer change and resumes at {}': '打印时段: 打印将在下一次换层时暂停，并于{}继续'
   Print issue detected: 检测到打印问题
   Print jobs waiting to run: 等待执行的打印任务
   Print paused: 打印已暂停
@@ -3262,6 +3271,7 @@ translations:
   Resume: 恢复
   Resume Print: 恢复打印
   Resume Requires Restart: '恢复打印需要重新开始'
+  Resume at: '继续时间'
   Resume canceled: 恢复已取消
   Resume even though the bed cooled down: 即使热床已冷却也恢复
   Resume failed: 恢复失败
@@ -4001,6 +4011,7 @@ translations:
   The print is still stuck to the bed: 打印件仍附着在热床上
   The print is waiting for the chamber to reach {}°C, but the heater is not heating.: '打印正在等待腔体达到 {}°C，但加热器没有加热。'
   The print is waiting for the chamber, but the heater is not heating.: '打印正在等待腔体，但加热器没有加热。'
+  'The print paused for another reason: print hours will not resume it': '打印因其他原因暂停：打印时段不会自动继续'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: '可打印尺寸（毫米，X × Y × Z），取自打印机 Klipper 配置中的轴限位。'
   The printer applied this value and keeps it for this tool.: '打印机已应用此值，并为该工具保存。'
   The printer asks for a service after 25100 changes on one head: '单个工具头切换25100次后打印机会提示维护'
@@ -4643,6 +4654,7 @@ translations:
   'Z: 0.000': 'Z: 0.000'
   Zone {:.0f}-{:.0f} Hz: "区间 {:.0f}-{:.0f} Hz"
   '[resonance_tester] has no probe_points, so the toolhead has no safe height for the settling laps.': '[resonance_tester] 没有 probe_points，因此打印头没有进行稳定绕圈的安全高度。'
+  a filament sensor reports no filament: '耗材传感器检测不到耗材'
   already loaded: '已加载'
   attempt {}: '第 {} 次尝试'
   auto: 自动
@@ -4737,6 +4749,7 @@ translations:
   tall: 高
   target {}%: '目标 {}%'
   target {}°: '目标 {}°'
+  the bed was turned off, so the print may have come loose: '热床已关闭，打印件可能已松动'
   the extruder: 挤出机
   the left belt: "左皮带"
   the lower belt: "下皮带"

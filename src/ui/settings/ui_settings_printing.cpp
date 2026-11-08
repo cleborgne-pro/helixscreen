@@ -26,6 +26,8 @@
 #include "plr_backend.h"
 #include "plr_plugin_rpc.h"
 #include "post_op_cooldown_manager.h"
+#include "print_window.h"
+#include "print_window_settings_manager.h"
 #include "safety_settings_manager.h"
 #include "settings_manager.h"
 
@@ -103,6 +105,28 @@ void apply_plr_mesh_include(bool add) {
         });
 }
 
+/// The print hours dropdowns list the day's half hours; setting their options
+/// clears the selection, so each one takes its setting back afterwards.
+void apply_print_window_options(lv_obj_t* root) {
+    if (!root) {
+        return;
+    }
+    const std::string options = print_window::slot_options();
+    const print_window::Window window = PrintWindowSettingsManager::instance().window();
+    const std::pair<const char*, int> rows[] = {{"row_print_window_stop", window.stop_slot},
+                                                {"row_print_window_resume", window.resume_slot}};
+    for (const auto& [row_name, slot] : rows) {
+        lv_obj_t* row = lv_obj_find_by_name(root, row_name);
+        lv_obj_t* dropdown = row ? lv_obj_find_by_name(row, "dropdown") : nullptr;
+        if (!dropdown) {
+            continue;
+        }
+        // DECLARATIVE_OK: the options are data, the day's slots from print_window.h
+        lv_dropdown_set_options(dropdown, options.c_str());
+        lv_dropdown_set_selected(dropdown, static_cast<uint32_t>(slot));
+    }
+}
+
 } // namespace
 
 void PrintingSettingsOverlay::register_callbacks() {
@@ -149,6 +173,18 @@ void PrintingSettingsOverlay::register_callbacks() {
         {"on_filament_auto_open_editor_changed",
          [](lv_event_t* e) {
              SettingsManager::instance().set_filament_auto_open_editor(event_checked(e));
+         }},
+        {"on_print_window_changed",
+         [](lv_event_t* e) {
+             PrintWindowSettingsManager::instance().set_enabled(event_checked(e));
+         }},
+        {"on_print_window_stop_changed",
+         [](lv_event_t* e) {
+             PrintWindowSettingsManager::instance().set_stop_slot(event_selected(e));
+         }},
+        {"on_print_window_resume_changed",
+         [](lv_event_t* e) {
+             PrintWindowSettingsManager::instance().set_resume_slot(event_selected(e));
          }},
         {"on_retraction_row_clicked",
          [](lv_event_t*) {
@@ -208,6 +244,7 @@ void PrintingSettingsOverlay::register_callbacks() {
 
 void PrintingSettingsOverlay::on_activate() {
     OverlayBase::on_activate();
+    apply_print_window_options(overlay_root_);
     query_plr_mesh_include();
 }
 
