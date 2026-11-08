@@ -181,6 +181,9 @@ local function message_for(e)
     if e.pct then
         what = what .. string.format(" (%d%%)", e.pct)
     end
+    if e.reason then
+        what = what .. " - " .. e.reason
+    end
     return what
 end
 
@@ -215,7 +218,7 @@ local function drain()
     else
         local file = shared_file(e)
         body = helix.json.encode({ event = e.key, filename = file ~= "" and file or nil,
-                                   progress = e.pct })
+                                   progress = e.pct, reason = e.reason })
         headers = { ["Content-Type"] = "application/json" }
     end
     -- A transport error names the request URL, which carries the credential,
@@ -285,6 +288,30 @@ helix.printer.watch("connected", function(up)
     end
 end)
 
+-- A pause or a failure says why: the screen works the reason out (a runout,
+-- a detected defect, a tangle, Klipper's error) a moment after the state
+-- edge, so the event waits for it, at most REASON_WAIT_MS. Any later edge
+-- sends the held event first, so events never change order.
+local REASON_WAIT_MS = 3000
+local WANTS_REASON = { paused = true, failed = true }
+local held = nil
+local held_timer = nil
+
+local function send_held()
+    if not held then return end
+    if held_timer then held_timer:cancel() end
+    held_timer = nil
+    local e = held
+    held = nil
+    local reason = helix.printer.get("stop_reason")
+    if reason and reason ~= "" then e.reason = reason end
+    enqueue(e)
+end
+
+helix.printer.watch("stop_reason", function(reason)
+    if held and reason and reason ~= "" then send_held() end
+end)
+
 local prev_state = helix.printer.get("print_state")
 helix.printer.watch("print_state", function(cur)
     local ev = classify(prev_state, cur)
@@ -292,12 +319,19 @@ helix.printer.watch("print_state", function(cur)
     if not ev or settling then return end
     if helix.settings.get("ev_" .. ev) == false then return end
     if helix.settings.get("muted") == true then return end
-    enqueue({
+    send_held()
+    local e = {
         key = ev,
         title = TITLES[ev],
         file = helix.printer.get("filename") or "",
         pct = helix.printer.get("progress") or nil,
-    })
+    }
+    if WANTS_REASON[ev] then
+        held = e
+        held_timer = helix.timer.after(REASON_WAIT_MS, send_held)
+        return
+    end
+    enqueue(e)
 end)
 
 helix.widget("tile", {

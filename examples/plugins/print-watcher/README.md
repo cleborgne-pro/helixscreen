@@ -25,6 +25,10 @@ worked example for a plugin overlay that controls its own settings.
 - `helix.printer.watch`: state edges classify into events against the six
   states the screen reports; the filename and progress snapshot rides the
   event, not a later read.
+  A pause or a failure carries the screen's `stop_reason` (a runout, a
+  detected defect, a tangle, Klipper's error): it arrives just after the
+  edge, so the event waits for it, three seconds at most, and any later
+  edge sends it first so events keep their order.
   An ending (completed, cancelled, failed) needs a print that was running,
   and the first state reported after the printer connects is a silent
   baseline, so a screen reboot never announces the job it finds on the

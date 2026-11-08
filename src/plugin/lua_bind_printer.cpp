@@ -148,6 +148,7 @@ const std::vector<PrinterField>& printer_fields() {
         {"print_state", "print_state", PrinterValueKind::String},
         {"progress", "print_progress", PrinterValueKind::Int},
         {"filename", "print_filename", PrinterValueKind::String},
+        {"stop_reason", "print_stop_reason", PrinterValueKind::String},
         {"extruder_temp", "extruder_temp", PrinterValueKind::DeciDegrees},
         {"extruder_target", "extruder_target", PrinterValueKind::DeciDegrees},
         {"bed_temp", "bed_temp", PrinterValueKind::DeciDegrees},

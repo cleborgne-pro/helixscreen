@@ -124,7 +124,7 @@ TEST_CASE_METHOD(XMLTestFixture, "klippy_state reads nil while Moonraker is disc
 }
 
 TEST_CASE("the stable printer table", "[plugin][bindings][printer]") {
-    REQUIRE(printer_fields().size() == 11);
+    REQUIRE(printer_fields().size() == 12);
     CHECK(std::string(printer_fields()[0].lua_name) == "connected");
     CHECK(std::string(printer_fields()[1].lua_name) == "klippy_state");
 }

@@ -796,6 +796,7 @@ Fields (`src/plugin/lua_bind_printer.cpp#printer_fields`):
 | `print_state` | string |
 | `progress` | integer (percent) |
 | `filename` | string |
+| `stop_reason` | string: why the print paused, failed or was cancelled, as the screen shows it (a runout, a detected defect, Klipper's error); empty while printing. Set a moment after `print_state` changes |
 | `extruder_temp`, `extruder_target` | degrees C |
 | `bed_temp`, `bed_target` | degrees C |
 | `chamber_temp`, `chamber_target` | degrees C |

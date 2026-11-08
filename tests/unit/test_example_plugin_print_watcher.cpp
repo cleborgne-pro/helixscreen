@@ -110,6 +110,10 @@ void edge(const char* state) {
     drain();
 }
 
+/// A pause or a failure waits for the screen's stop reason; with none
+/// published it goes out bare once the plugin's REASON_WAIT_MS is over.
+constexpr int kReasonWaitMs = 3100;
+
 /// Answers every http request since `next` with `status`, settling each send.
 void answer_http(HostRig& rig, size_t& next, int status) {
     while (next < rig.fake.requests.size()) {
@@ -286,6 +290,7 @@ TEST_CASE_METHOD(XMLTestFixture, "muted holds sends and the overlay switch unmut
     drain();
     CHECK(watcher_str("print-watcher__word") == "armed");
     edge("paused");
+    process_lvgl(kReasonWaitMs);
     REQUIRE(http_count(rig) == 1);
     CHECK(last_http(rig)->c == "Paused: benchy.gcode (43%)");
 }
@@ -427,6 +432,7 @@ TEST_CASE_METHOD(XMLTestFixture, "cancelled and error end a running print, nothi
     edge("printing");
     answer_http(rig, next, 200);
     edge("error");
+    process_lvgl(kReasonWaitMs);
     REQUIRE(http_count(rig) == 4);
     CHECK(last_http(rig)->c == "Failed: benchy.gcode (43%)");
     CHECK(last_http(rig)->params.value("X-Title", "") == "Failed");
@@ -528,6 +534,7 @@ TEST_CASE_METHOD(XMLTestFixture,
     CHECK(http_count(rig) == 0);
     process_lvgl(5100);
     edge("paused");
+    process_lvgl(kReasonWaitMs);
     REQUIRE(http_count(rig) == 1);
     answer_http(rig, next, 200);
     edge("printing");
@@ -573,6 +580,39 @@ TEST_CASE_METHOD(XMLTestFixture, "muting drops events that were queued before it
     CHECK(http_count(rig) == 2);
 }
 
+TEST_CASE_METHOD(XMLTestFixture, "a pause carries the reason the screen gives it",
+                 "[plugin][example]") {
+    reset_printer("benchy.gcode");
+    set_str("print_stop_reason", "");
+    HostRig rig(watcher_block(ntfy_settings()));
+    rig.host->load_from("examples/plugins");
+    size_t next = 0;
+    edge("printing");
+    answer_http(rig, next, 200);
+
+    // The reason lands just after the edge; the pause waits for it.
+    edge("paused");
+    CHECK(http_count(rig) == 1);
+    set_str("print_stop_reason", "Filament tangled");
+    drain();
+    REQUIRE(http_count(rig) == 2);
+    CHECK(last_http(rig)->c == "Paused: benchy.gcode (43%) - Filament tangled");
+    answer_http(rig, next, 200);
+
+    // A later edge sends a pause still waiting first, so the order holds.
+    set_str("print_stop_reason", "");
+    edge("printing");
+    answer_http(rig, next, 200);
+    edge("paused");
+    edge("printing");
+    REQUIRE(http_count(rig) == 4);
+    CHECK(last_http(rig)->c == "Paused: benchy.gcode (43%)");
+    answer_http(rig, next, 200);
+    CHECK(last_http(rig)->c == "Resumed: benchy.gcode (43%)");
+    answer_http(rig, next, 200);
+    set_str("print_stop_reason", "");
+}
+
 TEST_CASE_METHOD(XMLTestFixture, "the event log shows three rows under four columns, five at four",
                  "[plugin][example]") {
     reset_printer("benchy.gcode");
@@ -583,6 +623,7 @@ TEST_CASE_METHOD(XMLTestFixture, "the event log shows three rows under four colu
         edge("printing");
         answer_http(rig, next, 200);
         edge("paused");
+        process_lvgl(kReasonWaitMs);
         answer_http(rig, next, 200);
     }
     REQUIRE(http_count(rig) == 6); // six events in a ring of five
