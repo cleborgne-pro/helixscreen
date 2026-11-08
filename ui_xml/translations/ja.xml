@@ -155,6 +155,7 @@
   <translation tag="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print." ja="Moonrakerが配信するカメラ。ホーム画面にカメラウィジェットを追加すると、印刷中も映像を確認できます。"/>
   <translation tag="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen." ja="チャンバー内の空気をフィルターに通すファン。チャンバー温度画面で操作できます。"/>
   <translation tag="A few minutes, nearly all of it heating. You judge nothing by eye." ja="数分かかりますが、そのほとんどは加熱です。目視での判断は不要です。"/>
+  <translation tag="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume" ja="フィラメントがツールヘッドの手前で絡まるか引っかかっています。スプールとフィーダーで外してから再開してください"/>
   <translation tag="A folder name in moonraker.conf is unsafe, so cleanup is off." ja="moonraker.confのフォルダー名が安全でないため、クリーンアップはオフになっています。"/>
   <translation tag="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it." ja="プリンターにヒートソークのマクロが設定されています。HelixScreenは検出しますが実行はしません。"/>
   <translation tag="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen." ja="チャンバー内の空気を温めるヒーター。温度はチャンバー温度画面で設定します。"/>
@@ -584,6 +585,7 @@
   <translation tag="Cam" ja="カメラ"/>
   <translation tag="Camera" ja="カメラ"/>
   <translation tag="Camera checks the bed is empty before each print" ja="印刷を始める前にカメラでベッドが空か確認します"/>
+  <translation tag="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms" ja="印刷中にカメラが残留物を検出すると一時停止します。プリンターでは既定でオフ。誤検出の可能性があります"/>
   <translation tag="Can&apos;t connect — try forgetting and re-pairing the printer" ja="接続できません — プリンターの登録を解除して再ペアリングしてください"/>
   <translation tag="Can&apos;t move filament while the print is paused" ja="印刷の一時停止中はフィラメントを動かせません"/>
   <translation tag="Can&apos;t reach this printer. Save anyway?" ja="このプリンターに接続できません。保存しますか？"/>
@@ -3118,10 +3120,12 @@
   <translation tag="Reset to defaults" ja="デフォルトに戻す"/>
   <translation tag="Reset to original values" ja="元の値にリセット"/>
   <translation tag="Reset to tag" ja="タグから復元"/>
+  <translation tag="Reset tool-change counts?" ja="ツール変更回数をリセットしますか？"/>
   <translation tag="Reset {}?" ja="{}をリセットしますか？"/>
   <translation tag="Resetting" ja="リセット中"/>
   <translation tag="Resetting system" ja="システムをリセットしています"/>
   <translation tag="Resetting..." ja="リセット中..."/>
+  <translation tag="Residue Check (experimental)" ja="残留物チェック（ベータ）"/>
   <translation tag="Resolve it on the filament system screen, then try again" ja="フィラメントシステム画面で解決してから再試行してください"/>
   <translation tag="Response (Kp)" ja="応答 (Kp)"/>
   <translation tag="Restart" ja="再起動"/>
@@ -3575,6 +3579,7 @@
   <translation tag="Start K" ja="開始K"/>
   <translation tag="Start Print" ja="印刷を開始"/>
   <translation tag="Start Probing" ja="プローブ開始"/>
+  <translation tag="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside." ja="4つのツールヘッドすべてで新しいメンテナンス間隔を開始します。メンテナンス後に実行してください。これまでの回数は除外されます。"/>
   <translation tag="Start a new {} h interval? The hours counted so far are discarded." ja="新しい {} 時間の間隔を開始しますか？これまでの時間は破棄されます。"/>
   <translation tag="Start anyway?" ja="それでも開始しますか？"/>
   <translation tag="Start at" ja="開始位置"/>
@@ -3780,6 +3785,7 @@
   <translation tag="The bed was reported dirty, so this print cannot resume." ja="ベッドが汚れていると報告されたため、この印刷を再開できません。"/>
   <translation tag="The buffer may be disconnected, stuck, or faulty. Check it before retrying" ja="バッファーが未接続、固着、または故障している可能性があります。再試行前に確認してください"/>
   <translation tag="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer" ja="バッファーが 16 秒間動きを検出しませんでした。CFS とエクストルーダーの間の詰まり、またはバッファーの固着を確認してください"/>
+  <translation tag="The camera reported residue on the print: check it, then resume or cancel" ja="カメラが印刷物に残留物を検出しました。確認してから再開またはキャンセルしてください"/>
   <translation tag="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm." ja="カメラがベッド上に何かを検出したため、プリンターは印刷前に停止しました。ベッドに何もなければ誤検出です。"/>
   <translation tag="The carriage was not put back: check which tool is mounted" ja="キャリッジは元に戻されていません：装着されているツールを確認してください"/>
   <translation tag="The chamber heater can run a filament drying cycle. Start one from the drying dialog." ja="チャンバーヒーターでフィラメントの乾燥サイクルを実行できます。乾燥ダイアログから開始してください。"/>
@@ -3853,6 +3859,7 @@
   <translation tag="The print is waiting for the chamber, but the heater is not heating." ja="印刷はチャンバーを待っていますが、ヒーターが加熱していません。"/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." ja="印刷可能なサイズ（mm、X × Y × Z）。プリンターのKlipper設定の軸リミットから取得します。"/>
   <translation tag="The printer applied this value and keeps it for this tool." ja="プリンターはこの値を適用し、このツールに保存しました。"/>
+  <translation tag="The printer asks for a service after 25100 changes on one head" ja="1つのヘッドで25100回変更するとプリンターがメンテナンスを求めます"/>
   <translation tag="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options." ja="プリンターは印刷前にプライミングラインを描けます。HelixScreenは印刷前オプションで選べます。"/>
   <translation tag="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen." ja="プリンターは各ツールのオフセットを自動で測定できます。ツールオフセット校正画面で実行します。"/>
   <translation tag="The printer can measure pressure advance on its own. Run it on the PA calibration screen." ja="プリンターはプレッシャーアドバンスを自分で測定できます。PAキャリブレーション画面で実行できます。"/>
@@ -3860,8 +3867,11 @@
   <translation tag="The printer could not work out where to resume." ja="プリンターは再開位置を特定できませんでした。"/>
   <translation tag="The printer did not change its bed check" ja="プリンターはベッドチェックを変更しませんでした"/>
   <translation tag="The printer did not change its bed check: {}" ja="プリンターはベッドチェックを変更しませんでした：{}"/>
+  <translation tag="The printer did not change its residue check" ja="プリンターは残留物チェックを変更しませんでした"/>
+  <translation tag="The printer did not change its residue check: {}" ja="プリンターは残留物チェックを変更しませんでした: {}"/>
   <translation tag="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again." ja="プリンターが印刷開始を確認しませんでした ({})。まだ開始する可能性があります。もう一度開始する前にプリンターを確認してください。"/>
   <translation tag="The printer did not reset the filter" ja="プリンターがフィルターをリセットしませんでした"/>
+  <translation tag="The printer did not reset the tool-change counts" ja="プリンターはツール変更回数をリセットしませんでした"/>
   <translation tag="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye." ja="プリンターは隅で押出しを行い、測定値が一致するまで繰り返します。目視での判断は不要です。"/>
   <translation tag="The printer finishes this measurement on its own." ja="この測定はプリンターが最後まで行います。"/>
   <translation tag="The printer halted this print and cannot resume it. Restart from the beginning?" ja="プリンターはこの印刷を停止し、再開できません。最初からやり直しますか？"/>
@@ -3910,6 +3920,7 @@
   <translation tag="The toolhead is not homed, so this would home into the print" ja="ツールヘッドがホーミングされていないため、ホーミングするとノズルが造形物に当たります"/>
   <translation tag="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?" ja="ツールヘッドセンサーがフィラメント装填済みを検出しました。それでも装填を続行しますか？"/>
   <translation tag="The toolhead sensor indicates no filament is present. Proceed with unload anyway?" ja="ツールヘッドセンサーがフィラメント未検出を報告しました。それでもアンロードを続行しますか？"/>
+  <translation tag="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance" ja="ツールヘッドがプリンターのツール変更メンテナンス間隔に達しました。メンテナンス後、メンテナンス画面で回数をリセットしてください"/>
   <translation tag="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing." ja="トップカバーが外れました。印刷品質のため、続行する前にトップカバーを接続してください。"/>
   <translation tag="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck" ja="ユニットは既に別の処理を実行中です。完了を待つか、固まったままの場合は CFS をリセットしてください"/>
   <translation tag="The unit reported a fault with no further detail. Restart the printer if it repeats" ja="ユニットが詳細不明の障害を報告しました。繰り返す場合はプリンターを再起動してください"/>
@@ -4068,6 +4079,7 @@
   <translation tag="Tool change to T{}" ja="ツールを T{} に変更しています"/>
   <translation tag="Tool change to {} failed: {}" ja="{}へのツール変更に失敗しました: {}"/>
   <translation tag="Tool changer error: {}" ja="ツールチェンジャーのエラー: {}"/>
+  <translation tag="Tool changes since service" ja="メンテナンス後のツール変更回数"/>
   <translation tag="Tool cycle failed: {}" ja="ツールの順次交換に失敗しました：{}"/>
   <translation tag="Tool cycle finished" ja="ツールの順次交換が完了しました"/>
   <translation tag="Tool is seated" ja="ツールは装着済み"/>
@@ -4075,6 +4087,7 @@
   <translation tag="Tool offsets (mm)" ja="ツールオフセット (mm)"/>
   <translation tag="Tool offsets saved" ja="ツールオフセットを保存しました"/>
   <translation tag="Tool swap" ja="ツール交換"/>
+  <translation tag="Tool-change counts reset" ja="ツール変更回数をリセットしました"/>
   <translation tag="Toolchange purge" ja="ツール交換パージ"/>
   <translation tag="Toolhead" ja="ツールヘッド"/>
   <translation tag="Toolhead Calibration Running" ja="ツールヘッドのキャリブレーション実行中"/>

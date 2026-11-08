@@ -57,6 +57,29 @@ TEST_CASE("the mid-print preference guard maps to its message", "[snapmaker][exc
     REQUIRE(exception_message(*c) == "That setting cannot be changed while a print is running");
 }
 
+TEST_CASE("a tangle maps to its message whichever head raised it", "[snapmaker][exceptions]") {
+    // filament_entangle_detect raises 523 with the head's index and code 38.
+    for (const char* text : {"0002-0523-0000-0038", "0002-0523-0003-0038"}) {
+        CAPTURE(text);
+        const auto c = decode_exception_code(text);
+        REQUIRE(c.has_value());
+        CHECK(exception_message(*c) ==
+              "A filament is tangled or caught before its toolhead: free it at the spool and the "
+              "feeder, then resume");
+    }
+    // The runout under the same id is not a tangle.
+    CHECK(exception_message(*decode_exception_code("0002-0523-0001-0000")).empty());
+}
+
+TEST_CASE("residue and the tool-change maintenance interval map to their messages",
+          "[snapmaker][exceptions]") {
+    CHECK(exception_message(*decode_exception_code("0002-0532-0000-0003")) ==
+          "The camera reported residue on the print: check it, then resume or cancel");
+    CHECK_FALSE(exception_message(*decode_exception_code("0001-0523-0000-0037")).empty());
+    // The maintenance notice is printer-wide: index 0 only.
+    CHECK(exception_message(*decode_exception_code("0001-0523-0002-0037")).empty());
+}
+
 TEST_CASE("a code followed by a fifth group is not ours", "[snapmaker][exceptions]") {
     // A fifth dash-group means the payload is not level-id-index-code, so even
     // a window whose four groups all parse must be left alone.

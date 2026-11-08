@@ -392,6 +392,58 @@ TEST_CASE_METHOD(HelixTestFixture, "DetectionManager bed check follows the print
     m.reset_for_test();
 }
 
+TEST_CASE_METHOD(HelixTestFixture, "DetectionManager residue check follows the printer",
+                 "[detection][manager][residue_check]") {
+    auto& m = DetectionManager::instance();
+    m.reset_for_test();
+    MoonrakerClientMock client(MoonrakerClientMock::PrinterType::SNAPMAKER_U1);
+    set_moonraker_client(&client);
+    m.register_source(std::make_unique<U1StockSource>(nullptr));
+    lv_subject_t* available = m.subject_residue_check_available();
+    lv_subject_t* enabled = m.subject_residue_check_enabled();
+
+    SECTION("no defect_detection object: no row, and the switch sends nothing") {
+        m.apply_objects_list_for_test(json::array({"gcode_move"}));
+        CHECK(lv_subject_get_int(available) == 0);
+        client.clear_gcode_script_history();
+        CHECK_FALSE(m.set_residue_check_enabled(true));
+        CHECK(client.gcode_script_history().empty());
+    }
+
+    SECTION("the row reads the printer's value, off until the printer says otherwise") {
+        m.apply_objects_list_for_test(json::array({"defect_detection"}));
+        REQUIRE(lv_subject_get_int(available) == 1);
+        CHECK(lv_subject_get_int(enabled) == 0);
+        client.gcode_script("DEFECT_DETECTION_CONFIG RESIDUE_ENABLE=1");
+        m.refresh_bed_check();
+        drain();
+        CHECK(lv_subject_get_int(enabled) == 1);
+
+        // The module off as a whole runs no residue check either.
+        client.gcode_script("DEFECT_DETECTION_CONFIG MAIN_ENABLE=0");
+        m.refresh_bed_check();
+        drain();
+        CHECK(lv_subject_get_int(enabled) == 0);
+    }
+
+    SECTION("the switch sends RESIDUE_ENABLE and leaves the bed check alone") {
+        m.apply_objects_list_for_test(json::array({"defect_detection"}));
+        CHECK(m.set_residue_check_enabled(true));
+        drain();
+        CHECK(client.last_send_script() == "DEFECT_DETECTION_CONFIG RESIDUE_ENABLE=1");
+        CHECK(lv_subject_get_int(enabled) == 1);
+        CHECK(lv_subject_get_int(m.subject_bed_check_enabled()) == 1);
+
+        CHECK(m.set_residue_check_enabled(false));
+        drain();
+        CHECK(client.last_send_script() == "DEFECT_DETECTION_CONFIG RESIDUE_ENABLE=0");
+        CHECK(lv_subject_get_int(enabled) == 0);
+    }
+
+    set_moonraker_client(nullptr);
+    m.reset_for_test();
+}
+
 TEST_CASE_METHOD(HelixTestFixture, "DetectionManager bed check needs a source that has one",
                  "[detection][manager][bed_check]") {
     auto& m = DetectionManager::instance();

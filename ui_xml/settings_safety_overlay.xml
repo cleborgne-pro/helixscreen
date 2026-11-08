@@ -78,6 +78,18 @@
                               disabled="detection_bed_check_switchable" disabled_ref_value="0"/>
         </lv_obj>
         <!-- ================================================================== -->
+        <!-- RESIDUE CHECK (printer's own mid-print camera check, off by default).
+             Greyed with the bed check: both follow the detection module's switch. -->
+        <!-- ================================================================== -->
+        <lv_obj name="container_residue_check" width="100%" style_pad_all="0" scrollable="false" flex_flow="column">
+          <bind_flag_if_eq subject="detection_residue_check_available" flag="hidden" ref_value="0"/>
+          <setting_toggle_row name="row_residue_check"
+                              label="Residue Check (experimental)" icon="eye"
+                              description="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms"
+                              subject="detection_residue_check_enabled" callback="on_residue_check_changed"
+                              disabled="detection_bed_check_switchable" disabled_ref_value="0"/>
+        </lv_obj>
+        <!-- ================================================================== -->
         <!-- SLICER PRINTS THAT DO NOT FIT: the plugin's fit_check_blocks_autostart -->
         <!-- ================================================================== -->
         <plugin_feature_toggle_row name="row_fit_check_blocks_autostart"

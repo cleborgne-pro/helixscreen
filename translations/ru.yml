@@ -210,6 +210,7 @@ translations:
   A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.: 'Камера, которую транслирует Moonraker. Добавьте виджет камеры на главный экран, чтобы смотреть ее, в том числе во время печати.'
   A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.: 'Вентилятор, который прогоняет воздух камеры через фильтр. Управляйте им на экране температуры камеры.'
   A few minutes, nearly all of it heating. You judge nothing by eye.: 'Несколько минут, почти всё время нагрев. Ничего не нужно оценивать на глаз.'
+  'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume': 'Филамент запутался или застрял до печатающей головки: освободите его у катушки и податчика, затем продолжите'
   A folder name in moonraker.conf is unsafe, so cleanup is off.: "Небезопасное имя папки в moonraker.conf, поэтому очистка выключена."
   A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.: 'На принтере настроен макрос прогрева (heat soak). HelixScreen обнаруживает его, но не запускает.'
   A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.: 'Нагреватель, который греет воздух внутри камеры. Температура задается на экране температуры камеры.'
@@ -679,6 +680,7 @@ translations:
   Cam: Кам
   Camera: Камера
   Camera checks the bed is empty before each print: 'Камера проверяет, что стол пуст, перед каждой печатью'
+  Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms: 'Камера ищет остатки материала во время печати и ставит её на паузу. По умолчанию выключено в принтере; возможны ложные срабатывания'
   Can't connect — try forgetting and re-pairing the printer: Не удаётся подключиться
     — забудьте принтер и выполните сопряжение заново
   Can't move filament while the print is paused: Невозможно перемещать филамент, пока печать на паузе
@@ -3440,10 +3442,12 @@ translations:
   Reset to Default: Сбросить до умолчания
   Reset to defaults: Сбросить по умолчанию
   Reset to original values: Сбросить к исходным значениям
+  Reset tool-change counts?: 'Сбросить счётчики смен инструмента?'
   Reset {}?: 'Сбросить {}?'
   Resetting: Сброс
   Resetting system: 'Сброс системы'
   Resetting...: Сброс...
+  Residue Check (experimental): 'Проверка остатков (экспериментально)'
   Resolve it on the filament system screen, then try again: 'Устраните проблему на экране системы филамента и повторите попытку'
   Response (Kp): Отклик (Kp)
   Restart: Перезапуск
@@ -3953,6 +3957,7 @@ translations:
   Start K: Начальный K
   Start Print: Начать печать
   Start Probing: Начать зондирование
+  'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.': 'Начать новый интервал обслуживания для всех четырёх печатающих головок. Делайте это после обслуживания: текущие счётчики откладываются.'
   Start a new {} h interval? The hours counted so far are discarded.: 'Начать новый интервал {} ч? Отсчитанные часы будут сброшены.'
   Start anyway?: 'Всё равно начать?'
   Start at: Начать с
@@ -4184,6 +4189,7 @@ translations:
   The bed was reported dirty, so this print cannot resume.: 'Стол помечен как загрязнённый, поэтому печать не может быть продолжена.'
   The buffer may be disconnected, stuck, or faulty. Check it before retrying: Буфер может быть отключён, заклинен или неисправен. Проверьте его перед повтором
   The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer: Буфер не фиксировал движение 16 секунд. Проверьте засор между CFS и экструдером или заклинивший буфер
+  'The camera reported residue on the print: check it, then resume or cancel': 'Камера обнаружила остатки материала на печати: проверьте её, затем продолжите или отмените'
   ? The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   : 'Камере показалось, что на столе что-то есть, поэтому принтер остановился до начала печати. Если стол чист, это ложная тревога.'
   'The carriage was not put back: check which tool is mounted': 'Каретка не возвращена: проверьте, какой инструмент установлен'
@@ -4268,6 +4274,7 @@ translations:
   The print is waiting for the chamber, but the heater is not heating.: 'Печать ждёт камеру, но нагреватель не греет.'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: 'Размер области печати в миллиметрах (X × Y × Z) по пределам осей в конфигурации Klipper принтера.'
   The printer applied this value and keeps it for this tool.: 'Принтер применил это значение и сохранил его для этого инструмента.'
+  The printer asks for a service after 25100 changes on one head: 'Принтер запрашивает обслуживание после 25100 смен одной головки'
   The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.: 'Принтер может нарисовать линию прочистки перед печатью. HelixScreen предлагает ее в параметрах подготовки к печати.'
   The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.: 'Принтер может автоматически измерить смещение каждого инструмента. Запустите это на экране калибровки смещений инструментов.'
   The printer can measure pressure advance on its own. Run it on the PA calibration screen.: 'Принтер может сам измерить pressure advance. Запускается на экране «Калибровка PA».'
@@ -4275,8 +4282,11 @@ translations:
   The printer could not work out where to resume.: Принтер не смог определить, откуда продолжить.
   The printer did not change its bed check: 'Принтер не изменил проверку стола'
   'The printer did not change its bed check: {}': 'Принтер не изменил проверку стола: {}'
+  The printer did not change its residue check: 'Принтер не изменил проверку остатков'
+  'The printer did not change its residue check: {}': 'Принтер не изменил проверку остатков: {}'
   'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.': 'Принтер не подтвердил начало печати ({}). Печать ещё может начаться: проверьте принтер, прежде чем запускать её снова.'
   The printer did not reset the filter: 'Принтер не сбросил счётчик фильтра'
+  The printer did not reset the tool-change counts: 'Принтер не сбросил счётчики смен инструмента'
   The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.: 'Принтер выдавливает пластик в углу и повторяет, пока показания не сойдутся. Ничего не нужно оценивать на глаз.'
   The printer finishes this measurement on its own.: 'Принтер завершит это измерение сам.'
   The printer halted this print and cannot resume it. Restart from the beginning?: Принтер
@@ -4337,6 +4347,8 @@ translations:
   The toolhead sensor indicates no filament is present. Proceed with unload anyway?: Датчик
     печатающей головки показывает, что филамент отсутствует. Всё равно продолжить
     выгрузку?
+  ? "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
+  : "Печатающие головки достигли интервала обслуживания принтера: обслужите их, затем сбросьте счётчик в разделе Обслуживание"
   The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.: 'Верхняя крышка отключена. Для качества печати подключите её, прежде чем продолжить.'
   The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck: Блок уже выполняет другую операцию. Дождитесь её завершения или сбросьте CFS, если он завис
   The unit reported a fault with no further detail. Restart the printer if it repeats: Блок сообщил о неисправности без подробностей. Если повторится, перезапустите принтер
@@ -4533,6 +4545,7 @@ translations:
   Tool change to T{}: 'Смена инструмента на T{}'
   'Tool change to {} failed: {}': 'Ошибка смены инструмента на {}: {}'
   'Tool changer error: {}': 'Ошибка сменщика инструментов: {}'
+  Tool changes since service: 'Смены инструмента после обслуживания'
   'Tool cycle failed: {}': 'Ошибка перебора инструментов: {}'
   Tool cycle finished: Перебор инструментов завершён
   Tool is seated: Инструмент установлен
@@ -4540,6 +4553,7 @@ translations:
   Tool offsets (mm): Смещения инструментов (мм)
   Tool offsets saved: Смещения инструментов сохранены
   Tool swap: Смена инструмента
+  Tool-change counts reset: 'Счётчики смен инструмента сброшены'
   Toolchange purge: 'Продувка при смене инструмента'
   Toolhead: 'Печатающая головка'
   Toolhead Calibration Running: 'Идёт калибровка головок'

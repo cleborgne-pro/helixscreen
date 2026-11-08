@@ -158,6 +158,7 @@ translations:
   A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.: 'Moonraker 推流的摄像头。将摄像头小组件添加到主屏幕即可查看,打印时也能看到。'
   A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.: '让腔体内空气经过滤网循环的风扇。在腔体温度界面控制。'
   A few minutes, nearly all of it heating. You judge nothing by eye.: '需要几分钟，几乎全是加热时间。你无需用肉眼判断任何东西。'
+  'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume': '耗材在工具头之前缠绕或卡住：请在料盘和送料器处解开，然后继续'
   A folder name in moonraker.conf is unsafe, so cleanup is off.: "moonraker.conf 中的文件夹名称不安全，因此清理功能已关闭。"
   A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.: '打印机上已设置热浸(heat soak)宏。HelixScreen 会检测到它,但不会运行。'
   A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.: '为腔体内空气加热的加热器。在腔体温度界面设置温度。'
@@ -593,6 +594,7 @@ translations:
   Cam: 摄像
   Camera: 摄像头
   Camera checks the bed is empty before each print: '每次打印前用摄像头检查热床是否为空'
+  Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms: '打印过程中摄像头检测残留物并暂停打印。打印机默认关闭；可能误报'
   Can't connect — try forgetting and re-pairing the printer: 无法连接 — 请尝试忘记并重新配对打印机
   Can't move filament while the print is paused: 打印暂停期间无法移动耗材
   Can't read filament RFID tag: 无法读取耗材 RFID 标签
@@ -3221,10 +3223,12 @@ translations:
   Reset to Default: 重置为默认
   Reset to defaults: 重置为默认值
   Reset to original values: 重置为原始值
+  Reset tool-change counts?: '重置工具切换计数？'
   Reset {}?: '重置{}？'
   Resetting: 重置中
   Resetting system: '正在重置系统'
   Resetting...: 正在重置...
+  Residue Check (experimental): '残留物检查（实验性）'
   Resolve it on the filament system screen, then try again: '请在耗材系统界面中处理后重试'
   Response (Kp): 响应 (Kp)
   Restart: 重启
@@ -3693,6 +3697,7 @@ translations:
   Start K: 起始K值
   Start Print: 开始打印
   Start Probing: 开始探测
+  'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.': '为全部四个工具头开始新的维护周期。请在维护后进行：之前的计数将不再计入。'
   Start a new {} h interval? The hours counted so far are discarded.: '开始新的 {} 小时间隔？目前累计的小时数将被清除。'
   Start anyway?: '仍要开始吗？'
   Start at: 从第
@@ -3914,6 +3919,7 @@ translations:
   The bed was reported dirty, so this print cannot resume.: '热床被报告为脏污，因此无法恢复此次打印。'
   The buffer may be disconnected, stuck, or faulty. Check it before retrying: 缓冲器可能未连接、卡住或损坏。请检查后重试
   The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer: 缓冲器已 16 秒未检测到运动。请检查 CFS 与挤出机之间是否堵塞，或缓冲器是否卡住
+  'The camera reported residue on the print: check it, then resume or cancel': '摄像头在打印件上检测到残留物：请检查后继续或取消'
   ? The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   : '摄像头认为热床上有东西，因此打印机在打印前停止了。如果热床是空的，这是误报。'
   'The carriage was not put back: check which tool is mounted': '打印头未归位：请检查当前装载的是哪个工具'
@@ -3997,6 +4003,7 @@ translations:
   The print is waiting for the chamber, but the heater is not heating.: '打印正在等待腔体，但加热器没有加热。'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: '可打印尺寸（毫米，X × Y × Z），取自打印机 Klipper 配置中的轴限位。'
   The printer applied this value and keeps it for this tool.: '打印机已应用此值，并为该工具保存。'
+  The printer asks for a service after 25100 changes on one head: '单个工具头切换25100次后打印机会提示维护'
   The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.: '打印机可在打印前画一条预挤出线。HelixScreen 在打印前选项中提供该功能。'
   The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.: '打印机可自动测量每个工具的偏移。可在工具偏移校准页面运行。'
   The printer can measure pressure advance on its own. Run it on the PA calibration screen.: '打印机可以自行测量压力提前量(pressure advance)。在 PA 校准界面运行。'
@@ -4004,8 +4011,11 @@ translations:
   The printer could not work out where to resume.: 打印机无法确定从哪里恢复。
   The printer did not change its bed check: '打印机未更改热床检查'
   'The printer did not change its bed check: {}': '打印机未更改热床检查：{}'
+  The printer did not change its residue check: '打印机未更改残留物检查'
+  'The printer did not change its residue check: {}': '打印机未更改残留物检查: {}'
   'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.': '打印机未确认打印已开始 ({})。它仍可能开始：再次开始前请检查打印机。'
   The printer did not reset the filter: '打印机未重置滤网'
+  The printer did not reset the tool-change counts: '打印机未重置工具切换计数'
   The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.: '打印机在角落挤出并重复，直到读数一致为止。你无需用肉眼判断任何东西。'
   The printer finishes this measurement on its own.: '打印机会自行完成这次测量。'
   The printer halted this print and cannot resume it. Restart from the beginning?: 打印机已停止此打印且无法恢复。从头重新开始？
@@ -4059,6 +4069,8 @@ translations:
   The toolhead is not homed, so this would home into the print: '工具头尚未归位，归位会使喷嘴碰到打印件'
   The toolhead sensor indicates filament is already loaded. Proceed with load anyway?: 工具头传感器显示耗材已装载。仍要继续装载吗？
   The toolhead sensor indicates no filament is present. Proceed with unload anyway?: 工具头传感器显示无耗材。仍要继续卸载吗？
+  ? "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
+  : "工具头已达到打印机的工具切换维护周期：请维护后在维护页面重置计数"
   The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.: '检测到顶盖已断开连接。为确保打印质量，请连接顶盖后再继续使用。'
   The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck: 该单元正在执行其他操作。请等待其完成；若持续卡住，请重置 CFS
   The unit reported a fault with no further detail. Restart the printer if it repeats: 该单元报告了故障但无更多信息。若反复出现，请重启打印机
@@ -4242,6 +4254,7 @@ translations:
   Tool change to T{}: '切换工具到 T{}'
   'Tool change to {} failed: {}': '切换到{}失败: {}'
   'Tool changer error: {}': '换刀器错误: {}'
+  Tool changes since service: '上次维护后的工具切换次数'
   'Tool cycle failed: {}': 依次更换工具失败：{}
   Tool cycle finished: 依次更换工具完成
   Tool is seated: 工具已装好
@@ -4249,6 +4262,7 @@ translations:
   Tool offsets (mm): 工具偏移 (mm)
   Tool offsets saved: 工具偏移已保存
   Tool swap: 工具切换
+  Tool-change counts reset: '工具切换计数已重置'
   Toolchange purge: '换刀排料'
   Toolhead: '工具头'
   Toolhead Calibration Running: '工具头校准进行中'

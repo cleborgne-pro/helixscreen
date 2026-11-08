@@ -155,6 +155,7 @@
   <translation tag="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print." en="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print."/>
   <translation tag="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen." en="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen."/>
   <translation tag="A few minutes, nearly all of it heating. You judge nothing by eye." en="A few minutes, nearly all of it heating. You judge nothing by eye."/>
+  <translation tag="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume" en="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume"/>
   <translation tag="A folder name in moonraker.conf is unsafe, so cleanup is off." en="A folder name in moonraker.conf is unsafe, so cleanup is off."/>
   <translation tag="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it." en="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it."/>
   <translation tag="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen." en="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen."/>
@@ -584,6 +585,7 @@
   <translation tag="Cam" en="Cam"/>
   <translation tag="Camera" en="Camera"/>
   <translation tag="Camera checks the bed is empty before each print" en="Camera checks the bed is empty before each print"/>
+  <translation tag="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms" en="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms"/>
   <translation tag="Can&apos;t connect — try forgetting and re-pairing the printer" en="Can&apos;t connect — try forgetting and re-pairing the printer"/>
   <translation tag="Can&apos;t move filament while the print is paused" en="Can&apos;t move filament while the print is paused"/>
   <translation tag="Can&apos;t reach this printer. Save anyway?" en="Can&apos;t reach this printer. Save anyway?"/>
@@ -3118,10 +3120,12 @@
   <translation tag="Reset to defaults" en="Reset to defaults"/>
   <translation tag="Reset to original values" en="Reset to original values"/>
   <translation tag="Reset to tag" en="Reset to tag"/>
+  <translation tag="Reset tool-change counts?" en="Reset tool-change counts?"/>
   <translation tag="Reset {}?" en="Reset {}?"/>
   <translation tag="Resetting" en="Resetting"/>
   <translation tag="Resetting system" en="Resetting system"/>
   <translation tag="Resetting..." en="Resetting..."/>
+  <translation tag="Residue Check (experimental)" en="Residue Check (experimental)"/>
   <translation tag="Resolve it on the filament system screen, then try again" en="Resolve it on the filament system screen, then try again"/>
   <translation tag="Response (Kp)" en="Response (Kp)"/>
   <translation tag="Restart" en="Restart"/>
@@ -3575,6 +3579,7 @@
   <translation tag="Start K" en="Start K"/>
   <translation tag="Start Print" en="Start Print"/>
   <translation tag="Start Probing" en="Start Probing"/>
+  <translation tag="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside." en="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside."/>
   <translation tag="Start a new {} h interval? The hours counted so far are discarded." en="Start a new {} h interval? The hours counted so far are discarded."/>
   <translation tag="Start anyway?" en="Start anyway?"/>
   <translation tag="Start at" en="Start at"/>
@@ -3780,6 +3785,7 @@
   <translation tag="The bed was reported dirty, so this print cannot resume." en="The bed was reported dirty, so this print cannot resume."/>
   <translation tag="The buffer may be disconnected, stuck, or faulty. Check it before retrying" en="The buffer may be disconnected, stuck, or faulty. Check it before retrying"/>
   <translation tag="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer" en="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer"/>
+  <translation tag="The camera reported residue on the print: check it, then resume or cancel" en="The camera reported residue on the print: check it, then resume or cancel"/>
   <translation tag="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm." en="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm."/>
   <translation tag="The carriage was not put back: check which tool is mounted" en="The carriage was not put back: check which tool is mounted"/>
   <translation tag="The chamber heater can run a filament drying cycle. Start one from the drying dialog." en="The chamber heater can run a filament drying cycle. Start one from the drying dialog."/>
@@ -3853,6 +3859,7 @@
   <translation tag="The print is waiting for the chamber, but the heater is not heating." en="The print is waiting for the chamber, but the heater is not heating."/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." en="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config."/>
   <translation tag="The printer applied this value and keeps it for this tool." en="The printer applied this value and keeps it for this tool."/>
+  <translation tag="The printer asks for a service after 25100 changes on one head" en="The printer asks for a service after 25100 changes on one head"/>
   <translation tag="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options." en="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options."/>
   <translation tag="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen." en="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen."/>
   <translation tag="The printer can measure pressure advance on its own. Run it on the PA calibration screen." en="The printer can measure pressure advance on its own. Run it on the PA calibration screen."/>
@@ -3860,8 +3867,11 @@
   <translation tag="The printer could not work out where to resume." en="The printer could not work out where to resume."/>
   <translation tag="The printer did not change its bed check" en="The printer did not change its bed check"/>
   <translation tag="The printer did not change its bed check: {}" en="The printer did not change its bed check: {}"/>
+  <translation tag="The printer did not change its residue check" en="The printer did not change its residue check"/>
+  <translation tag="The printer did not change its residue check: {}" en="The printer did not change its residue check: {}"/>
   <translation tag="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again." en="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again."/>
   <translation tag="The printer did not reset the filter" en="The printer did not reset the filter"/>
+  <translation tag="The printer did not reset the tool-change counts" en="The printer did not reset the tool-change counts"/>
   <translation tag="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye." en="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye."/>
   <translation tag="The printer finishes this measurement on its own." en="The printer finishes this measurement on its own."/>
   <translation tag="The printer halted this print and cannot resume it. Restart from the beginning?" en="The printer halted this print and cannot resume it. Restart from the beginning?"/>
@@ -3910,6 +3920,7 @@
   <translation tag="The toolhead is not homed, so this would home into the print" en="The toolhead is not homed, so this would home into the print"/>
   <translation tag="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?" en="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?"/>
   <translation tag="The toolhead sensor indicates no filament is present. Proceed with unload anyway?" en="The toolhead sensor indicates no filament is present. Proceed with unload anyway?"/>
+  <translation tag="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance" en="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance"/>
   <translation tag="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing." en="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing."/>
   <translation tag="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck" en="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck"/>
   <translation tag="The unit reported a fault with no further detail. Restart the printer if it repeats" en="The unit reported a fault with no further detail. Restart the printer if it repeats"/>
@@ -4068,6 +4079,7 @@
   <translation tag="Tool change to T{}" en="Tool change to T{}"/>
   <translation tag="Tool change to {} failed: {}" en="Tool change to {} failed: {}"/>
   <translation tag="Tool changer error: {}" en="Tool changer error: {}"/>
+  <translation tag="Tool changes since service" en="Tool changes since service"/>
   <translation tag="Tool cycle failed: {}" en="Tool cycle failed: {}"/>
   <translation tag="Tool cycle finished" en="Tool cycle finished"/>
   <translation tag="Tool is seated" en="Tool is seated"/>
@@ -4075,6 +4087,7 @@
   <translation tag="Tool offsets (mm)" en="Tool offsets (mm)"/>
   <translation tag="Tool offsets saved" en="Tool offsets saved"/>
   <translation tag="Tool swap" en="Tool swap"/>
+  <translation tag="Tool-change counts reset" en="Tool-change counts reset"/>
   <translation tag="Toolchange purge" en="Toolchange purge"/>
   <translation tag="Toolhead" en="Toolhead"/>
   <translation tag="Toolhead Calibration Running" en="Toolhead Calibration Running"/>

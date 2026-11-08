@@ -20,6 +20,7 @@
 #include "../lvgl_ui_test_fixture.h"
 #include "../test_helpers/config_test_access.h"
 #include "../test_helpers/gcode_recording_api.h"
+#include "../test_helpers/modal_answer.h"
 #include "../ui_test_utils.h"
 #include "app_globals.h"
 #include "config.h"
@@ -529,6 +530,43 @@ TEST_CASE_METHOD(
         CHECK(api.sent == std::vector<std::string>{"SET_PURIFIER FAN=inner WORK=0"});
         CHECK(meter(kFilter).used_h == Catch::Approx(0.0));
     }
+    set_moonraker_api(previous);
+    state().set_hardware(PrinterDiscovery{});
+}
+
+TEST_CASE_METHOD(
+    MaintenanceModelFixture,
+    "maintenance overlay: the printer's tool-change counts show, and reset on the printer",
+    "[maintenance][model][toolchange_wear]") {
+    MoonrakerClientMock client(MoonrakerClientMock::PrinterType::SNAPMAKER_U1);
+    helix::test::GcodeRecordingApi api(client, state());
+    helix::IMoonrakerAPI* previous = get_moonraker_api();
+    set_moonraker_api(&api);
+    lv_obj_t* overlay =
+        static_cast<lv_obj_t*>(lv_xml_create(test_screen(), "maintenance_overlay", nullptr));
+    REQUIRE(overlay != nullptr);
+    lv_obj_t* section = lv_obj_find_by_name(overlay, "mt_toolchanges");
+    REQUIRE(section != nullptr);
+    CHECK_FALSE(shown(section));
+
+    PrinterDiscovery hw;
+    hw.parse_objects(json::array({"extruder", "extruder1", "heater_bed", "filament_detect"}));
+    state().set_hardware(hw);
+    state().update_from_status(
+        json{{"extruder", {{"switch_count", 4210}, {"last_maintenance_count", 0}}},
+             {"extruder1", {{"switch_count", 21350}, {"last_maintenance_count", 0}}}});
+    drain();
+    CHECK(shown(section));
+    CHECK(subject_text("toolchange_wear_h1_text") == "21350 / 25100");
+    CHECK(subject_int("toolchange_wear_h1_status") == 1); // past 80%
+    CHECK(subject_int("toolchange_wear_h0_status") == 0);
+
+    maintenance_model::confirm_toolchange_reset();
+    drain();
+    helix::test::answer_top_modal("btn_primary");
+    drain();
+    CHECK(api.sent == std::vector<std::string>{"RESET_EXTRUDER_MAINTENANCE_COUNT"});
+
     set_moonraker_api(previous);
     state().set_hardware(PrinterDiscovery{});
 }

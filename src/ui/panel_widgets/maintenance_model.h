@@ -47,6 +47,10 @@ SubjectLifetime lifetime();
 /// Asks before discarding a meter's hours, then resets it.
 void confirm_reset(int meter);
 
+/// Asks, then has the printer start a new tool-change service interval for
+/// every head (it keeps one baseline for them all).
+void confirm_toolchange_reset();
+
 /// Resets a meter now and saves.
 void reset_meter(int meter);
 

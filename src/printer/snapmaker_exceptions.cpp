@@ -4,6 +4,7 @@
 #include "snapmaker_exceptions.h"
 
 #include "core/text_io.h"
+#include "translation_loader.h"
 
 #include <spdlog/fmt/fmt.h>
 
@@ -17,7 +18,8 @@ namespace {
 
 /// One fault we have wording for. Matched on (id, index, code); level is not
 /// part of the identity, because the firmware may raise the same fault at a
-/// different level depending on what it decides to do about it.
+/// different level depending on what it decides to do about it. A per-head
+/// fault carries the head in its index, so its row matches any index.
 struct KnownException {
     int id;
     int index;
@@ -25,12 +27,26 @@ struct KnownException {
     const char* message;
 };
 
-constexpr std::array<KnownException, 3> kKnown{{
-    {522, 0, 17, "Power was lost during the print; the printer stopped and saved its progress"},
+constexpr int kAnyIndex = -1;
+
+// Codes from the stock firmware (Snapmaker/u1-klipper, klippy/extras):
+// 523-*-38 filament_entangle_detect.py, 523-0-37 the extruder switch recorder
+// in kinematics/extruder.py, 532-*-3 defect_detection.py.
+constexpr std::array<KnownException, 6> kKnown{{
+    {522, 0, 17,
+     TR_NOOP("Power was lost during the print; the printer stopped and saved its progress")},
     {530, 0, 11,
-     "Remove the PEI sheet from the bed, then start again: probing through the sheet "
-     "gives wrong results"},
-    {531, 0, 16, "That setting cannot be changed while a print is running"},
+     TR_NOOP("Remove the PEI sheet from the bed, then start again: probing through the sheet "
+             "gives wrong results")},
+    {531, 0, 16, TR_NOOP("That setting cannot be changed while a print is running")},
+    {523, kAnyIndex, 38,
+     TR_NOOP("A filament is tangled or caught before its toolhead: free it at the spool and the "
+             "feeder, then resume")},
+    {523, 0, 37,
+     TR_NOOP("The toolheads have reached the printer's tool-change maintenance interval: service "
+             "them, then reset the count in Maintenance")},
+    {532, kAnyIndex, 3,
+     TR_NOOP("The camera reported residue on the print: check it, then resume or cancel")},
 }};
 
 /// Is `s[at..at+3]` four digits?
@@ -100,7 +116,7 @@ std::optional<ExceptionCode> decode_exception_code(const std::string& text) {
 
 std::string_view exception_message(const ExceptionCode& c) {
     for (const auto& k : kKnown) {
-        if (k.id == c.id && k.index == c.index && k.code == c.code) {
+        if (k.id == c.id && (k.index == kAnyIndex || k.index == c.index) && k.code == c.code) {
             return k.message;
         }
     }

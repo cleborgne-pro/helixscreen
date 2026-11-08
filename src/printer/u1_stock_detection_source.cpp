@@ -69,6 +69,12 @@ void U1StockSource::read_bed_check(BedCheckReadCallback done) {
                 main != module->end() && main->is_boolean()) {
                 state.module_enabled = main->get<bool>();
             }
+            if (auto residue = module->find("residue");
+                residue != module->end() && residue->is_object()) {
+                if (auto en = residue->find("enable"); en != residue->end() && en->is_boolean()) {
+                    state.residue_enabled = en->get<bool>();
+                }
+            }
             done(state);
         },
         [done](const MoonrakerError& err) {
@@ -77,17 +83,25 @@ void U1StockSource::read_bed_check(BedCheckReadCallback done) {
         });
 }
 
-void U1StockSource::set_bed_check(bool enabled, BedCheckSetCallback done) {
+void U1StockSource::send_check_switch(const char* param, bool enabled, BedCheckSetCallback done) {
     const std::string script =
-        std::string("DEFECT_DETECTION_CONFIG CLEAN_BED_ENABLE=") + (enabled ? "1" : "0");
+        std::string("DEFECT_DETECTION_CONFIG ") + param + "=" + (enabled ? "1" : "0");
     // The error callback carries Klipper's reason to the caller, which shows
     // it with its own revert; that is why it is not left null.
     get_moonraker_client()->send_jsonrpc(
         "printer.gcode.script", json{{"script", script}}, [done](const json&) { done(true, {}); },
-        [done](const MoonrakerError& err) {
-            spdlog::warn("[U1StockSource] bed check switch refused: {}", err.message);
+        [done, script](const MoonrakerError& err) {
+            spdlog::warn("[U1StockSource] '{}' refused: {}", script, err.message);
             done(false, err.message);
         });
+}
+
+void U1StockSource::set_bed_check(bool enabled, BedCheckSetCallback done) {
+    send_check_switch("CLEAN_BED_ENABLE", enabled, std::move(done));
+}
+
+void U1StockSource::set_residue_check(bool enabled, BedCheckSetCallback done) {
+    send_check_switch("RESIDUE_ENABLE", enabled, std::move(done));
 }
 
 DetectionKind U1StockSource::latched_kind() const {

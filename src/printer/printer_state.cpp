@@ -176,6 +176,7 @@ void PrinterState::deinit_subjects() {
     hardware_validation_state_.deinit_subjects();
     composite_visibility_state_.deinit_subjects();
     chamber_air_state_.deinit_subjects();
+    toolchange_wear_state_.deinit_subjects();
     network_state_.deinit_subjects();
     versions_state_.deinit_subjects();
     excluded_objects_state_.deinit_subjects();
@@ -244,6 +245,7 @@ void PrinterState::init_subjects(bool register_xml) {
     // has_any_preprint_options aggregate (per-op can_show_* subjects retired)
     composite_visibility_state_.init_subjects(register_xml);
     chamber_air_state_.init_subjects(register_xml);
+    toolchange_wear_state_.init_subjects(register_xml);
 
     // Version subjects (for About section) - delegated to versions_state_ component
     versions_state_.init_subjects(register_xml);
@@ -351,6 +353,7 @@ void PrinterState::update_from_status(const json& state, double eventtime,
         capabilities_state_.set_enclosure_top_fitted(*fitted);
     }
     chamber_air_state_.apply(helix::chamber_air::read_status(discovery_, state));
+    toolchange_wear_state_.apply(helix::toolchange_wear::read_status(state));
 
     // Delegate print updates to print state component
     print_domain_.update_from_status(state, whole_objects);
@@ -559,6 +562,7 @@ void PrinterState::set_hardware(helix::PrinterDiscovery hardware) {
         set_printer_type_internal(profile_state_.printer_type());
     }
     chamber_air_state_.set_hardware(discovery_);
+    toolchange_wear_state_.set_hardware(discovery_);
     versions_state_.set_firmware_name_internal(discovery_.firmware_name());
     print_domain_.set_layer_pause_state_object(helix::layer_pause::state_object(discovery_));
 

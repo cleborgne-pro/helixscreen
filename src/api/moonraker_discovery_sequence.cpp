@@ -47,6 +47,7 @@
 #include "sensor_state.h"
 #include "system/platform_tls.h"
 #include "tool_offsets.h"
+#include "toolchange_wear.h"
 #include "toolchanger_addon.h"
 #include "unit_conversions.h"
 #include "webcam_service_health.h"
@@ -1423,6 +1424,10 @@ json MoonrakerDiscoverySequence::build_subscription_objects(const PrinterDiscove
         subscription_objects, helix::enclosure_top::required_status_objects(hw));
     subscription_objects = helix::merge_subscription_objects(
         subscription_objects, helix::chamber_air::required_status_objects(hw));
+    // Each head's tool-change counters ride on its extruder object, beside the
+    // fields the AMS backend asks for. See include/toolchange_wear.h.
+    subscription_objects = helix::merge_subscription_objects(
+        subscription_objects, helix::toolchange_wear::required_status_objects(hw));
 
     // Firmware that keeps a z-offset PER TOOL needs whatever object stores it.
     // Empty for klipper-toolchanger, whose offsets ride on the `tool T*`

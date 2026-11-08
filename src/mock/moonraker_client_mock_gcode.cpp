@@ -450,11 +450,26 @@ MoonrakerClientMock::GcodeResult MoonrakerClientMock::gcode_u1_feeding(const std
     if (apply_multiace_gcode(gcode)) {
         return 0;
     }
+    if (is_command(gcode, "RESET_EXTRUDER_MAINTENANCE_COUNT")) {
+        json status = json::object();
+        for (int head = 0; head < 4; ++head) {
+            u1_serviced_at_[head] = u1_switch_counts_[head].load();
+            status[head == 0 ? std::string("extruder") : "extruder" + std::to_string(head)] = {
+                {"last_maintenance_count", u1_serviced_at_[head].load()}};
+        }
+        dispatch_status_update(status);
+        return 0;
+    }
     if (is_command(gcode, "DEFECT_DETECTION_CONFIG")) {
         if (has_token(gcode, "CLEAN_BED_ENABLE=0")) {
             u1_clean_bed_enable_ = false;
         } else if (has_token(gcode, "CLEAN_BED_ENABLE=1")) {
             u1_clean_bed_enable_ = true;
+        }
+        if (has_token(gcode, "RESIDUE_ENABLE=0")) {
+            u1_residue_enable_ = false;
+        } else if (has_token(gcode, "RESIDUE_ENABLE=1")) {
+            u1_residue_enable_ = true;
         }
         if (has_token(gcode, "MAIN_ENABLE=0")) {
             u1_defect_main_enable_ = false;
@@ -462,8 +477,9 @@ MoonrakerClientMock::GcodeResult MoonrakerClientMock::gcode_u1_feeding(const std
             u1_defect_main_enable_ = true;
         }
         spdlog::info("[MoonrakerClientMock] U1 DEFECT_DETECTION_CONFIG: main_enable={} "
-                     "clean_bed.enable={}",
-                     u1_defect_main_enable_.load(), u1_clean_bed_enable_.load());
+                     "clean_bed.enable={} residue.enable={}",
+                     u1_defect_main_enable_.load(), u1_clean_bed_enable_.load(),
+                     u1_residue_enable_.load());
         return 0;
     }
     // "Detach Toolhead": the head goes back to its dock and nothing is

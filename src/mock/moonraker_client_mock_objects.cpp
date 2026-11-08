@@ -722,6 +722,7 @@ void register_object_handlers(std::unordered_map<std::string, MethodHandler>& re
                         const auto [diameter, volume_type] = self->nozzle_properties(head);
                         status_obj[name]["nozzle_diameter"] = diameter;
                         status_obj[name]["nozzle_volume_type"] = volume_type;
+                        status_obj[name].update(self->toolchange_counters(head));
                     }
                 }
             }
@@ -863,6 +864,7 @@ void register_object_handlers(std::unordered_map<std::string, MethodHandler>& re
                         const auto [diameter, volume_type] = self->nozzle_properties(head);
                         status_obj[name]["nozzle_diameter"] = diameter;
                         status_obj[name]["nozzle_volume_type"] = volume_type;
+                        status_obj[name].update(self->toolchange_counters(head));
                     }
                 }
             }
@@ -1294,3 +1296,11 @@ json mock_probe_status(helix::mock::PrinterType type) {
 }
 
 } // namespace helix::sim
+
+json MoonrakerClientMock::toolchange_counters(int head) const {
+    if (head < 0 || head >= static_cast<int>(u1_switch_counts_.size())) {
+        return json::object();
+    }
+    return {{"switch_count", u1_switch_counts_[static_cast<size_t>(head)].load()},
+            {"last_maintenance_count", u1_serviced_at_[static_cast<size_t>(head)].load()}};
+}

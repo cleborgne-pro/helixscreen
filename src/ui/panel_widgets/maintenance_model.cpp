@@ -20,6 +20,7 @@
 #include "printer_state.h"
 #include "settings_manager.h"
 #include "subject_managed_panel.h"
+#include "toolchange_wear.h"
 #include "widget_subjects.h"
 
 #if HELIX_HAS_PLUGINS
@@ -437,6 +438,44 @@ void confirm_reset(int meter) {
                     meter_at(meter).interval_h);
     ui::modal_confirm(title.c_str(), message.c_str(), ModalSeverity::Warning, lv_tr("Reset"),
                       [meter] { reset_meter(meter); });
+}
+
+namespace {
+
+void reset_toolchange_counts() {
+    IMoonrakerAPI* api = get_moonraker_api();
+    if (!api) {
+        ToastManager::instance().show(ToastSeverity::WARNING, lv_tr("No printer connection"));
+        return;
+    }
+    spdlog::info("[MaintenanceModel] Resetting the tool-change counts: {}",
+                 toolchange_wear::reset_gcode());
+    // The counts on screen follow the printer's own report of the new baseline.
+    api->execute_gcode(
+        toolchange_wear::reset_gcode(),
+        []() {
+            ui::queue_update("MaintenanceModel::toolchange_reset", []() {
+                ToastManager::instance().show(ToastSeverity::SUCCESS,
+                                              lv_tr("Tool-change counts reset"));
+            });
+        },
+        [](const MoonrakerError& err) {
+            spdlog::warn("[MaintenanceModel] Tool-change count reset failed: {}", err.message);
+            ui::queue_update("MaintenanceModel::toolchange_reset_failed", []() {
+                ToastManager::instance().show(
+                    ToastSeverity::ERROR,
+                    lv_tr("The printer did not reset the tool-change counts"));
+            });
+        });
+}
+
+} // namespace
+
+void confirm_toolchange_reset() {
+    ui::modal_confirm(lv_tr("Reset tool-change counts?"),
+                      lv_tr("Start a new service interval for all four toolheads. Do it after "
+                            "servicing them: the counts so far are set aside."),
+                      ModalSeverity::Warning, lv_tr("Reset"), [] { reset_toolchange_counts(); });
 }
 
 void set_interval_choice(int meter, int choice_index) {

@@ -159,6 +159,7 @@ translations:
   A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.: 'Moonrakerが配信するカメラ。ホーム画面にカメラウィジェットを追加すると、印刷中も映像を確認できます。'
   A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.: 'チャンバー内の空気をフィルターに通すファン。チャンバー温度画面で操作できます。'
   A few minutes, nearly all of it heating. You judge nothing by eye.: '数分かかりますが、そのほとんどは加熱です。目視での判断は不要です。'
+  'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume': 'フィラメントがツールヘッドの手前で絡まるか引っかかっています。スプールとフィーダーで外してから再開してください'
   A folder name in moonraker.conf is unsafe, so cleanup is off.: "moonraker.confのフォルダー名が安全でないため、クリーンアップはオフになっています。"
   A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.: 'プリンターにヒートソークのマクロが設定されています。HelixScreenは検出しますが実行はしません。'
   A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.: 'チャンバー内の空気を温めるヒーター。温度はチャンバー温度画面で設定します。'
@@ -594,6 +595,7 @@ translations:
   Cam: カメラ
   Camera: カメラ
   Camera checks the bed is empty before each print: '印刷を始める前にカメラでベッドが空か確認します'
+  Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms: '印刷中にカメラが残留物を検出すると一時停止します。プリンターでは既定でオフ。誤検出の可能性があります'
   Can't connect — try forgetting and re-pairing the printer: 接続できません — プリンターの登録を解除して再ペアリングしてください
   Can't move filament while the print is paused: 印刷の一時停止中はフィラメントを動かせません
   Can't read filament RFID tag: フィラメントの RFID タグを読み取れません
@@ -3230,10 +3232,12 @@ translations:
   Reset to Default: デフォルトにリセット
   Reset to defaults: デフォルトに戻す
   Reset to original values: 元の値にリセット
+  Reset tool-change counts?: 'ツール変更回数をリセットしますか？'
   Reset {}?: '{}をリセットしますか？'
   Resetting: リセット中
   Resetting system: 'システムをリセットしています'
   Resetting...: リセット中...
+  Residue Check (experimental): '残留物チェック（ベータ）'
   Resolve it on the filament system screen, then try again: 'フィラメントシステム画面で解決してから再試行してください'
   Response (Kp): 応答 (Kp)
   Restart: 再起動
@@ -3702,6 +3706,7 @@ translations:
   Start K: 開始K
   Start Print: 印刷を開始
   Start Probing: プローブ開始
+  'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.': '4つのツールヘッドすべてで新しいメンテナンス間隔を開始します。メンテナンス後に実行してください。これまでの回数は除外されます。'
   Start a new {} h interval? The hours counted so far are discarded.: '新しい {} 時間の間隔を開始しますか？これまでの時間は破棄されます。'
   Start anyway?: 'それでも開始しますか？'
   Start at: 開始位置
@@ -3923,6 +3928,7 @@ translations:
   The bed was reported dirty, so this print cannot resume.: 'ベッドが汚れていると報告されたため、この印刷を再開できません。'
   The buffer may be disconnected, stuck, or faulty. Check it before retrying: バッファーが未接続、固着、または故障している可能性があります。再試行前に確認してください
   The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer: バッファーが 16 秒間動きを検出しませんでした。CFS とエクストルーダーの間の詰まり、またはバッファーの固着を確認してください
+  'The camera reported residue on the print: check it, then resume or cancel': 'カメラが印刷物に残留物を検出しました。確認してから再開またはキャンセルしてください'
   ? The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   : 'カメラがベッド上に何かを検出したため、プリンターは印刷前に停止しました。ベッドに何もなければ誤検出です。'
   'The carriage was not put back: check which tool is mounted': 'キャリッジは元に戻されていません：装着されているツールを確認してください'
@@ -4006,6 +4012,7 @@ translations:
   The print is waiting for the chamber, but the heater is not heating.: '印刷はチャンバーを待っていますが、ヒーターが加熱していません。'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: '印刷可能なサイズ（mm、X × Y × Z）。プリンターのKlipper設定の軸リミットから取得します。'
   The printer applied this value and keeps it for this tool.: 'プリンターはこの値を適用し、このツールに保存しました。'
+  The printer asks for a service after 25100 changes on one head: '1つのヘッドで25100回変更するとプリンターがメンテナンスを求めます'
   The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.: 'プリンターは印刷前にプライミングラインを描けます。HelixScreenは印刷前オプションで選べます。'
   The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.: 'プリンターは各ツールのオフセットを自動で測定できます。ツールオフセット校正画面で実行します。'
   The printer can measure pressure advance on its own. Run it on the PA calibration screen.: 'プリンターはプレッシャーアドバンスを自分で測定できます。PAキャリブレーション画面で実行できます。'
@@ -4013,8 +4020,11 @@ translations:
   The printer could not work out where to resume.: プリンターは再開位置を特定できませんでした。
   The printer did not change its bed check: 'プリンターはベッドチェックを変更しませんでした'
   'The printer did not change its bed check: {}': 'プリンターはベッドチェックを変更しませんでした：{}'
+  The printer did not change its residue check: 'プリンターは残留物チェックを変更しませんでした'
+  'The printer did not change its residue check: {}': 'プリンターは残留物チェックを変更しませんでした: {}'
   'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.': 'プリンターが印刷開始を確認しませんでした ({})。まだ開始する可能性があります。もう一度開始する前にプリンターを確認してください。'
   The printer did not reset the filter: 'プリンターがフィルターをリセットしませんでした'
+  The printer did not reset the tool-change counts: 'プリンターはツール変更回数をリセットしませんでした'
   The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.: 'プリンターは隅で押出しを行い、測定値が一致するまで繰り返します。目視での判断は不要です。'
   The printer finishes this measurement on its own.: 'この測定はプリンターが最後まで行います。'
   The printer halted this print and cannot resume it. Restart from the beginning?: プリンターはこの印刷を停止し、再開できません。最初からやり直しますか？
@@ -4068,6 +4078,8 @@ translations:
   The toolhead is not homed, so this would home into the print: 'ツールヘッドがホーミングされていないため、ホーミングするとノズルが造形物に当たります'
   The toolhead sensor indicates filament is already loaded. Proceed with load anyway?: ツールヘッドセンサーがフィラメント装填済みを検出しました。それでも装填を続行しますか？
   The toolhead sensor indicates no filament is present. Proceed with unload anyway?: ツールヘッドセンサーがフィラメント未検出を報告しました。それでもアンロードを続行しますか？
+  ? "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
+  : "ツールヘッドがプリンターのツール変更メンテナンス間隔に達しました。メンテナンス後、メンテナンス画面で回数をリセットしてください"
   The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.: 'トップカバーが外れました。印刷品質のため、続行する前にトップカバーを接続してください。'
   The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck: ユニットは既に別の処理を実行中です。完了を待つか、固まったままの場合は CFS をリセットしてください
   The unit reported a fault with no further detail. Restart the printer if it repeats: ユニットが詳細不明の障害を報告しました。繰り返す場合はプリンターを再起動してください
@@ -4251,6 +4263,7 @@ translations:
   Tool change to T{}: 'ツールを T{} に変更しています'
   'Tool change to {} failed: {}': '{}へのツール変更に失敗しました: {}'
   'Tool changer error: {}': 'ツールチェンジャーのエラー: {}'
+  Tool changes since service: 'メンテナンス後のツール変更回数'
   'Tool cycle failed: {}': ツールの順次交換に失敗しました：{}
   Tool cycle finished: ツールの順次交換が完了しました
   Tool is seated: ツールは装着済み
@@ -4258,6 +4271,7 @@ translations:
   Tool offsets (mm): ツールオフセット (mm)
   Tool offsets saved: ツールオフセットを保存しました
   Tool swap: ツール交換
+  Tool-change counts reset: 'ツール変更回数をリセットしました'
   Toolchange purge: 'ツール交換パージ'
   Toolhead: 'ツールヘッド'
   Toolhead Calibration Running: 'ツールヘッドのキャリブレーション実行中'

@@ -9,6 +9,7 @@
 #include "non_filament_pause.h"
 #include "notice.h"
 #include "settings_manager.h"
+#include "translation_loader.h"
 
 #include <spdlog/fmt/fmt.h>
 #include <spdlog/spdlog.h>
@@ -36,12 +37,21 @@ void DetectionManager::ensure_availability_subject() {
     UI_MANAGED_SUBJECT_INT(bed_check_enabled_subject_, 1, "detection_bed_check_enabled", subjects_);
     UI_MANAGED_SUBJECT_INT(bed_check_switchable_subject_, 1, "detection_bed_check_switchable",
                            subjects_);
+    UI_MANAGED_SUBJECT_INT(residue_check_available_subject_, residue_check_source() ? 1 : 0,
+                           "detection_residue_check_available", subjects_);
+    // The firmware's default (off) until the printer answers.
+    UI_MANAGED_SUBJECT_INT(residue_check_enabled_subject_, 0, "detection_residue_check_enabled",
+                           subjects_);
     // The Safety & Alerts row's toggle. Registered with its subject so the
     // row and what it drives exist together.
     register_xml_callbacks({
         {"on_bed_check_changed",
          [](lv_event_t* e) {
              DetectionManager::instance().set_bed_check_enabled(helix::ui::event_checked(e));
+         }},
+        {"on_residue_check_changed",
+         [](lv_event_t* e) {
+             DetectionManager::instance().set_residue_check_enabled(helix::ui::event_checked(e));
          }},
     });
     availability_subject_ready_ = true;
@@ -60,6 +70,7 @@ void DetectionManager::update_availability() {
         lv_subject_set_int(&detection_available_subject_, any_available() ? 1 : 0);
         lv_subject_set_int(&detection_pause_applicable_subject_, any_pause_applicable() ? 1 : 0);
         lv_subject_set_int(&bed_check_available_subject_, bed_check_source() ? 1 : 0);
+        lv_subject_set_int(&residue_check_available_subject_, residue_check_source() ? 1 : 0);
     }
     maybe_seed_settings();
 }
@@ -67,6 +78,15 @@ void DetectionManager::update_availability() {
 DetectionSource* DetectionManager::bed_check_source() const {
     for (const auto& src : sources_) {
         if (src && src->available() && src->has_bed_check()) {
+            return src.get();
+        }
+    }
+    return nullptr;
+}
+
+DetectionSource* DetectionManager::residue_check_source() const {
+    for (const auto& src : sources_) {
+        if (src && src->available() && src->has_residue_check()) {
             return src.get();
         }
     }
@@ -88,6 +108,10 @@ void DetectionManager::refresh_bed_check() {
             lv_subject_set_int(&bed_check_enabled_subject_,
                                state->enabled && state->module_enabled ? 1 : 0);
             lv_subject_set_int(&bed_check_switchable_subject_, state->module_enabled ? 1 : 0);
+            if (state->residue_enabled) {
+                lv_subject_set_int(&residue_check_enabled_subject_,
+                                   *state->residue_enabled && state->module_enabled ? 1 : 0);
+            }
         }));
 }
 
@@ -97,31 +121,58 @@ bool DetectionManager::set_bed_check_enabled(bool enabled, std::function<void()>
         spdlog::warn("DetectionManager: no bed check to switch");
         return false;
     }
-    const int before = lv_subject_get_int(&bed_check_enabled_subject_);
-    lv_subject_set_int(&bed_check_enabled_subject_, enabled ? 1 : 0);
     spdlog::info("DetectionManager: bed check -> {}", enabled ? "on" : "off");
-    src->set_bed_check(
-        enabled,
-        lifetime_.bg_cb("DetectionManager::on_bed_check_set",
-                        [this, before, on_accepted](bool accepted, const std::string& refusal) {
-                            if (accepted) {
-                                if (on_accepted) {
-                                    on_accepted();
-                                }
-                                return;
-                            }
-                            lv_subject_set_int(&bed_check_enabled_subject_, before);
-                            show_bed_check_refusal(refusal);
-                        }));
+    switch_check(
+        &bed_check_enabled_subject_, enabled,
+        [src, enabled](DetectionSource::BedCheckSetCallback done) {
+            src->set_bed_check(enabled, std::move(done));
+        },
+        {TR_NOOP("The printer did not change its bed check"),
+         TR_NOOP("The printer did not change its bed check: {}")},
+        std::move(on_accepted));
     return true;
 }
 
-void DetectionManager::show_bed_check_refusal(const std::string& refusal) {
-    const std::string text =
-        refusal.empty()
-            ? std::string(lv_tr("The printer did not change its bed check"))
-            : fmt::format(lv_tr("The printer did not change its bed check: {}"), refusal);
-    publish_notice({NoticeSeverity::ERROR, text, 6000});
+bool DetectionManager::set_residue_check_enabled(bool enabled) {
+    DetectionSource* src = residue_check_source();
+    if (!src) {
+        spdlog::warn("DetectionManager: no residue check to switch");
+        return false;
+    }
+    spdlog::info("DetectionManager: residue check -> {}", enabled ? "on" : "off");
+    switch_check(&residue_check_enabled_subject_, enabled,
+                 [src, enabled](DetectionSource::BedCheckSetCallback done) {
+                     src->set_residue_check(enabled, std::move(done));
+                 },
+                 {TR_NOOP("The printer did not change its residue check"),
+                  TR_NOOP("The printer did not change its residue check: {}")},
+                 {});
+    return true;
+}
+
+void DetectionManager::switch_check(lv_subject_t* subject, bool enabled, const CheckSender& send,
+                                    CheckRefusal refusal_text, std::function<void()> on_accepted) {
+    const int before = lv_subject_get_int(subject);
+    lv_subject_set_int(subject, enabled ? 1 : 0);
+    send(lifetime_.bg_cb(
+        "DetectionManager::on_check_set",
+        [subject, before, refusal_text, on_accepted](bool accepted, const std::string& refusal) {
+            if (accepted) {
+                if (on_accepted) {
+                    on_accepted();
+                }
+                return;
+            }
+            lv_subject_set_int(subject, before);
+            show_check_refusal(refusal_text, refusal);
+        }));
+}
+
+void DetectionManager::show_check_refusal(CheckRefusal text, const std::string& refusal) {
+    const std::string message = refusal.empty()
+                                    ? std::string(lv_tr(text.plain))
+                                    : fmt::format(fmt::runtime(lv_tr(text.with_reason)), refusal);
+    publish_notice({NoticeSeverity::ERROR, message, 6000});
 }
 
 bool DetectionManager::pause_explained_by_detection() const {
@@ -357,6 +408,8 @@ void DetectionManager::reset_for_test() {
         lv_subject_set_int(&bed_check_available_subject_, 0);
         lv_subject_set_int(&bed_check_enabled_subject_, 1);
         lv_subject_set_int(&bed_check_switchable_subject_, 1);
+        lv_subject_set_int(&residue_check_available_subject_, 0);
+        lv_subject_set_int(&residue_check_enabled_subject_, 0);
     }
 }
 

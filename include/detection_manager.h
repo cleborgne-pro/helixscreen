@@ -104,7 +104,24 @@ class DetectionManager {
     /// @return false when no capable source has a bed check, so nothing was sent
     bool set_bed_check_enabled(bool enabled, std::function<void()> on_accepted = {});
 
-    /// Ask the capable source for the bed check's state and publish it.
+    /// "A capable source has a switchable mid-print residue check" (0/1).
+    lv_subject_t* subject_residue_check_available() {
+        return &residue_check_available_subject_;
+    }
+
+    /// The residue check's state as the printer last reported or accepted it
+    /// (integer 0/1). Greyed by subject_bed_check_switchable() like the bed check.
+    lv_subject_t* subject_residue_check_enabled() {
+        return &residue_check_enabled_subject_;
+    }
+
+    /// Switch the printer's residue check, the same way as
+    /// set_bed_check_enabled(). Main thread.
+    /// @return false when no capable source has a residue check
+    bool set_residue_check_enabled(bool enabled);
+
+    /// Ask the capable source for the bed and residue checks' state and
+    /// publish it.
     void refresh_bed_check();
 
     /// Whether the print is paused because a capable source detected
@@ -155,8 +172,21 @@ class DetectionManager {
 
     /// The capable source with a bed check, or nullptr.
     DetectionSource* bed_check_source() const;
+    /// The capable source with a residue check, or nullptr.
+    DetectionSource* residue_check_source() const;
 
-    static void show_bed_check_refusal(const std::string& refusal);
+    /// What the toast says when the printer refuses to switch a check: the
+    /// English source of the sentence without, then with, the printer's reason.
+    struct CheckRefusal {
+        const char* plain;
+        const char* with_reason;
+    };
+    using CheckSender = std::function<void(DetectionSource::BedCheckSetCallback)>;
+    /// Optimistic switch shared by the checks: @p subject follows at once and
+    /// goes back, with the refusal toast, when the printer refuses.
+    void switch_check(lv_subject_t* subject, bool enabled, const CheckSender& send,
+                      CheckRefusal refusal_text, std::function<void()> on_accepted);
+    static void show_check_refusal(CheckRefusal text, const std::string& refusal);
 
     SubjectManager subjects_;
     lv_subject_t detection_available_subject_{};
@@ -164,6 +194,8 @@ class DetectionManager {
     lv_subject_t bed_check_available_subject_{};
     lv_subject_t bed_check_enabled_subject_{};
     lv_subject_t bed_check_switchable_subject_{};
+    lv_subject_t residue_check_available_subject_{};
+    lv_subject_t residue_check_enabled_subject_{};
     bool availability_subject_ready_ = false;
 
     helix::IMoonrakerClient* client_ = nullptr;

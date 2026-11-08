@@ -238,3 +238,47 @@ TEST_CASE_METHOD(DetectionRowsFixture, "Bed check row follows detection_bed_chec
     lv_subject_set_int(bed_enabled, 1);
     lv_subject_set_int(m.subject_bed_check_switchable(), 1);
 }
+
+// The residue row shows on a printer whose module has the check, and greys
+// with the bed check while the module is off as a whole.
+TEST_CASE_METHOD(DetectionRowsFixture, "Residue check row follows the printer's residue check",
+                 "[detection][settings][safety][binding][residue_check]") {
+    auto& m = helix::detection::DetectionManager::instance();
+    lv_subject_t* available = m.subject_residue_check_available();
+    lv_subject_t* enabled = m.subject_residue_check_enabled();
+    auto residue_container = [this] {
+        lv_obj_t* c = lv_obj_find_by_name(root_, "container_residue_check");
+        REQUIRE(c != nullptr);
+        return c;
+    };
+    auto residue_toggle = [this] {
+        lv_obj_t* row = lv_obj_find_by_name(root_, "row_residue_check");
+        REQUIRE(row != nullptr);
+        lv_obj_t* toggle = lv_obj_find_by_name(row, "toggle");
+        REQUIRE(toggle != nullptr);
+        return toggle;
+    };
+
+    SECTION("no residue check: the row hides") {
+        lv_subject_set_int(available, 0);
+        build();
+        CHECK(lv_obj_has_flag(residue_container(), LV_OBJ_FLAG_HIDDEN));
+    }
+
+    SECTION("a printer with a residue check shows its state, greyed with the module off") {
+        lv_subject_set_int(available, 1);
+        lv_subject_set_int(enabled, 1);
+        build();
+        CHECK_FALSE(lv_obj_has_flag(residue_container(), LV_OBJ_FLAG_HIDDEN));
+        CHECK(lv_obj_has_state(residue_toggle(), LV_STATE_CHECKED));
+        CHECK_FALSE(lv_obj_has_state(residue_toggle(), LV_STATE_DISABLED));
+
+        lv_subject_set_int(m.subject_bed_check_switchable(), 0);
+        process_lvgl(10);
+        CHECK(lv_obj_has_state(residue_toggle(), LV_STATE_DISABLED));
+    }
+
+    lv_subject_set_int(available, 0);
+    lv_subject_set_int(enabled, 0);
+    lv_subject_set_int(m.subject_bed_check_switchable(), 1);
+}

@@ -191,6 +191,7 @@
   <translation tag="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print." ru="Камера, которую транслирует Moonraker. Добавьте виджет камеры на главный экран, чтобы смотреть ее, в том числе во время печати."/>
   <translation tag="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen." ru="Вентилятор, который прогоняет воздух камеры через фильтр. Управляйте им на экране температуры камеры."/>
   <translation tag="A few minutes, nearly all of it heating. You judge nothing by eye." ru="Несколько минут, почти всё время нагрев. Ничего не нужно оценивать на глаз."/>
+  <translation tag="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume" ru="Филамент запутался или застрял до печатающей головки: освободите его у катушки и податчика, затем продолжите"/>
   <translation tag="A folder name in moonraker.conf is unsafe, so cleanup is off." ru="Небезопасное имя папки в moonraker.conf, поэтому очистка выключена."/>
   <translation tag="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it." ru="На принтере настроен макрос прогрева (heat soak). HelixScreen обнаруживает его, но не запускает."/>
   <translation tag="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen." ru="Нагреватель, который греет воздух внутри камеры. Температура задается на экране температуры камеры."/>
@@ -626,6 +627,7 @@
   <translation tag="Cam" ru="Кам"/>
   <translation tag="Camera" ru="Камера"/>
   <translation tag="Camera checks the bed is empty before each print" ru="Камера проверяет, что стол пуст, перед каждой печатью"/>
+  <translation tag="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms" ru="Камера ищет остатки материала во время печати и ставит её на паузу. По умолчанию выключено в принтере; возможны ложные срабатывания"/>
   <translation tag="Can&apos;t connect — try forgetting and re-pairing the printer" ru="Не удаётся подключиться — забудьте принтер и выполните сопряжение заново"/>
   <translation tag="Can&apos;t move filament while the print is paused" ru="Невозможно перемещать филамент, пока печать на паузе"/>
   <translation tag="Can&apos;t reach this printer. Save anyway?" ru="Принтер недоступен. Всё равно сохранить?"/>
@@ -3175,10 +3177,12 @@
   <translation tag="Reset to defaults" ru="Сбросить по умолчанию"/>
   <translation tag="Reset to original values" ru="Сбросить к исходным значениям"/>
   <translation tag="Reset to tag" ru="Восстановить по метке"/>
+  <translation tag="Reset tool-change counts?" ru="Сбросить счётчики смен инструмента?"/>
   <translation tag="Reset {}?" ru="Сбросить {}?"/>
   <translation tag="Resetting" ru="Сброс"/>
   <translation tag="Resetting system" ru="Сброс системы"/>
   <translation tag="Resetting..." ru="Сброс..."/>
+  <translation tag="Residue Check (experimental)" ru="Проверка остатков (экспериментально)"/>
   <translation tag="Resolve it on the filament system screen, then try again" ru="Устраните проблему на экране системы филамента и повторите попытку"/>
   <translation tag="Response (Kp)" ru="Отклик (Kp)"/>
   <translation tag="Restart" ru="Перезапуск"/>
@@ -3638,6 +3642,7 @@
   <translation tag="Start K" ru="Начальный K"/>
   <translation tag="Start Print" ru="Начать печать"/>
   <translation tag="Start Probing" ru="Начать зондирование"/>
+  <translation tag="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside." ru="Начать новый интервал обслуживания для всех четырёх печатающих головок. Делайте это после обслуживания: текущие счётчики откладываются."/>
   <translation tag="Start a new {} h interval? The hours counted so far are discarded." ru="Начать новый интервал {} ч? Отсчитанные часы будут сброшены."/>
   <translation tag="Start anyway?" ru="Всё равно начать?"/>
   <translation tag="Start at" ru="Начать с"/>
@@ -3843,6 +3848,7 @@
   <translation tag="The bed was reported dirty, so this print cannot resume." ru="Стол помечен как загрязнённый, поэтому печать не может быть продолжена."/>
   <translation tag="The buffer may be disconnected, stuck, or faulty. Check it before retrying" ru="Буфер может быть отключён, заклинен или неисправен. Проверьте его перед повтором"/>
   <translation tag="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer" ru="Буфер не фиксировал движение 16 секунд. Проверьте засор между CFS и экструдером или заклинивший буфер"/>
+  <translation tag="The camera reported residue on the print: check it, then resume or cancel" ru="Камера обнаружила остатки материала на печати: проверьте её, затем продолжите или отмените"/>
   <translation tag="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm." ru="Камере показалось, что на столе что-то есть, поэтому принтер остановился до начала печати. Если стол чист, это ложная тревога."/>
   <translation tag="The carriage was not put back: check which tool is mounted" ru="Каретка не возвращена: проверьте, какой инструмент установлен"/>
   <translation tag="The chamber heater can run a filament drying cycle. Start one from the drying dialog." ru="Нагреватель камеры может запускать цикл сушки филамента. Запустите его из диалога сушки."/>
@@ -3916,6 +3922,7 @@
   <translation tag="The print is waiting for the chamber, but the heater is not heating." ru="Печать ждёт камеру, но нагреватель не греет."/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." ru="Размер области печати в миллиметрах (X × Y × Z) по пределам осей в конфигурации Klipper принтера."/>
   <translation tag="The printer applied this value and keeps it for this tool." ru="Принтер применил это значение и сохранил его для этого инструмента."/>
+  <translation tag="The printer asks for a service after 25100 changes on one head" ru="Принтер запрашивает обслуживание после 25100 смен одной головки"/>
   <translation tag="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options." ru="Принтер может нарисовать линию прочистки перед печатью. HelixScreen предлагает ее в параметрах подготовки к печати."/>
   <translation tag="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen." ru="Принтер может автоматически измерить смещение каждого инструмента. Запустите это на экране калибровки смещений инструментов."/>
   <translation tag="The printer can measure pressure advance on its own. Run it on the PA calibration screen." ru="Принтер может сам измерить pressure advance. Запускается на экране «Калибровка PA»."/>
@@ -3923,8 +3930,11 @@
   <translation tag="The printer could not work out where to resume." ru="Принтер не смог определить, откуда продолжить."/>
   <translation tag="The printer did not change its bed check" ru="Принтер не изменил проверку стола"/>
   <translation tag="The printer did not change its bed check: {}" ru="Принтер не изменил проверку стола: {}"/>
+  <translation tag="The printer did not change its residue check" ru="Принтер не изменил проверку остатков"/>
+  <translation tag="The printer did not change its residue check: {}" ru="Принтер не изменил проверку остатков: {}"/>
   <translation tag="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again." ru="Принтер не подтвердил начало печати ({}). Печать ещё может начаться: проверьте принтер, прежде чем запускать её снова."/>
   <translation tag="The printer did not reset the filter" ru="Принтер не сбросил счётчик фильтра"/>
+  <translation tag="The printer did not reset the tool-change counts" ru="Принтер не сбросил счётчики смен инструмента"/>
   <translation tag="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye." ru="Принтер выдавливает пластик в углу и повторяет, пока показания не сойдутся. Ничего не нужно оценивать на глаз."/>
   <translation tag="The printer finishes this measurement on its own." ru="Принтер завершит это измерение сам."/>
   <translation tag="The printer halted this print and cannot resume it. Restart from the beginning?" ru="Принтер остановил эту печать и не может её возобновить. Начать с начала?"/>
@@ -3973,6 +3983,7 @@
   <translation tag="The toolhead is not homed, so this would home into the print" ru="Печатающая головка не запаркована, парковка ударит её о модель"/>
   <translation tag="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?" ru="Датчик печатающей головки показывает, что филамент уже загружен. Всё равно продолжить загрузку?"/>
   <translation tag="The toolhead sensor indicates no filament is present. Proceed with unload anyway?" ru="Датчик печатающей головки показывает, что филамент отсутствует. Всё равно продолжить выгрузку?"/>
+  <translation tag="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance" ru="Печатающие головки достигли интервала обслуживания принтера: обслужите их, затем сбросьте счётчик в разделе Обслуживание"/>
   <translation tag="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing." ru="Верхняя крышка отключена. Для качества печати подключите её, прежде чем продолжить."/>
   <translation tag="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck" ru="Блок уже выполняет другую операцию. Дождитесь её завершения или сбросьте CFS, если он завис"/>
   <translation tag="The unit reported a fault with no further detail. Restart the printer if it repeats" ru="Блок сообщил о неисправности без подробностей. Если повторится, перезапустите принтер"/>
@@ -4131,6 +4142,7 @@
   <translation tag="Tool change to T{}" ru="Смена инструмента на T{}"/>
   <translation tag="Tool change to {} failed: {}" ru="Ошибка смены инструмента на {}: {}"/>
   <translation tag="Tool changer error: {}" ru="Ошибка сменщика инструментов: {}"/>
+  <translation tag="Tool changes since service" ru="Смены инструмента после обслуживания"/>
   <translation tag="Tool cycle failed: {}" ru="Ошибка перебора инструментов: {}"/>
   <translation tag="Tool cycle finished" ru="Перебор инструментов завершён"/>
   <translation tag="Tool is seated" ru="Инструмент установлен"/>
@@ -4138,6 +4150,7 @@
   <translation tag="Tool offsets (mm)" ru="Смещения инструментов (мм)"/>
   <translation tag="Tool offsets saved" ru="Смещения инструментов сохранены"/>
   <translation tag="Tool swap" ru="Смена инструмента"/>
+  <translation tag="Tool-change counts reset" ru="Счётчики смен инструмента сброшены"/>
   <translation tag="Toolchange purge" ru="Продувка при смене инструмента"/>
   <translation tag="Toolhead" ru="Печатающая головка"/>
   <translation tag="Toolhead Calibration Running" ru="Идёт калибровка головок"/>

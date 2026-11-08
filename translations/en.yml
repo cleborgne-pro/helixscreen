@@ -157,6 +157,7 @@ translations:
   A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.: A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.
   A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.: A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.
   A few minutes, nearly all of it heating. You judge nothing by eye.: 'A few minutes, nearly all of it heating. You judge nothing by eye.'
+  'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume': 'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume'
   A folder name in moonraker.conf is unsafe, so cleanup is off.: A folder name in moonraker.conf is unsafe, so cleanup is off.
   A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.: A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.
   A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.: A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.
@@ -616,6 +617,7 @@ translations:
   Cam: Cam
   Camera: Camera
   Camera checks the bed is empty before each print: Camera checks the bed is empty before each print
+  Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms: Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms
   Can't connect — try forgetting and re-pairing the printer: Can't connect — try forgetting
     and re-pairing the printer
   Can't move filament while the print is paused: Can't move filament while the print is paused
@@ -3318,10 +3320,12 @@ translations:
   Reset to defaults: Reset to defaults
   Reset to original values: Reset to original values
   Reset to tag: Reset to tag
+  Reset tool-change counts?: Reset tool-change counts?
   Reset {}?: Reset {}?
   Resetting: Resetting
   Resetting system: Resetting system
   Resetting...: Resetting...
+  Residue Check (experimental): Residue Check (experimental)
   Resolve it on the filament system screen, then try again: Resolve it on the filament system screen, then try again
   Response (Kp): Response (Kp)
   Restart: Restart
@@ -3815,6 +3819,7 @@ translations:
   Start K: Start K
   Start Print: Start Print
   Start Probing: Start Probing
+  'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.': 'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.'
   Start a new {} h interval? The hours counted so far are discarded.: Start a new {} h interval? The hours counted so far are discarded.
   Start anyway?: Start anyway?
   Start at: Start at
@@ -4042,6 +4047,7 @@ translations:
   The bed was reported dirty, so this print cannot resume.: The bed was reported dirty, so this print cannot resume.
   The buffer may be disconnected, stuck, or faulty. Check it before retrying: The buffer may be disconnected, stuck, or faulty. Check it before retrying
   The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer: The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer
+  'The camera reported residue on the print: check it, then resume or cancel': 'The camera reported residue on the print: check it, then resume or cancel'
   ? The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   : The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   'The carriage was not put back: check which tool is mounted': 'The carriage was not put back: check which tool is mounted'
@@ -4125,6 +4131,7 @@ translations:
   The print is waiting for the chamber, but the heater is not heating.: The print is waiting for the chamber, but the heater is not heating.
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.
   The printer applied this value and keeps it for this tool.: 'The printer applied this value and keeps it for this tool.'
+  The printer asks for a service after 25100 changes on one head: The printer asks for a service after 25100 changes on one head
   The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.: The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.
   The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.: The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.
   The printer can measure pressure advance on its own. Run it on the PA calibration screen.: The printer can measure pressure advance on its own. Run it on the PA calibration screen.
@@ -4132,8 +4139,11 @@ translations:
   The printer could not work out where to resume.: The printer could not work out where to resume.
   The printer did not change its bed check: The printer did not change its bed check
   'The printer did not change its bed check: {}': 'The printer did not change its bed check: {}'
+  The printer did not change its residue check: The printer did not change its residue check
+  'The printer did not change its residue check: {}': 'The printer did not change its residue check: {}'
   'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.': 'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.'
   The printer did not reset the filter: The printer did not reset the filter
+  The printer did not reset the tool-change counts: The printer did not reset the tool-change counts
   The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.: The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.
   The printer finishes this measurement on its own.: 'The printer finishes this measurement on its own.'
   The printer halted this print and cannot resume it. Restart from the beginning?: The
@@ -4190,6 +4200,8 @@ translations:
     toolhead sensor indicates filament is already loaded. Proceed with load anyway?
   The toolhead sensor indicates no filament is present. Proceed with unload anyway?: The
     toolhead sensor indicates no filament is present. Proceed with unload anyway?
+  ? "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
+  : "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
   The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.: The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.
   The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck: The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck
   The unit reported a fault with no further detail. Restart the printer if it repeats: The unit reported a fault with no further detail. Restart the printer if it repeats
@@ -4389,6 +4401,7 @@ translations:
   Tool change to T{}: Tool change to T{}
   'Tool change to {} failed: {}': 'Tool change to {} failed: {}'
   'Tool changer error: {}': 'Tool changer error: {}'
+  Tool changes since service: Tool changes since service
   'Tool cycle failed: {}': 'Tool cycle failed: {}'
   Tool cycle finished: Tool cycle finished
   Tool is seated: Tool is seated
@@ -4396,6 +4409,7 @@ translations:
   Tool offsets (mm): Tool offsets (mm)
   Tool offsets saved: Tool offsets saved
   Tool swap: Tool swap
+  Tool-change counts reset: Tool-change counts reset
   Toolchange purge: Toolchange purge
   Toolhead: Toolhead
   Toolhead Calibration Running: Toolhead Calibration Running

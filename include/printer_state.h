@@ -33,6 +33,7 @@
 #include "spdlog/spdlog.h"
 #include "state/subject_macros.h"
 #include "subject_managed_panel.h"
+#include "toolchange_wear_state.h"
 
 #include <atomic>
 #include <functional>
@@ -353,6 +354,10 @@ class PrinterState {
     }
     const helix::ChamberAirState& chamber_air() const {
         return chamber_air_state_;
+    }
+    /// Tool changes per head since the last service (include/toolchange_wear_state.h).
+    helix::ToolchangeWearState& toolchange_wear() {
+        return toolchange_wear_state_;
     }
     const helix::PrinterCompositeVisibilityState& composite_visibility_state() const {
         return composite_visibility_state_;
@@ -921,6 +926,7 @@ class PrinterState {
     /// Composite visibility state component (has_any_preprint_options aggregate)
     helix::PrinterCompositeVisibilityState composite_visibility_state_;
     helix::ChamberAirState chamber_air_state_;
+    helix::ToolchangeWearState toolchange_wear_state_;
 
     /// Network state component (connection, klippy, nav buttons)
     helix::PrinterNetworkState network_state_;

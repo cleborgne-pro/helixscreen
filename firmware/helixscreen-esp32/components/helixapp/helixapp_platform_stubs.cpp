@@ -116,11 +116,11 @@ SubjectLifetime get_app_globals_subjects_lifetime() {
 // Wizard-active gate (app_globals.cpp on Linux). ESP32 has no first-run wizard
 // flow driving it, so it initializes to 0 and only PLR/offer code observes it.
 static lv_subject_t g_wizard_active_subject;
-// Safety & Alerts binds DetectionManager's subjects and bed-check toggle. The firmware cut
-// has no detection (detection_manager.cpp is excluded), so every gate reads 0 and the
-// detection and bed-check rows stay hidden; the toggle's callback is inert.
-static lv_subject_t g_detection_subjects[5];
-static void detection_bed_check_noop_cb(lv_event_t* /*e*/) {}
+// Safety & Alerts binds DetectionManager's subjects and its bed and residue check toggles.
+// The firmware cut has no detection (detection_manager.cpp is excluded), so every gate
+// reads 0 and the detection and check rows stay hidden; the toggles' callback is inert.
+static lv_subject_t g_detection_subjects[7];
+static void detection_check_noop_cb(lv_event_t* /*e*/) {}
 static lv_subject_t g_platform_tier_subject;
 lv_subject_t& get_wizard_active_subject() {
     return g_wizard_active_subject;
@@ -166,7 +166,10 @@ void app_globals_init_subjects() {
     lv_xml_register_subject(nullptr, "detection_bed_check_available", &g_detection_subjects[2]);
     lv_xml_register_subject(nullptr, "detection_bed_check_enabled", &g_detection_subjects[3]);
     lv_xml_register_subject(nullptr, "detection_bed_check_switchable", &g_detection_subjects[4]);
-    lv_xml_register_event_cb(nullptr, "on_bed_check_changed", detection_bed_check_noop_cb);
+    lv_xml_register_subject(nullptr, "detection_residue_check_available", &g_detection_subjects[5]);
+    lv_xml_register_subject(nullptr, "detection_residue_check_enabled", &g_detection_subjects[6]);
+    lv_xml_register_event_cb(nullptr, "on_bed_check_changed", detection_check_noop_cb);
+    lv_xml_register_event_cb(nullptr, "on_residue_check_changed", detection_check_noop_cb);
     helix::ui::modal_init_subjects();
     g_subjects_initialized = true;
     StaticSubjectRegistry::instance().register_deinit("AppGlobals", app_globals_deinit_subjects);

@@ -897,7 +897,7 @@ nlohmann::json MoonrakerClientMock::defect_detection_status() const {
     return nlohmann::json{{"main_enable", u1_defect_main_enable_.load()},
                           {"clean_bed", feature(u1_clean_bed_enable_.load())},
                           {"noodle", feature(true)},
-                          {"residue", feature(false)},
+                          {"residue", feature(u1_residue_enable_.load())},
                           {"nozzle", feature(false)}};
 }
 

@@ -155,6 +155,7 @@
   <translation tag="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print." fr="Une caméra diffusée par Moonraker. Ajoutez le widget caméra à l&apos;écran d&apos;accueil pour la regarder, y compris pendant une impression."/>
   <translation tag="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen." fr="Un ventilateur qui fait passer l&apos;air de l&apos;enceinte à travers un filtre. Commandez-le sur l&apos;écran de température de l&apos;enceinte."/>
   <translation tag="A few minutes, nearly all of it heating. You judge nothing by eye." fr="Quelques minutes, presque tout en chauffage. Vous ne jugez rien à l&apos;œil."/>
+  <translation tag="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume" fr="Un filament est emmêlé ou coincé avant sa tête d&apos;outil : libérez-le à la bobine et à l&apos;alimentateur, puis reprenez"/>
   <translation tag="A folder name in moonraker.conf is unsafe, so cleanup is off." fr="Un nom de dossier dans moonraker.conf n&apos;est pas sûr, le nettoyage est donc désactivé."/>
   <translation tag="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it." fr="Une macro de heat soak est configurée sur l&apos;imprimante. HelixScreen la détecte mais ne l&apos;exécute pas."/>
   <translation tag="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen." fr="Un chauffage qui réchauffe l&apos;air de l&apos;enceinte. Réglez sa température sur l&apos;écran de température de l&apos;enceinte."/>
@@ -584,6 +585,7 @@
   <translation tag="Cam" fr="Cam"/>
   <translation tag="Camera" fr="Caméra"/>
   <translation tag="Camera checks the bed is empty before each print" fr="La caméra vérifie que le plateau est vide avant chaque impression"/>
+  <translation tag="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms" fr="La caméra cherche des résidus pendant l&apos;impression et la met en pause. Désactivé par défaut sur l&apos;imprimante ; fausses alertes possibles"/>
   <translation tag="Can&apos;t connect — try forgetting and re-pairing the printer" fr="Connexion impossible — essayez d&apos;oublier et de réappairer l&apos;imprimante"/>
   <translation tag="Can&apos;t move filament while the print is paused" fr="Impossible de déplacer le filament pendant une impression en pause"/>
   <translation tag="Can&apos;t reach this printer. Save anyway?" fr="Imprimante injoignable. Enregistrer quand même ?"/>
@@ -3118,10 +3120,12 @@
   <translation tag="Reset to defaults" fr="Réinitialiser par défaut"/>
   <translation tag="Reset to original values" fr="Réinitialiser aux valeurs d&apos;origine"/>
   <translation tag="Reset to tag" fr="Rétablir depuis le tag"/>
+  <translation tag="Reset tool-change counts?" fr="Réinitialiser les compteurs de changements d&apos;outil ?"/>
   <translation tag="Reset {}?" fr="Réinitialiser {} ?"/>
   <translation tag="Resetting" fr="Réinitialisation"/>
   <translation tag="Resetting system" fr="Réinitialisation du système"/>
   <translation tag="Resetting..." fr="Réinitialisation..."/>
+  <translation tag="Residue Check (experimental)" fr="Détection de résidus (expérimental)"/>
   <translation tag="Resolve it on the filament system screen, then try again" fr="Résolvez-le sur l&apos;écran du système de filament, puis réessayez"/>
   <translation tag="Response (Kp)" fr="Réponse (Kp)"/>
   <translation tag="Restart" fr="Redémarrer"/>
@@ -3575,6 +3579,7 @@
   <translation tag="Start K" fr="K initial"/>
   <translation tag="Start Print" fr="Lancer l&apos;impression"/>
   <translation tag="Start Probing" fr="Démarrer le palpage"/>
+  <translation tag="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside." fr="Démarrer un nouvel intervalle d&apos;entretien pour les quatre têtes d&apos;outil. À faire après leur entretien : les compteurs actuels sont mis de côté."/>
   <translation tag="Start a new {} h interval? The hours counted so far are discarded." fr="Commencer un nouvel intervalle de {} h ? Les heures comptées jusqu’ici sont perdues."/>
   <translation tag="Start anyway?" fr="Démarrer quand même ?"/>
   <translation tag="Start at" fr="Commencer à"/>
@@ -3780,6 +3785,7 @@
   <translation tag="The bed was reported dirty, so this print cannot resume." fr="Le plateau a été signalé comme sale, cette impression ne peut donc pas reprendre."/>
   <translation tag="The buffer may be disconnected, stuck, or faulty. Check it before retrying" fr="Le tampon est peut-être débranché, bloqué ou défectueux. Vérifiez-le avant de réessayer"/>
   <translation tag="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer" fr="Le tampon n&apos;a détecté aucun mouvement pendant 16 secondes. Vérifiez s&apos;il y a une obstruction entre le CFS et l&apos;extrudeur, ou un tampon bloqué"/>
+  <translation tag="The camera reported residue on the print: check it, then resume or cancel" fr="La caméra a signalé des résidus sur l&apos;impression : vérifiez-la, puis reprenez ou annulez"/>
   <translation tag="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm." fr="La caméra a cru voir quelque chose sur le plateau, l&apos;imprimante s&apos;est donc arrêtée avant d&apos;imprimer. Si le plateau est libre, c&apos;était une fausse alerte."/>
   <translation tag="The carriage was not put back: check which tool is mounted" fr="Le chariot n&apos;a pas été remis en place : vérifiez quel outil est monté"/>
   <translation tag="The chamber heater can run a filament drying cycle. Start one from the drying dialog." fr="Le chauffage de l&apos;enceinte peut lancer un cycle de séchage du filament. Démarrez-le depuis la boîte de dialogue de séchage."/>
@@ -3853,6 +3859,7 @@
   <translation tag="The print is waiting for the chamber, but the heater is not heating." fr="L&apos;impression attend la chambre, mais le chauffage ne chauffe pas."/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." fr="La taille imprimable en millimètres (X × Y × Z), d&apos;après les limites des axes dans la configuration Klipper de l&apos;imprimante."/>
   <translation tag="The printer applied this value and keeps it for this tool." fr="L&apos;imprimante a appliqué cette valeur et la conserve pour cet outil."/>
+  <translation tag="The printer asks for a service after 25100 changes on one head" fr="L&apos;imprimante demande un entretien après 25100 changements sur une tête"/>
   <translation tag="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options." fr="L&apos;imprimante peut tracer une ligne d&apos;amorçage avant une impression. HelixScreen la propose dans les options de pré-impression."/>
   <translation tag="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen." fr="L&apos;imprimante peut mesurer automatiquement le décalage de chaque outil. Lancez-le dans l&apos;écran de calibration des décalages d&apos;outils."/>
   <translation tag="The printer can measure pressure advance on its own. Run it on the PA calibration screen." fr="L&apos;imprimante peut mesurer le pressure advance toute seule. Lancez-le sur l&apos;écran Calibration PA."/>
@@ -3860,8 +3867,11 @@
   <translation tag="The printer could not work out where to resume." fr="L&apos;imprimante n&apos;a pas pu déterminer où reprendre."/>
   <translation tag="The printer did not change its bed check" fr="L&apos;imprimante n&apos;a pas modifié sa vérification du plateau"/>
   <translation tag="The printer did not change its bed check: {}" fr="L&apos;imprimante n&apos;a pas modifié sa vérification du plateau: {}"/>
+  <translation tag="The printer did not change its residue check" fr="L&apos;imprimante n&apos;a pas modifié sa détection de résidus"/>
+  <translation tag="The printer did not change its residue check: {}" fr="L&apos;imprimante n&apos;a pas modifié sa détection de résidus : {}"/>
   <translation tag="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again." fr="L&apos;imprimante n&apos;a pas confirmé le démarrage de l&apos;impression ({}). Elle peut encore démarrer : vérifiez l&apos;imprimante avant de la relancer."/>
   <translation tag="The printer did not reset the filter" fr="L&apos;imprimante n&apos;a pas réinitialisé le filtre"/>
+  <translation tag="The printer did not reset the tool-change counts" fr="L&apos;imprimante n&apos;a pas réinitialisé les compteurs de changements d&apos;outil"/>
   <translation tag="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye." fr="L&apos;imprimante extrude dans un coin et répète jusqu&apos;à ce que les mesures concordent. Vous ne jugez rien à l&apos;œil."/>
   <translation tag="The printer finishes this measurement on its own." fr="L&apos;imprimante termine cette mesure d&apos;elle-même."/>
   <translation tag="The printer halted this print and cannot resume it. Restart from the beginning?" fr="L&apos;imprimante a arrêté cette impression et ne peut pas la reprendre. Redémarrer depuis le début ?"/>
@@ -3910,6 +3920,7 @@
   <translation tag="The toolhead is not homed, so this would home into the print" fr="La tête d&apos;outil n&apos;est pas référencée, le référencement heurterait l&apos;impression"/>
   <translation tag="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?" fr="Le capteur de la tête d&apos;outil indique que du filament est déjà chargé. Procéder au chargement quand même ?"/>
   <translation tag="The toolhead sensor indicates no filament is present. Proceed with unload anyway?" fr="Le capteur de la tête d&apos;outil indique qu&apos;aucun filament n&apos;est présent. Procéder au déchargement quand même ?"/>
+  <translation tag="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance" fr="Les têtes d&apos;outil ont atteint l&apos;intervalle d&apos;entretien de l&apos;imprimante : entretenez-les, puis réinitialisez le compteur dans Maintenance"/>
   <translation tag="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing." fr="Le capot supérieur a été débranché. Pour garantir la qualité d&apos;impression, rebranchez-le avant de continuer."/>
   <translation tag="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck" fr="L&apos;unité exécute déjà une autre opération. Attendez la fin, ou réinitialisez le CFS s&apos;il reste bloqué"/>
   <translation tag="The unit reported a fault with no further detail. Restart the printer if it repeats" fr="L&apos;unité a signalé une panne sans plus de détails. Redémarrez l&apos;imprimante si cela se reproduit"/>
@@ -4068,6 +4079,7 @@
   <translation tag="Tool change to T{}" fr="Changement d&apos;outil vers T{}"/>
   <translation tag="Tool change to {} failed: {}" fr="Échec du changement vers l&apos;outil {} : {}"/>
   <translation tag="Tool changer error: {}" fr="Erreur du changeur d&apos;outils : {}"/>
+  <translation tag="Tool changes since service" fr="Changements d&apos;outil depuis l&apos;entretien"/>
   <translation tag="Tool cycle failed: {}" fr="Échec de la rotation des outils : {}"/>
   <translation tag="Tool cycle finished" fr="Rotation des outils terminée"/>
   <translation tag="Tool is seated" fr="L&apos;outil est en place"/>
@@ -4075,6 +4087,7 @@
   <translation tag="Tool offsets (mm)" fr="Offsets d&apos;outil (mm)"/>
   <translation tag="Tool offsets saved" fr="Offsets d&apos;outil enregistrés"/>
   <translation tag="Tool swap" fr="Changement d&apos;outil"/>
+  <translation tag="Tool-change counts reset" fr="Compteurs de changements d&apos;outil réinitialisés"/>
   <translation tag="Toolchange purge" fr="Purge au changement d&apos;outil"/>
   <translation tag="Toolhead" fr="Tête d&apos;outil"/>
   <translation tag="Toolhead Calibration Running" fr="Calibration des têtes d&apos;outil en cours"/>

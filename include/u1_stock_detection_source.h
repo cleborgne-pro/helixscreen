@@ -18,8 +18,9 @@ namespace helix::detection {
  * same snapshot, so already_paused is always true.
  *
  * The module's pre-print bed check is switched with DEFECT_DETECTION_CONFIG
- * CLEAN_BED_ENABLE and read back from the defect_detection status object,
- * whose get_status() returns the module's stored config.
+ * CLEAN_BED_ENABLE, its residue check with RESIDUE_ENABLE, and both are read
+ * back from the defect_detection status object, whose get_status() returns the
+ * module's stored config.
  */
 class U1StockSource : public DetectionSource {
   public:
@@ -63,11 +64,20 @@ class U1StockSource : public DetectionSource {
     void read_bed_check(BedCheckReadCallback done) override;
     void set_bed_check(bool enabled, BedCheckSetCallback done) override;
 
+    /// The module's mid-print residue check (RESIDUE_ENABLE), off by default in
+    /// the stock firmware.
+    bool has_residue_check() const override {
+        return capable_;
+    }
+    void set_residue_check(bool enabled, BedCheckSetCallback done) override;
+
     /// Install the print-state observer. Called once.
     void start();
 
   private:
     void evaluate();
+    /// DEFECT_DETECTION_CONFIG <param>=0|1, with Klipper's refusal passed on.
+    static void send_check_switch(const char* param, bool enabled, BedCheckSetCallback done);
     /// The defect kind the latched exception reports, Unknown when none.
     DetectionKind latched_kind() const;
 

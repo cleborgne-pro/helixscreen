@@ -1430,6 +1430,9 @@ class MoonrakerClientMock : public helix::MoonrakerClient {
     /// The U1 persona's fitted nozzle on head @p head (0-3): its diameter in mm
     /// and flow type, as the extruder object reports them.
     [[nodiscard]] std::pair<double, std::string> nozzle_properties(int head) const;
+    /// The U1 persona's tool-change counters on head @p head (0-3), as its
+    /// extruder object reports them: switch_count and last_maintenance_count.
+    [[nodiscard]] json toolchange_counters(int head) const;
 
     /// The U1 firmware's control/nozzle_properties webhook: @p params carries
     /// extruder and diameter, and optionally volume_type. Refuses the way the
@@ -2716,10 +2719,15 @@ class MoonrakerClientMock : public helix::MoonrakerClient {
         "load_finish", "preload_finish", "load_finish", "preload_finish"};
     std::array<bool, static_cast<size_t>(kU1Channels)> u1_filament_detected_{true, true, true,
                                                                              true};
-    /// defect_detection main_enable and clean_bed.enable, switched by
+    /// defect_detection main_enable, clean_bed.enable and residue.enable, switched by
     /// DEFECT_DETECTION_CONFIG.
     std::atomic<bool> u1_defect_main_enable_{true};
     std::atomic<bool> u1_clean_bed_enable_{true};
+    std::atomic<bool> u1_residue_enable_{false};
+    /// Each head's switch_count and last_maintenance_count (RESET_EXTRUDER_MAINTENANCE_COUNT
+    /// moves the second to the first): one head near its service interval, one past it.
+    std::array<std::atomic<int>, 4> u1_switch_counts_{4210, 21350, 980, 25400};
+    std::array<std::atomic<int>, 4> u1_serviced_at_{};
 
     /// One feeder command line: walk the named channel through its states.
     /// HELIX_MOCK_BATCH_FAIL_SLOT=<n> swaps that channel's terminal for its

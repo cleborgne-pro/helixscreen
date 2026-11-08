@@ -378,19 +378,10 @@ K is set through the extruder stepper directly, so no `SET_PRESSURE_ADVANCE` ech
 
 ## 480x320 Display Considerations
 
-The U1's 480x320 display uses the TINY layout preset. This is the smallest resolution HelixScreen supports, and several UI panels have known layout issues at this size. Key issues:
-
-- **Navbar icons clipped** at screen edges
-- **Controls panel** labels overlapping, z-offset value wrapping
-- **Print select list view** fundamentally broken at this size
-- **Numeric keypad overlay** too tall, bottom rows cut off
-- **Filament panel** cards pushed off-screen
-
-These are resolution-specific issues, not Snapmaker-specific. Any 480x320 device benefits from the same fixes.
+The U1's 480x320 display uses the TINY layout preset, the smallest resolution HelixScreen supports. The layout issues once listed here (navbar icons clipped, Controls labels overlapping, the print select list view, the numeric keypad's height, the filament panel's cards) have been fixed since; a pass of headless 480x320 captures against the U1 mock (`HELIX_MOCK_PRINTER=snapmaker_u1 ./scripts/screenshot.sh helix-screen <token> <token> --test -s 480x320`, 2026-11-08) found none of them. The Controls panel's Z-offset reads in a compact form (`+.000mm`) at this size on purpose (`helix::zoffset::format_offset_compact`).
 
 ## Known Limitations
 
-- **480x320 UI needs work** -- Multiple panels have layout issues at this resolution (see above).
 - **SSH access required** -- deployment needs SSH. Stock firmware (1.2+) provides it via the **Root access** option / debug mode; the community [Extended Firmware](https://github.com/paxx12-snapmaker-u1/SnapmakerU1-Extended-Firmware) enables it by default. Either works — PAXX is **not** required. (Stock boot-time autostart is newly added and pending verification on stock hardware; see [Firmware Requirements](#firmware-requirements).)
 - **Auto-start requires `/oem/.debug`** -- The overlay filesystem is wiped on boot unless `/oem/.debug` exists. This flag must be created once during installation to persist the boot-launcher hook (see [How HelixScreen takes over the display](#how-helixscreen-takes-over-the-display)).
 - **WiFi management** -- Stopping `unisrv` (stock UI) does not affect WiFi — the U1 uses standard `wpa_supplicant` managed by the OS. HelixScreen has its own WiFi manager with `wpa_supplicant` support.
@@ -528,8 +519,10 @@ AI-based print defect detection system. The status object itself is not subscrib
 | `main_enable` | `true` | Master enable |
 | `clean_bed.enable` | `true` | Dirty bed detection |
 | `noodle.enable` | `true` | Spaghetti/noodle detection |
-| `residue.enable` | `false` | Residue detection |
-| `nozzle.enable` | `false` | Nozzle clog detection |
+| `residue.enable` | `false` | Residue detection, during the print (code 3) |
+| `nozzle.enable` | `false` | Nozzle check; no `DEFECT_DETECTION_CONFIG` parameter switches it |
+
+**Residue check (code 3).** Off by default in the firmware and not described by Snapmaker. The module runs it with the noodle check during the print and pauses with exception 532 code 3 "detected residue". It is switched with `DEFECT_DETECTION_CONFIG RESIDUE_ENABLE=0|1` (the stock firmware's `cmd_DEFECT_DETECTION_CONFIG` in Snapmaker/u1-klipper) and read back from `residue.enable` in the same query as the bed check, so the **Residue Check (experimental)** row in Settings > Safety & Alerts follows the printer and greys with the bed check while `main_enable` is off. Its coded fault (0002-0532-0000-0003) reads in HelixScreen's translated wording (`snapmaker::exception_message()`) instead of the firmware's English sentence. The nozzle check has no switch in the firmware's command, so HelixScreen offers none.
 
 ### `purifier` — the Top Cover's air purifier
 
@@ -567,11 +560,17 @@ command at print start: `SET_PURIFIER_MODE` comes from the sliced gcode.
 
 ### `filament_entangle_detect` — Tangle detection (NOT SUBSCRIBED)
 
-Per-extruder filament tangle detection. Not subscribed.
+Per-head tangle detection (`filament_entangle_detect e<N>_filament`). During a print it compares the extruder's travel with the feeder wheels' tachometer counts; when the wheels lag it raises exception 523 with the head as index and code 38, then pauses. Not subscribed: its status carries no live reading, only the stored threshold.
 
 | Field | Example | Notes |
 |-------|---------|-------|
-| `detect_factor` | `1.0` | Tangle confidence (0-1, lower=tangled) |
+| `detect_factor` | `1.0` | Detection length multiplier (minimum 0.5), set with `SET_FILAMENT_ENTANGLE_DETECT_FACTOR SENSOR=<name> DETECT_FACTOR=`. A threshold, not a confidence: nothing in the status moves while printing |
+
+The switch and the sensitivity (`print_task_config.filament_entangle_detect` / `filament_entangle_sen`) are the Print Behavior device actions. A tangle's coded fault reads "A filament is tangled or caught before its toolhead…" through `snapmaker::exception_message()`, whose row matches the code whatever the head.
+
+### Tool-change counters (`extruder*`)
+
+The firmware's extruder switch recorder counts every pick of a head and keeps the count reached at the last service: `switch_count` and `last_maintenance_count` on each `extruder*` object. Past `individual_maintenance_threshold` (25100 by default, not in any status object) changes on one head it raises 0001-0523-0000-0037 "Maintenance recommended for extruders"; `RESET_EXTRUDER_MAINTENANCE_COUNT` takes the current counts as the new baseline for every head. `helix::toolchange_wear` subscribes the two fields on the heads discovery found and `ToolchangeWearState` publishes, per head, the share of the interval used; the Maintenance overlay shows them under **Tool changes since service** with one Reset that sends the command.
 
 ## Verified Hardware
 

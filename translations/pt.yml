@@ -163,6 +163,7 @@ translations:
   A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print.: 'Uma câmera transmitida pelo Moonraker. Adicione o widget de câmera à tela inicial para assisti-la, inclusive durante uma impressão.'
   A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen.: 'Uma ventoinha que puxa o ar da câmara por um filtro. Controle-a na tela de temperatura da câmara.'
   A few minutes, nearly all of it heating. You judge nothing by eye.: 'Alguns minutos, quase todo aquecendo. Você não julga nada a olho.'
+  'A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume': 'Um filamento está embaraçado ou preso antes do cabeçote: solte-o no carretel e no alimentador e retome'
   A folder name in moonraker.conf is unsafe, so cleanup is off.: "Um nome de pasta no moonraker.conf não é seguro, por isso a limpeza está desligada."
   A heat soak macro is set up on the printer. HelixScreen detects it but does not run it.: 'Há uma macro de heat soak configurada na impressora. O HelixScreen a detecta, mas não a executa.'
   A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen.: 'Um aquecedor que esquenta o ar dentro da câmara. Defina a temperatura na tela de temperatura da câmara.'
@@ -629,6 +630,7 @@ translations:
   Cam: Cam
   Camera: Câmera
   Camera checks the bed is empty before each print: 'A câmera verifica se a mesa está vazia antes de cada impressão'
+  Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms: 'A câmera procura resíduos durante a impressão e a pausa. Desativado por padrão na impressora; pode dar alarmes falsos'
   Can't connect — try forgetting and re-pairing the printer: Não foi possível conectar
     — tente esquecer e parear a impressora novamente
   Can't move filament while the print is paused: Não é possível mover o filamento com a impressão pausada
@@ -3392,10 +3394,12 @@ translations:
   Reset to Default: Restaurar Padrão
   Reset to defaults: Restaurar padrões
   Reset to original values: Restaurar valores originais
+  Reset tool-change counts?: 'Resetar os contadores de trocas de ferramenta?'
   Reset {}?: 'Resetar {}?'
   Resetting: Restaurando
   Resetting system: 'Redefinindo o sistema'
   Resetting...: Resetando...
+  Residue Check (experimental): 'Verificação de resíduos (experimental)'
   Resolve it on the filament system screen, then try again: 'Resolva na tela do sistema de filamento e tente novamente'
   Response (Kp): Resposta (Kp)
   Restart: Reiniciar
@@ -3903,6 +3907,7 @@ translations:
   Start K: K inicial
   Start Print: Iniciar Impressão
   Start Probing: Iniciar Sondagem
+  'Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside.': 'Iniciar um novo intervalo de manutenção para os quatro cabeçotes. Faça isso após a manutenção: as contagens atuais são deixadas de lado.'
   Start a new {} h interval? The hours counted so far are discarded.: 'Iniciar um novo intervalo de {} h? As horas contadas até agora são descartadas.'
   Start anyway?: 'Iniciar mesmo assim?'
   Start at: Começar em
@@ -4136,6 +4141,7 @@ translations:
   The bed was reported dirty, so this print cannot resume.: 'A mesa foi reportada como suja, portanto esta impressão não pode ser retomada.'
   The buffer may be disconnected, stuck, or faulty. Check it before retrying: O buffer pode estar desconectado, travado ou com defeito. Verifique antes de tentar novamente
   The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer: O buffer não detectou movimento por 16 segundos. Verifique se há obstrução entre o CFS e o extrusor, ou um buffer travado
+  'The camera reported residue on the print: check it, then resume or cancel': 'A câmera detectou resíduos na impressão: verifique e retome ou cancele'
   ? The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm.
   : 'A câmera achou que viu algo na mesa, então a impressora parou antes de imprimir. Se a mesa estiver livre, foi um alarme falso.'
   'The carriage was not put back: check which tool is mounted': 'O carro não foi devolvido: verifique qual ferramenta está montada'
@@ -4221,6 +4227,7 @@ translations:
   The print is waiting for the chamber, but the heater is not heating.: 'A impressão aguarda a câmara, mas o aquecedor não está aquecendo.'
   The printable size in millimeters (X × Y × Z), from the axis limits in the printer's Klipper config.: 'O tamanho imprimível em milímetros (X × Y × Z), a partir dos limites dos eixos na configuração Klipper da impressora.'
   The printer applied this value and keeps it for this tool.: 'A impressora aplicou este valor e o mantém para esta ferramenta.'
+  The printer asks for a service after 25100 changes on one head: 'A impressora pede manutenção após 25100 trocas em um cabeçote'
   The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options.: 'A impressora pode traçar uma linha de purga antes da impressão. O HelixScreen a oferece nas opções de pré-impressão.'
   The printer can measure each tool's offset automatically. Run it on the tool offset calibration screen.: 'A impressora pode medir o deslocamento de cada ferramenta automaticamente. Execute na tela de calibração de deslocamento.'
   The printer can measure pressure advance on its own. Run it on the PA calibration screen.: 'A impressora pode medir o pressure advance por conta própria. Execute na tela Calibração de PA.'
@@ -4228,8 +4235,11 @@ translations:
   The printer could not work out where to resume.: A impressora não conseguiu determinar onde retomar.
   The printer did not change its bed check: 'A impressora não alterou a verificação da mesa'
   'The printer did not change its bed check: {}': 'A impressora não alterou a verificação da mesa: {}'
+  The printer did not change its residue check: 'A impressora não alterou a verificação de resíduos'
+  'The printer did not change its residue check: {}': 'A impressora não alterou a verificação de resíduos: {}'
   'The printer did not confirm the print started ({}). It may still start: check the printer before starting it again.': 'A impressora não confirmou o início da impressão ({}). Ela ainda pode começar: verifique a impressora antes de iniciar de novo.'
   The printer did not reset the filter: 'A impressora não repôs o filtro'
+  The printer did not reset the tool-change counts: 'A impressora não resetou os contadores de trocas de ferramenta'
   The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye.: 'A impressora extruda num canto e repete até as leituras coincidirem. Você não julga nada a olho.'
   The printer finishes this measurement on its own.: 'A impressora conclui esta medição por conta própria.'
   The printer halted this print and cannot resume it. Restart from the beginning?: A
@@ -4293,6 +4303,8 @@ translations:
   The toolhead sensor indicates no filament is present. Proceed with unload anyway?: O
     sensor do cabeçote indica que não há filamento presente. Prosseguir com o descarregamento
     mesmo assim?
+  ? "The toolheads have reached the printer's tool-change maintenance interval: service them, then reset the count in Maintenance"
+  : "Os cabeçotes atingiram o intervalo de manutenção da impressora: faça a manutenção e resete a contagem em Manutenção"
   The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing.: 'A cobertura superior foi desligada. Para garantir a qualidade de impressão, volte a ligá-la antes de continuar.'
   The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck: A unidade já está executando outra operação. Aguarde a conclusão, ou reinicie o CFS se ele continuar travado
   The unit reported a fault with no further detail. Restart the printer if it repeats: A unidade relatou uma falha sem mais detalhes. Reinicie a impressora se repetir
@@ -4493,6 +4505,7 @@ translations:
   Tool change to T{}: 'Troca de ferramenta para T{}'
   'Tool change to {} failed: {}': 'Falha ao trocar para a ferramenta {}: {}'
   'Tool changer error: {}': 'Erro do trocador de ferramentas: {}'
+  Tool changes since service: 'Trocas de ferramenta desde a manutenção'
   'Tool cycle failed: {}': 'Falha ao alternar ferramentas: {}'
   Tool cycle finished: Alternância de ferramentas concluída
   Tool is seated: A ferramenta está encaixada
@@ -4500,6 +4513,7 @@ translations:
   Tool offsets (mm): Offsets de ferramenta (mm)
   Tool offsets saved: Offsets de ferramenta salvos
   Tool swap: Troca de ferramenta
+  Tool-change counts reset: 'Contadores de trocas de ferramenta resetados'
   Toolchange purge: 'Purga de troca de ferramenta'
   Toolhead: 'Cabeçote'
   Toolhead Calibration Running: 'Calibração dos cabeçotes em andamento'

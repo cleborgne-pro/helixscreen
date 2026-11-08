@@ -155,6 +155,7 @@
   <translation tag="A camera Moonraker streams. Add the camera widget to the home screen to watch it, and see it during a print." pt="Uma câmera transmitida pelo Moonraker. Adicione o widget de câmera à tela inicial para assisti-la, inclusive durante uma impressão."/>
   <translation tag="A fan that pulls the enclosure air through a filter. Control it on the chamber temperature screen." pt="Uma ventoinha que puxa o ar da câmara por um filtro. Controle-a na tela de temperatura da câmara."/>
   <translation tag="A few minutes, nearly all of it heating. You judge nothing by eye." pt="Alguns minutos, quase todo aquecendo. Você não julga nada a olho."/>
+  <translation tag="A filament is tangled or caught before its toolhead: free it at the spool and the feeder, then resume" pt="Um filamento está embaraçado ou preso antes do cabeçote: solte-o no carretel e no alimentador e retome"/>
   <translation tag="A folder name in moonraker.conf is unsafe, so cleanup is off." pt="Um nome de pasta no moonraker.conf não é seguro, por isso a limpeza está desligada."/>
   <translation tag="A heat soak macro is set up on the printer. HelixScreen detects it but does not run it." pt="Há uma macro de heat soak configurada na impressora. O HelixScreen a detecta, mas não a executa."/>
   <translation tag="A heater that warms the air inside the enclosure. Set its temperature on the chamber temperature screen." pt="Um aquecedor que esquenta o ar dentro da câmara. Defina a temperatura na tela de temperatura da câmara."/>
@@ -584,6 +585,7 @@
   <translation tag="Cam" pt="Cam"/>
   <translation tag="Camera" pt="Câmera"/>
   <translation tag="Camera checks the bed is empty before each print" pt="A câmera verifica se a mesa está vazia antes de cada impressão"/>
+  <translation tag="Camera looks for residue during the print and pauses it. Off by default in the printer; expect false alarms" pt="A câmera procura resíduos durante a impressão e a pausa. Desativado por padrão na impressora; pode dar alarmes falsos"/>
   <translation tag="Can&apos;t connect — try forgetting and re-pairing the printer" pt="Não foi possível conectar — tente esquecer e parear a impressora novamente"/>
   <translation tag="Can&apos;t move filament while the print is paused" pt="Não é possível mover o filamento com a impressão pausada"/>
   <translation tag="Can&apos;t reach this printer. Save anyway?" pt="Não foi possível alcançar esta impressora. Salvar mesmo assim?"/>
@@ -3118,10 +3120,12 @@
   <translation tag="Reset to defaults" pt="Restaurar padrões"/>
   <translation tag="Reset to original values" pt="Restaurar valores originais"/>
   <translation tag="Reset to tag" pt="Restaurar do tag"/>
+  <translation tag="Reset tool-change counts?" pt="Resetar os contadores de trocas de ferramenta?"/>
   <translation tag="Reset {}?" pt="Resetar {}?"/>
   <translation tag="Resetting" pt="Restaurando"/>
   <translation tag="Resetting system" pt="Redefinindo o sistema"/>
   <translation tag="Resetting..." pt="Resetando..."/>
+  <translation tag="Residue Check (experimental)" pt="Verificação de resíduos (experimental)"/>
   <translation tag="Resolve it on the filament system screen, then try again" pt="Resolva na tela do sistema de filamento e tente novamente"/>
   <translation tag="Response (Kp)" pt="Resposta (Kp)"/>
   <translation tag="Restart" pt="Reiniciar"/>
@@ -3575,6 +3579,7 @@
   <translation tag="Start K" pt="K inicial"/>
   <translation tag="Start Print" pt="Iniciar Impressão"/>
   <translation tag="Start Probing" pt="Iniciar Sondagem"/>
+  <translation tag="Start a new service interval for all four toolheads. Do it after servicing them: the counts so far are set aside." pt="Iniciar um novo intervalo de manutenção para os quatro cabeçotes. Faça isso após a manutenção: as contagens atuais são deixadas de lado."/>
   <translation tag="Start a new {} h interval? The hours counted so far are discarded." pt="Iniciar um novo intervalo de {} h? As horas contadas até agora são descartadas."/>
   <translation tag="Start anyway?" pt="Iniciar mesmo assim?"/>
   <translation tag="Start at" pt="Começar em"/>
@@ -3780,6 +3785,7 @@
   <translation tag="The bed was reported dirty, so this print cannot resume." pt="A mesa foi reportada como suja, portanto esta impressão não pode ser retomada."/>
   <translation tag="The buffer may be disconnected, stuck, or faulty. Check it before retrying" pt="O buffer pode estar desconectado, travado ou com defeito. Verifique antes de tentar novamente"/>
   <translation tag="The buffer saw no movement for 16 seconds. Check for a blockage between the CFS and the extruder, or a stuck buffer" pt="O buffer não detectou movimento por 16 segundos. Verifique se há obstrução entre o CFS e o extrusor, ou um buffer travado"/>
+  <translation tag="The camera reported residue on the print: check it, then resume or cancel" pt="A câmera detectou resíduos na impressão: verifique e retome ou cancele"/>
   <translation tag="The camera thought it saw something on the bed, so the printer stopped before printing. If the bed is clear, it was a false alarm." pt="A câmera achou que viu algo na mesa, então a impressora parou antes de imprimir. Se a mesa estiver livre, foi um alarme falso."/>
   <translation tag="The carriage was not put back: check which tool is mounted" pt="O carro não foi devolvido: verifique qual ferramenta está montada"/>
   <translation tag="The chamber heater can run a filament drying cycle. Start one from the drying dialog." pt="O aquecedor da câmara pode executar um ciclo de secagem de filamento. Inicie pelo diálogo de secagem."/>
@@ -3853,6 +3859,7 @@
   <translation tag="The print is waiting for the chamber, but the heater is not heating." pt="A impressão aguarda a câmara, mas o aquecedor não está aquecendo."/>
   <translation tag="The printable size in millimeters (X × Y × Z), from the axis limits in the printer&apos;s Klipper config." pt="O tamanho imprimível em milímetros (X × Y × Z), a partir dos limites dos eixos na configuração Klipper da impressora."/>
   <translation tag="The printer applied this value and keeps it for this tool." pt="A impressora aplicou este valor e o mantém para esta ferramenta."/>
+  <translation tag="The printer asks for a service after 25100 changes on one head" pt="A impressora pede manutenção após 25100 trocas em um cabeçote"/>
   <translation tag="The printer can draw a priming line before a print. HelixScreen offers it in the pre-print options." pt="A impressora pode traçar uma linha de purga antes da impressão. O HelixScreen a oferece nas opções de pré-impressão."/>
   <translation tag="The printer can measure each tool&apos;s offset automatically. Run it on the tool offset calibration screen." pt="A impressora pode medir o deslocamento de cada ferramenta automaticamente. Execute na tela de calibração de deslocamento."/>
   <translation tag="The printer can measure pressure advance on its own. Run it on the PA calibration screen." pt="A impressora pode medir o pressure advance por conta própria. Execute na tela Calibração de PA."/>
@@ -3860,8 +3867,11 @@
   <translation tag="The printer could not work out where to resume." pt="A impressora não conseguiu determinar onde retomar."/>
   <translation tag="The printer did not change its bed check" pt="A impressora não alterou a verificação da mesa"/>
   <translation tag="The printer did not change its bed check: {}" pt="A impressora não alterou a verificação da mesa: {}"/>
+  <translation tag="The printer did not change its residue check" pt="A impressora não alterou a verificação de resíduos"/>
+  <translation tag="The printer did not change its residue check: {}" pt="A impressora não alterou a verificação de resíduos: {}"/>
   <translation tag="The printer did not confirm the print started ({}). It may still start: check the printer before starting it again." pt="A impressora não confirmou o início da impressão ({}). Ela ainda pode começar: verifique a impressora antes de iniciar de novo."/>
   <translation tag="The printer did not reset the filter" pt="A impressora não repôs o filtro"/>
+  <translation tag="The printer did not reset the tool-change counts" pt="A impressora não resetou os contadores de trocas de ferramenta"/>
   <translation tag="The printer extrudes in a corner and repeats until the readings agree. You do not judge anything by eye." pt="A impressora extruda num canto e repete até as leituras coincidirem. Você não julga nada a olho."/>
   <translation tag="The printer finishes this measurement on its own." pt="A impressora conclui esta medição por conta própria."/>
   <translation tag="The printer halted this print and cannot resume it. Restart from the beginning?" pt="A impressora parou esta impressão e não pode retomá-la. Reiniciar do início?"/>
@@ -3910,6 +3920,7 @@
   <translation tag="The toolhead is not homed, so this would home into the print" pt="O cabeçote não fez home, fazer home colidiria com a impressão"/>
   <translation tag="The toolhead sensor indicates filament is already loaded. Proceed with load anyway?" pt="O sensor do cabeçote indica que o filamento já está carregado. Prosseguir com o carregamento mesmo assim?"/>
   <translation tag="The toolhead sensor indicates no filament is present. Proceed with unload anyway?" pt="O sensor do cabeçote indica que não há filamento presente. Prosseguir com o descarregamento mesmo assim?"/>
+  <translation tag="The toolheads have reached the printer&apos;s tool-change maintenance interval: service them, then reset the count in Maintenance" pt="Os cabeçotes atingiram o intervalo de manutenção da impressora: faça a manutenção e resete a contagem em Manutenção"/>
   <translation tag="The top cover has been disconnected. To ensure print quality, reconnect the top cover before continuing." pt="A cobertura superior foi desligada. Para garantir a qualidade de impressão, volte a ligá-la antes de continuar."/>
   <translation tag="The unit is already running another operation. Wait for it to finish, or reset the CFS if it stays stuck" pt="A unidade já está executando outra operação. Aguarde a conclusão, ou reinicie o CFS se ele continuar travado"/>
   <translation tag="The unit reported a fault with no further detail. Restart the printer if it repeats" pt="A unidade relatou uma falha sem mais detalhes. Reinicie a impressora se repetir"/>
@@ -4068,6 +4079,7 @@
   <translation tag="Tool change to T{}" pt="Troca de ferramenta para T{}"/>
   <translation tag="Tool change to {} failed: {}" pt="Falha ao trocar para a ferramenta {}: {}"/>
   <translation tag="Tool changer error: {}" pt="Erro do trocador de ferramentas: {}"/>
+  <translation tag="Tool changes since service" pt="Trocas de ferramenta desde a manutenção"/>
   <translation tag="Tool cycle failed: {}" pt="Falha ao alternar ferramentas: {}"/>
   <translation tag="Tool cycle finished" pt="Alternância de ferramentas concluída"/>
   <translation tag="Tool is seated" pt="A ferramenta está encaixada"/>
@@ -4075,6 +4087,7 @@
   <translation tag="Tool offsets (mm)" pt="Offsets de ferramenta (mm)"/>
   <translation tag="Tool offsets saved" pt="Offsets de ferramenta salvos"/>
   <translation tag="Tool swap" pt="Troca de ferramenta"/>
+  <translation tag="Tool-change counts reset" pt="Contadores de trocas de ferramenta resetados"/>
   <translation tag="Toolchange purge" pt="Purga de troca de ferramenta"/>
   <translation tag="Toolhead" pt="Cabeçote"/>
   <translation tag="Toolhead Calibration Running" pt="Calibração dos cabeçotes em andamento"/>

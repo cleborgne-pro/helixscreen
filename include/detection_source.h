@@ -114,6 +114,9 @@ class DetectionSource {
     struct BedCheckState {
         bool enabled = false;
         bool module_enabled = true;
+        /// The residue check, read in the same query; nullopt when the
+        /// printer reports none.
+        std::optional<bool> residue_enabled;
     };
     /// Callback for a read: the printer's state, or nullopt when the printer
     /// could not be asked or did not answer. Called on any thread; the caller
@@ -134,6 +137,16 @@ class DetectionSource {
     }
     /// Switch the printer's bed check. Called only while has_bed_check().
     virtual void set_bed_check(bool enabled, BedCheckSetCallback done) {
+        (void)enabled;
+        done(false, {});
+    }
+    /// Whether the printer runs a mid-print residue check the user can switch
+    /// on and off. Read back with read_bed_check(), which carries both checks.
+    virtual bool has_residue_check() const {
+        return false;
+    }
+    /// Switch the printer's residue check. Called only while has_residue_check().
+    virtual void set_residue_check(bool enabled, BedCheckSetCallback done) {
         (void)enabled;
         done(false, {});
     }

@@ -53,6 +53,12 @@ void MaintenanceOverlay::register_callbacks() {
                  maintenance_model::confirm_reset(*meter);
              LVGL_SAFE_EVENT_CB_END();
          }},
+        {"maintenance_toolchange_reset_cb",
+         [](lv_event_t*) {
+             LVGL_SAFE_EVENT_CB_BEGIN("[MaintenanceOverlay] maintenance_toolchange_reset_cb");
+             maintenance_model::confirm_toolchange_reset();
+             LVGL_SAFE_EVENT_CB_END();
+         }},
         {"maintenance_interval_0_cb", on_interval_changed<0>},
         {"maintenance_interval_1_cb", on_interval_changed<1>},
         {"maintenance_interval_2_cb", on_interval_changed<2>},
