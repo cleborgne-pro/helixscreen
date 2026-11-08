@@ -11,6 +11,7 @@
 #include "core/text_io.h"
 #include "filament_database.h"
 #include "i_moonraker_api.h"
+#include "idle_timeout_config.h"
 #include "klipper_extruder_naming.h"
 #include "lvgl.h"
 #include "printer_state.h"
@@ -563,30 +564,16 @@ void TemperatureController::read_configured_idle_timeout(std::function<void(int)
     if (!api_) {
         return;
     }
-    constexpr int kKlipperDefaultS = 600;
     auto tok = lifetime_.token();
     api_->query_configfile(
         [tok, on_main = std::move(on_main)](const nlohmann::json& config) {
             // Background (WS) thread: parse only.
-            int configured_s = kKlipperDefaultS;
-            if (config.contains("idle_timeout") && config["idle_timeout"].contains("timeout")) {
-                const auto& t = config["idle_timeout"]["timeout"];
-                if (t.is_string()) {
-                    const auto parsed =
-                        helix::text_io::parse_leading<float>(t.get_ref<const std::string&>());
-                    if (!parsed) {
-                        return;
-                    }
-                    configured_s = static_cast<int>(*parsed);
-                } else if (t.is_number()) {
-                    configured_s = static_cast<int>(t.get<double>());
-                }
-            }
-            if (configured_s <= 0) {
+            const auto configured_s = configured_idle_timeout_s(config);
+            if (!configured_s) {
                 return;
             }
             tok.defer("TemperatureController::read_configured_idle_timeout",
-                      [on_main, configured_s]() { on_main(configured_s); });
+                      [on_main, s = *configured_s]() { on_main(s); });
         },
         [](const MoonrakerError&) {});
 }
